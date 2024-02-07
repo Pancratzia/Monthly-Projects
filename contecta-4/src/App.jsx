@@ -107,6 +107,14 @@ function App() {
     setWinner(0);
   }
 
+  const handleResetPoints = () => {
+    setPoints({
+      1: 0,
+      2: 0,
+    });
+    handleReset();
+  }
+
   return (
     <>
       <div className="container">
@@ -139,6 +147,7 @@ function App() {
           )}
           <div className="buttons">
             <button className="reset" onClick={handleReset}>Reset</button>
+            <button className="resetPoints" onClick={handleResetPoints}>Reset Points</button>
           </div>
         </div>
       </div>

@@ -42,3 +42,7 @@ body{
 .circle-yellow{
     background-color: yellow !important;
 }
+
+.buttons{
+    grid-column: 1/8;
+}
