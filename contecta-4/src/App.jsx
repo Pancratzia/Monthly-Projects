@@ -11,6 +11,10 @@ function App() {
   ]);
   const [turn, setTurn] = useState("1");
   const [winner, setWinner] = useState(0);
+  const [points, setPoints] = useState({
+    1: 0,
+    2: 0,
+  });
 
   const checkFullBoard = () => {
     return board.every((row) => row.every((cell) => cell !== ""));
@@ -18,10 +22,10 @@ function App() {
 
   const checkWinningPossibilities = (row, col) => {
     const directions = [
-      [[0, -1], [0, 1]], // Horizontal
-      [[-1, 0], [1, 0]], // Vertical
-      [[-1, -1], [1, 1]], // Diagonal superior izquierda a inferior derecha
-      [[-1, 1], [1, -1]], // Diagonal superior derecha a inferior izquierda
+      [[0, -1], [0, 1]],
+      [[-1, 0], [1, 0]],
+      [[-1, -1], [1, 1]],
+      [[-1, 1], [1, -1]],
     ];
   
     for (let i = 0; i < directions.length; i++) {
@@ -40,7 +44,12 @@ function App() {
       }
   
       if (count >= 4) {
+        alert(`Player ${turn} wins!`);
         setWinner(turn);
+        setPoints({
+          ...points,
+          [turn]: points[turn] + 1,
+        });
         return;
       }
     }
@@ -101,6 +110,16 @@ function App() {
   return (
     <>
       <div className="container">
+        <div className="stadistics">
+          <div className="points">
+            <h3>Player 1</h3>
+            <h3>{points[1]}</h3>
+          </div>
+          <div className="points">
+            <h3>Player 2</h3>
+            <h3>{points[2]}</h3>
+          </div>
+        </div>
         <div className="board">
           {board.map((row, rowIndex) =>
             row.map((cell, cellIndex) => (
