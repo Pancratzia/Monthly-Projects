@@ -19,9 +19,7 @@ function App() {
               <div
                 key={`${rowIndex}-${cellIndex}`}
                 className="cell" >
-                <div className="circle">
-                  {cell}
-                </div>
+                <div className={ cell === "1" ? "circle-red circle" : cell === "2" ? "circle-yellow circle" : "circle"}></div>
               </div>
             ))
           )}

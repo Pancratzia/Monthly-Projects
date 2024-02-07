@@ -34,3 +34,11 @@ body{
     background-color: white;
     cursor: pointer;
 }
+
+.circle-red{
+    background-color: red !important;
+}
+
+.circle-yellow{
+    background-color: yellow !important;
+}
