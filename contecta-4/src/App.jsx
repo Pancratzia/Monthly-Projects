@@ -19,47 +19,35 @@ function App() {
   };
 
   const checkWinningPossibilities = (row, col) => {
-    for (let i = 0; i < 6; i++) {
-      if (board[i][col] === turn) {
-        if (i - 3 >= 0) {
-          if (
-            board[i - 1][col] === turn &&
-            board[i - 2][col] === turn &&
-            board[i - 3][col] === turn
-          ) {
-            setWinner(turn);
-            return;
-          }
+    const directions = [
+      [[0, -1], [0, 1]], // Horizontal
+      [[-1, 0], [1, 0]], // Vertical
+      [[-1, -1], [1, 1]], // Diagonal superior izquierda a inferior derecha
+      [[-1, 1], [1, -1]], // Diagonal superior derecha a inferior izquierda
+    ];
+  
+    for (let i = 0; i < directions.length; i++) {
+      let count = 1;
+  
+      for (let j = 0; j < 2; j++) {
+        const [dx, dy] = directions[i][j];
+        let r = row + dx;
+        let c = col + dy;
+  
+        while (r >= 0 && r < 6 && c >= 0 && c < 7 && board[r][c] === turn) {
+          count++;
+          r += dx;
+          c += dy;
         }
       }
-    }
-
-    for (let i = 0; i < 7; i++) {
-      if (board[row][i] === turn) {
-        if (i - 3 >= 0) {
-          if (
-            board[row][i - 1] === turn &&
-            board[row][i - 2] === turn &&
-            board[row][i - 3] === turn
-          ) {
-            setWinner(turn);
-            return;
-          }
-        }
-      }
-    }
-
-    if (row - 3 >= 0 && col - 3 >= 0) {
-      if (
-        board[row - 1][col - 1] === turn &&
-        board[row - 2][col - 2] === turn &&
-        board[row - 3][col - 3] === turn
-      ) {
+  
+      if (count >= 4) {
         setWinner(turn);
         return;
       }
     }
   };
+  
 
   const checkBoard = (row, col) => {
     checkWinningPossibilities(row, col);
