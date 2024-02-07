@@ -23,27 +23,39 @@ function App() {
 
   const checkWinningPossibilities = (row, col) => {
     const directions = [
-      [[0, -1], [0, 1]],
-      [[-1, 0], [1, 0]],
-      [[-1, -1], [1, 1]],
-      [[-1, 1], [1, -1]],
+      [
+        [0, -1],
+        [0, 1],
+      ],
+      [
+        [-1, 0],
+        [1, 0],
+      ],
+      [
+        [-1, -1],
+        [1, 1],
+      ],
+      [
+        [-1, 1],
+        [1, -1],
+      ],
     ];
-  
+
     for (let i = 0; i < directions.length; i++) {
       let count = 1;
-  
+
       for (let j = 0; j < 2; j++) {
         const [dx, dy] = directions[i][j];
         let r = row + dx;
         let c = col + dy;
-  
+
         while (r >= 0 && r < 6 && c >= 0 && c < 7 && board[r][c] === turn) {
           count++;
           r += dx;
           c += dy;
         }
       }
-  
+
       if (count >= 4) {
         alert(`Player ${turn} wins!`);
         confetti();
@@ -57,7 +69,7 @@ function App() {
       }
     }
   };
-  
+
   const checkBoard = (row, col) => {
     checkWinningPossibilities(row, col);
 
@@ -74,6 +86,11 @@ function App() {
   };
 
   const handleClick = (col) => {
+    if (checkFullBoard()) {
+      alert("The board is full");
+      return;
+    }
+
     if (winner !== 0) {
       alert(`There is a winner! Player ${winner} wins!`);
       return;
@@ -84,9 +101,9 @@ function App() {
     for (let i = 5; i >= 0; i--) {
       if (newBoard[i][col] === "") {
         newBoard[i][col] = turn;
-        setTurn(turn === "1" ? "2" : "1");
         setBoard(newBoard);
-        checkBoard(i, col);
+        setTurn(turn === "1" ? "2" : "1");
+        setTimeout(() => checkBoard(i, col), 100);
         return;
       }
     }
@@ -105,7 +122,7 @@ function App() {
     ]);
     setTurn("1");
     setWinner(0);
-  }
+  };
 
   const handleResetPoints = () => {
     setPoints({
@@ -113,7 +130,7 @@ function App() {
       2: 0,
     });
     handleReset();
-  }
+  };
 
   return (
     <>
@@ -146,14 +163,22 @@ function App() {
             ))
           )}
           <div className="buttons">
-            <button className="btn reset" onClick={handleReset}>Reset</button>
-            <button className="btn resetPoints" onClick={handleResetPoints}>Reset Points</button>
+            <button className="btn reset" onClick={handleReset}>
+              Reset
+            </button>
+            <button className="btn resetPoints" onClick={handleResetPoints}>
+              Reset Points
+            </button>
           </div>
         </div>
 
         <div className="turns">
-          <div className={`player player-1 ${turn === "1" ? "active" : ""}`}></div>
-          <div className={`player player-2 ${turn === "2" ? "active" : ""}`}></div>
+          <div
+            className={`player player-1 ${turn === "1" ? "active" : ""}`}
+          ></div>
+          <div
+            className={`player player-2 ${turn === "2" ? "active" : ""}`}
+          ></div>
         </div>
       </div>
     </>
