@@ -65,7 +65,8 @@ function App() {
     }
 
     if (checkFullBoard()) {
-      alert("Board is full");
+      alert("It's a draw!");
+      handleReset();
       return;
     }
   };
@@ -73,10 +74,6 @@ function App() {
   const handleClick = (col) => {
     if (winner !== 0) {
       alert(`There is a winner! Player ${winner} wins!`);
-      return;
-    }
-    if (checkFullBoard()) {
-      alert("Board is full");
       return;
     }
 
