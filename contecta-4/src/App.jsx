@@ -50,6 +50,7 @@ function App() {
           ...points,
           [turn]: points[turn] + 1,
         });
+        handleReset();
         return;
       }
     }
