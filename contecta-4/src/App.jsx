@@ -1,4 +1,5 @@
 import { useState } from "react";
+import confetti from "canvas-confetti";
 
 function App() {
   const [board, setBoard] = useState([
@@ -45,6 +46,7 @@ function App() {
   
       if (count >= 4) {
         alert(`Player ${turn} wins!`);
+        confetti();
         setWinner(turn);
         setPoints({
           ...points,
@@ -147,6 +149,11 @@ function App() {
             <button className="btn reset" onClick={handleReset}>Reset</button>
             <button className="btn resetPoints" onClick={handleResetPoints}>Reset Points</button>
           </div>
+        </div>
+
+        <div className="turns">
+          <div className={`player player-1 ${turn === "1" ? "active" : ""}`}></div>
+          <div className={`player player-2 ${turn === "2" ? "active" : ""}`}></div>
         </div>
       </div>
     </>
