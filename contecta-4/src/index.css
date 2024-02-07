@@ -4,11 +4,39 @@ body{
     min-height: 100vh;
     display: grid;
     place-items: center;
+    background: linear-gradient( 180deg, grey, lightgrey);
 }
 
 .container{
     width: 95%;
     max-width: 1200px;
+}
+
+.stadistics{
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+}
+
+.points{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 30px;
+    font-weight: bold;
+    text-shadow: 2px 2px 5px black;
+}
+
+.points:first-of-type{
+    color: rgb(255, 0, 0);
+}
+
+.points:last-of-type{
+    color: yellow;
+}
+
+.points h3{
+    margin: 5px;
 }
 
 .board{
@@ -45,4 +73,28 @@ body{
 
 .buttons{
     grid-column: 1/8;
+    background-color: darkblue;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    border-radius:  5px 5px 0 0;
+}
+
+.btn{
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    color: black;
+    background-color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn:hover{
+    opacity: 0.8;
 }

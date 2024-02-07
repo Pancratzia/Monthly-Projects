@@ -120,11 +120,11 @@ function App() {
       <div className="container">
         <div className="stadistics">
           <div className="points">
-            <h3>Player 1</h3>
+            <h3>Player 1:</h3>
             <h3>{points[1]}</h3>
           </div>
           <div className="points">
-            <h3>Player 2</h3>
+            <h3>Player 2:</h3>
             <h3>{points[2]}</h3>
           </div>
         </div>
@@ -146,8 +146,8 @@ function App() {
             ))
           )}
           <div className="buttons">
-            <button className="reset" onClick={handleReset}>Reset</button>
-            <button className="resetPoints" onClick={handleResetPoints}>Reset Points</button>
+            <button className="btn reset" onClick={handleReset}>Reset</button>
+            <button className="btn resetPoints" onClick={handleResetPoints}>Reset Points</button>
           </div>
         </div>
       </div>
