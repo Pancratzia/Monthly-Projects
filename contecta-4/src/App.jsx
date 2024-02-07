@@ -1,16 +1,14 @@
 import { useState } from "react";
 
-const INITIAL_BOARD = [
-  ["", "", "", "", "", "", ""],
-  ["", "", "", "", "", "", ""],
-  ["", "", "", "", "", "", ""],
-  ["", "", "", "", "", "", ""],
-  ["", "", "", "", "", "", ""],
-  ["", "", "", "", "", "", ""],
-];
-
 function App() {
-  const [board, setBoard] = useState(INITIAL_BOARD);
+  const [board, setBoard] = useState([
+    ["", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", ""],
+  ]);
   const [turn, setTurn] = useState("1");
   const [winner, setWinner] = useState(0);
 
@@ -48,7 +46,6 @@ function App() {
     }
   };
   
-
   const checkBoard = (row, col) => {
     checkWinningPossibilities(row, col);
 
@@ -88,6 +85,19 @@ function App() {
     alert("Column is full");
   };
 
+  const handleReset = () => {
+    setBoard([
+      ["", "", "", "", "", "", ""],
+      ["", "", "", "", "", "", ""],
+      ["", "", "", "", "", "", ""],
+      ["", "", "", "", "", "", ""],
+      ["", "", "", "", "", "", ""],
+      ["", "", "", "", "", "", ""],
+    ]);
+    setTurn("1");
+    setWinner(0);
+  }
+
   return (
     <>
       <div className="container">
@@ -108,6 +118,9 @@ function App() {
               </div>
             ))
           )}
+          <div className="buttons">
+            <button className="reset" onClick={handleReset}>Reset</button>
+          </div>
         </div>
       </div>
     </>
