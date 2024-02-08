@@ -1,125 +1,131 @@
-body{
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    display: grid;
-    place-items: center;
-    background: linear-gradient( 180deg, grey, lightgrey);
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background-color: #b7b7c5;
+  background: linear-gradient(135deg, #48177255 25%, transparent 25%) -10px 0/
+      20px 20px,
+    linear-gradient(225deg, #481772 25%, transparent 25%) -10px 0/ 20px 20px,
+    linear-gradient(315deg, #48177255 25%, transparent 25%) 0px 0/ 20px 20px,
+    linear-gradient(45deg, #481772 25%, #b7b7c5 25%) 0px 0/ 20px 20px;
 }
 
-.container{
-    width: 95%;
-    max-width: 1200px;
+.container {
+  width: 95%;
+  max-width: 1200px;
+  text-align: center;
 }
 
-.stadistics{
-    display: flex;
-    justify-content: center;
-    gap: 50px;
+.stadistics {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
 }
 
-.points{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 30px;
-    font-weight: bold;
-    text-shadow: 2px 2px 5px black;
+.points {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 30px;
+  font-weight: bold;
+  text-shadow: 2px 2px 5px black;
 }
 
-.points:first-of-type{
-    color: rgb(255, 0, 0);
+.points:first-of-type {
+  color: rgb(255, 0, 0);
 }
 
-.points:last-of-type{
-    color: yellow;
+.points:last-of-type {
+  color: yellow;
 }
 
-.points h3{
-    margin: 5px;
+.points h3 {
+  margin: 5px;
 }
 
-.board{
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
+.board {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
 }
 
-.cell{
-    width: 80px;
-    height: 80px;
-    border: 10px solid blue;
-    border-radius: 5px;
-    background-color: rgb(0, 0, 255);
-    display: grid;
-    place-items: center;
-    font-size: 30px;
+.cell {
+  width: 80px;
+  height: 80px;
+  border: 10px solid blue;
+  border-radius: 5px;
+  background-color: rgb(0, 0, 255);
+  display: grid;
+  place-items: center;
+  font-size: 30px;
 }
 
-.circle{
-    width: 80%;
-    height: 80%;
-    border-radius: 50%;
-    background-color: white;
-    cursor: pointer;
+.circle {
+  width: 80%;
+  height: 80%;
+  border-radius: 50%;
+  background-color: white;
+  cursor: pointer;
 }
 
-.circle-red{
-    background-color: red !important;
+.circle-red {
+  background-color: red !important;
 }
 
-.circle-yellow{
-    background-color: yellow !important;
+.circle-yellow {
+  background-color: yellow !important;
 }
 
-.buttons{
-    grid-column: 1/8;
-    background-color: darkblue;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    gap: 50px;
-    border-radius:  5px 5px 0 0;
+.buttons {
+  grid-column: 1/8;
+  background-color: darkblue;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  border-radius: 5px 5px 0 0;
 }
 
-.btn{
-    padding: 10px 20px;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 16px;
-    color: black;
-    background-color: white;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: all 0.3s ease-in-out;
+.btn {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  color: black;
+  background-color: white;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease-in-out;
 }
 
-.btn:hover{
-    opacity: 0.8;
+.btn:hover {
+  opacity: 0.8;
 }
 
-.turns{
-    display: flex;
-    justify-content: center;
-    margin: 20px;
-    gap: 40px;
+.turns {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+  gap: 40px;
 }
 
-.player{
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
+.player {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
 }
 
-.player.active{
-    border: 5px solid black;
+.player.active {
+  border: 5px solid black;
 }
 
-.player.player-1{
-    background-color: red;
+.player.player-1 {
+  background-color: red;
 }
 
-.player.player-2{
-    background-color: yellow;
+.player.player-2 {
+  background-color: yellow;
 }
