@@ -4,12 +4,19 @@ body {
   min-height: 100vh;
   display: grid;
   place-items: center;
-  background-color: #b7b7c5;
-  background: linear-gradient(135deg, #48177255 25%, transparent 25%) -10px 0/
-      20px 20px,
-    linear-gradient(225deg, #481772 25%, transparent 25%) -10px 0/ 20px 20px,
-    linear-gradient(315deg, #48177255 25%, transparent 25%) 0px 0/ 20px 20px,
-    linear-gradient(45deg, #481772 25%, #b7b7c5 25%) 0px 0/ 20px 20px;
+  background: radial-gradient(
+    transparent 29%,
+    #dcdbef 30%,
+    #dcdbef 50%,
+    transparent 51%,
+    transparent 74%,
+    #dcdbef 75%,
+    #dcdbef 95%,
+    transparent 96%
+  );
+  background-size: 3em 3em;
+  background-color: #ffffff;
+  opacity: 1;
 }
 
 .container {
