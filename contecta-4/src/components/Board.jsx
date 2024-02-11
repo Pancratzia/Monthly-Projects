@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import Buttons from "./Buttons";
 const Board = ({ board, handleClick, handleReset, handleResetPoints }) => {
   return (
     <div className="board">
@@ -18,14 +19,7 @@ const Board = ({ board, handleClick, handleReset, handleResetPoints }) => {
           </div>
         ))
       )}
-      <div className="buttons">
-        <button className="btn btn--reset" onClick={handleReset}>
-          Reset
-        </button>
-        <button className="btn btn--resetPoints" onClick={handleResetPoints}>
-          Reset Points
-        </button>
-      </div>
+      <Buttons handleReset={handleReset} handleResetPoints={handleResetPoints} />
     </div>
   );
 };
