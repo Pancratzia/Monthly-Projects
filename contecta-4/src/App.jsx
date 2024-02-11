@@ -1,5 +1,6 @@
 import { useState } from "react";
 import confetti from "canvas-confetti";
+import Turns from "./components/Turns";
 
 function App() {
   const [board, setBoard] = useState([
@@ -139,18 +140,8 @@ function App() {
       </div>
 
       <div className="container">
-        <div className="turns">
-          <div
-            className={`turns__player turns__player-1 ${
-              turn === "1" ? "active" : ""
-            }`}
-          ></div>
-          <div
-            className={`turns__player turns__player-2 ${
-              turn === "2" ? "active" : ""
-            }`}
-          ></div>
-        </div>
+        
+        <Turns turn={turn} />
 
         <div className="board">
           {board.map((row, rowIndex) =>
