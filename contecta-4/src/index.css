@@ -1,10 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Protest+Guerrilla&display=swap');
 
 :root{
-  --player-1-color: red;
-  --player-2-color: yellow;
-  --board-color: blue;
-  --buttons-color: darkblue;
+  --player-1-color: #ff94a2;
+  --player-2-color: #ffe180;
+  --board-color: #b8e4ff;
+  --buttons-color: #95b8f6;
+  --black: #555;
+  --background: #fbf7f0;
 
   --font-family: 'Protest Guerrilla', sans-serif;
 }
@@ -29,20 +31,10 @@ body {
   min-height: 100vh;
   display: grid;
   place-items: center;
-  background: radial-gradient(
-    transparent 29%,
-    #dcdbef 30%,
-    #dcdbef 50%,
-    transparent 51%,
-    transparent 74%,
-    #dcdbef 75%,
-    #dcdbef 95%,
-    transparent 96%
-  );
-  background-size: 6rem 6rem;
-  background-color: #ffffff;
+  background-color: var(--background);
   opacity: 1;
   font-family: var(--font-family);
+
 }
 
 .container {
@@ -54,7 +46,7 @@ body {
 .title{
   font-size: 50px;
   text-transform: uppercase;
-  text-shadow: 3px 4px 7px rgba(0, 0, 0, 0.5);
+  text-shadow: 3px 4px 7px var(--black);
   margin: 0;
   color: var(--board-color);
 }
@@ -85,15 +77,15 @@ body {
   align-items: center;
   font-size: 30px;
   font-weight: bold;
-  text-shadow: 2px 2px 5px black;
+  text-shadow: 2px 2px 5px var(--black);;
 }
 
 .points:first-of-type {
-  color: rgb(255, 0, 0);
+  color: var(--player-1-color);
 }
 
 .points:last-of-type {
-  color: yellow;
+  color: var(--player-2-color);
 }
 
 .points h3 {
@@ -108,9 +100,9 @@ body {
 .cell {
   width: 80px;
   height: 80px;
-  border: 10px solid blue;
+  border: 10px solid var(--board-color);
   border-radius: 5px;
-  background-color: rgb(0, 0, 255);
+  background-color: var(--board-color);
   display: grid;
   place-items: center;
   font-size: 30px;
@@ -125,16 +117,16 @@ body {
 }
 
 .circle-red {
-  background-color: red !important;
+  background-color: var(--player-1-color) !important;
 }
 
 .circle-yellow {
-  background-color: yellow !important;
+  background-color: var(--player-2-color) !important;
 }
 
 .buttons {
   grid-column: 1/8;
-  background-color: darkblue;
+  background-color: var(--buttons-color);
   padding: 20px;
   display: flex;
   justify-content: center;
@@ -149,7 +141,7 @@ body {
   cursor: pointer;
   font-weight: bold;
   font-size: 16px;
-  color: black;
+  color: var(--black);;
   background-color: white;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -174,13 +166,13 @@ body {
 }
 
 .player.active {
-  border: 5px solid black;
+  border: 5px solid var(--black);;
 }
 
 .player.player-1 {
-  background-color: red;
+  background-color: var(--player-1-color);
 }
 
 .player.player-2 {
-  background-color: yellow;
+  background-color: var(--player-2-color);
 }
