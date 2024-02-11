@@ -122,18 +122,18 @@ body {
   grid-template-columns: repeat(7, 1fr);
 }
 
-.cell {
-  width: 80px;
-  height: 80px;
-  border: 10px solid var(--board-color);
-  border-radius: 5px;
+.board__cell {
+  width: 8rem;
+  height: 8rem;
+  border: .5rem solid var(--board-color);
   background-color: var(--board-color);
+  border-radius: .3rem;
   display: grid;
   place-items: center;
-  font-size: 30px;
+  font-size: 3rem;
 }
 
-.circle {
+.board__circle {
   width: 80%;
   height: 80%;
   border-radius: 50%;
@@ -141,40 +141,53 @@ body {
   cursor: pointer;
 }
 
-.circle-red {
+.board__circle--red {
   background-color: var(--player-1-color) !important;
+  border: .3rem solid var(--buttons-color);
 }
 
-.circle-yellow {
+.board__circle--yellow {
   background-color: var(--player-2-color) !important;
+  border: .3rem solid var(--buttons-color);
 }
+
+/**Buttons**/
 
 .buttons {
   grid-column: 1/8;
   background-color: var(--buttons-color);
-  padding: 20px;
+  padding: 2rem;
   display: flex;
   justify-content: center;
-  gap: 50px;
-  border-radius: 5px 5px 0 0;
+  gap: 5rem;
+  border-radius: .5rem .5rem 0;
 }
 
 .btn {
-  padding: 10px 20px;
-  border-radius: 5px;
+  padding: 1rem 2rem;
+  border-radius: .5rem;
   border: none;
   cursor: pointer;
   font-weight: bold;
-  font-size: 16px;
-  color: var(--black);;
+  font-size: 1.6rem;
+  color: var(--black);
   background-color: white;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: .1rem;
+  box-shadow: .2rem .2rem .3rem var(--black);
   transition: all 0.3s ease-in-out;
 }
 
 .btn:hover {
   opacity: 0.8;
+}
+
+.btn--reset{
+  background-color: var(--player-1-color);
+}
+
+.btn--resetPoints {
+  background-color: var(--player-2-color);
 }
 
 /**Turns**/

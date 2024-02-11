@@ -149,14 +149,14 @@ function App() {
         <div className="board">
           {board.map((row, rowIndex) =>
             row.map((cell, cellIndex) => (
-              <div key={`${rowIndex}-${cellIndex}`} className="cell">
+              <div key={`${rowIndex}-${cellIndex}`} className="board__cell">
                 <div
                   className={
                     cell === "1"
-                      ? "circle-red circle"
+                      ? "board__circle--red board__circle"
                       : cell === "2"
-                      ? "circle-yellow circle"
-                      : "circle"
+                      ? "board__circle--yellow board__circle"
+                      : "board__circle"
                   }
                   onClick={() => handleClick(cellIndex)}
                 ></div>
@@ -164,10 +164,10 @@ function App() {
             ))
           )}
           <div className="buttons">
-            <button className="btn reset" onClick={handleReset}>
+            <button className="btn btn--reset" onClick={handleReset}>
               Reset
             </button>
-            <button className="btn resetPoints" onClick={handleResetPoints}>
+            <button className="btn btn--resetPoints" onClick={handleResetPoints}>
               Reset Points
             </button>
           </div>
