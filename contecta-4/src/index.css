@@ -35,7 +35,6 @@ body {
   background-color: var(--background);
   opacity: 1;
   font-family: var(--font-family);
-
 }
 
 /**Utilities**/
@@ -47,11 +46,21 @@ body {
 
 /**Main Title**/
 
+.title-container {
+  margin: 2rem 0;
+  text-align: center;
+  background-color: white;
+  width: 100%;
+  border-radius: .5rem;
+  box-shadow: .2rem .2rem .5rem var(--black);
+}
+
 .title{
   font-size: 5rem;
   text-transform: uppercase;
   text-shadow: .3rem .4rem .7rem var(--black);
   margin: 0;
+  width: 100%;
   color: var(--board-color);
 }
 

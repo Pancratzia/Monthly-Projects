@@ -134,15 +134,21 @@ function App() {
 
   return (
     <>
-      <div className="container">
+      <div className="title-container">
         <h1 className="title">Conecta 4</h1>
+      </div>
 
+      <div className="container">
         <div className="turns">
           <div
-            className={`turns__player turns__player-1 ${turn === "1" ? "active" : ""}`}
+            className={`turns__player turns__player-1 ${
+              turn === "1" ? "active" : ""
+            }`}
           ></div>
           <div
-            className={`turns__player turns__player-2 ${turn === "2" ? "active" : ""}`}
+            className={`turns__player turns__player-2 ${
+              turn === "2" ? "active" : ""
+            }`}
           ></div>
         </div>
 
@@ -167,7 +173,10 @@ function App() {
             <button className="btn btn--reset" onClick={handleReset}>
               Reset
             </button>
-            <button className="btn btn--resetPoints" onClick={handleResetPoints}>
+            <button
+              className="btn btn--resetPoints"
+              onClick={handleResetPoints}
+            >
               Reset Points
             </button>
           </div>
