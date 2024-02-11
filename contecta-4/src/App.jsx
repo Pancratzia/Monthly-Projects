@@ -139,10 +139,10 @@ function App() {
 
         <div className="turns">
           <div
-            className={`player player-1 ${turn === "1" ? "active" : ""}`}
+            className={`turns__player turns__player-1 ${turn === "1" ? "active" : ""}`}
           ></div>
           <div
-            className={`player player-2 ${turn === "2" ? "active" : ""}`}
+            className={`turns__player turns__player-2 ${turn === "2" ? "active" : ""}`}
           ></div>
         </div>
 

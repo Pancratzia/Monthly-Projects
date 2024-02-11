@@ -115,8 +115,6 @@ body {
   color: var(--player-2-color);
 }
 
-
-
 /**Board**/
 
 .board {
@@ -179,27 +177,29 @@ body {
   opacity: 0.8;
 }
 
+/**Turns**/
+
 .turns {
   display: flex;
-  justify-content: center;
-  margin: 20px;
-  gap: 40px;
+  justify-content: space-around;
+  margin: 2rem;
+  gap: 4rem;
 }
 
-.player {
-  width: 80px;
-  height: 80px;
+.turns__player {
+  width: 5rem;
+  height: 5rem;
   border-radius: 50%;
 }
 
-.player.active {
-  border: 5px solid var(--black);;
+.turns__player.active {
+  border: .3rem solid var(--black);;
 }
 
-.player.player-1 {
+.turns__player-1 {
   background-color: var(--player-1-color);
 }
 
-.player.player-2 {
+.turns__player-2 {
   background-color: var(--player-2-color);
 }
