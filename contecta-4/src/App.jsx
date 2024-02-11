@@ -2,6 +2,7 @@ import { useState } from "react";
 import confetti from "canvas-confetti";
 import Turns from "./components/Turns";
 import Stadistics from "./components/Stadistics";
+import Board from "./components/Board";
 
 function App() {
   const [board, setBoard] = useState([
@@ -144,35 +145,7 @@ function App() {
         
         <Turns turn={turn} />
 
-        <div className="board">
-          {board.map((row, rowIndex) =>
-            row.map((cell, cellIndex) => (
-              <div key={`${rowIndex}-${cellIndex}`} className="board__cell">
-                <div
-                  className={
-                    cell === "1"
-                      ? "board__circle--red board__circle"
-                      : cell === "2"
-                      ? "board__circle--yellow board__circle"
-                      : "board__circle"
-                  }
-                  onClick={() => handleClick(cellIndex)}
-                ></div>
-              </div>
-            ))
-          )}
-          <div className="buttons">
-            <button className="btn btn--reset" onClick={handleReset}>
-              Reset
-            </button>
-            <button
-              className="btn btn--resetPoints"
-              onClick={handleResetPoints}
-            >
-              Reset Points
-            </button>
-          </div>
-        </div>
+        <Board board={board} handleClick={handleClick} handleReset={handleReset} handleResetPoints={handleResetPoints} />
 
         <Stadistics points={points} />
       </div>
