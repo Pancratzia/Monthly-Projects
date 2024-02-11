@@ -135,18 +135,17 @@ function App() {
   return (
     <>
       <div className="container">
-
         <h1 className="title">Conecta 4</h1>
-        <div className="stadistics">
-          <div className="points">
-            <h3>Player 1:</h3>
-            <h3>{points[1]}</h3>
-          </div>
-          <div className="points">
-            <h3>Player 2:</h3>
-            <h3>{points[2]}</h3>
-          </div>
+
+        <div className="turns">
+          <div
+            className={`player player-1 ${turn === "1" ? "active" : ""}`}
+          ></div>
+          <div
+            className={`player player-2 ${turn === "2" ? "active" : ""}`}
+          ></div>
         </div>
+
         <div className="board">
           {board.map((row, rowIndex) =>
             row.map((cell, cellIndex) => (
@@ -174,13 +173,23 @@ function App() {
           </div>
         </div>
 
-        <div className="turns">
-          <div
-            className={`player player-1 ${turn === "1" ? "active" : ""}`}
-          ></div>
-          <div
-            className={`player player-2 ${turn === "2" ? "active" : ""}`}
-          ></div>
+        <div className="stadistics">
+          <div className="stadistics__points">
+            <h3 className="stadistics__player-name stadistics__player-name--red stadistics__h3">
+              Player 1:
+            </h3>
+            <h3 className="stadistics__actual-points stadistics__h3 stadistics__actual-points--red">
+              {points[1]}
+            </h3>
+          </div>
+          <div className="stadistics__points">
+            <h3 className="stadistics__player-name stadistics__player-name--yellow stadistics__h3">
+              Player 2:
+            </h3>
+            <h3 className="stadistics__actual-points stadistics__h3 stadistics__actual-points--yellow">
+              {points[2]}
+            </h3>
+          </div>
         </div>
       </div>
     </>

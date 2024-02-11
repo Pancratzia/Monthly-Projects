@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Protest+Guerrilla&display=swap');
 
+/**Globals**/
 :root{
   --player-1-color: #ff94a2;
   --player-2-color: #ffe180;
@@ -37,23 +38,26 @@ body {
 
 }
 
+/**Utilities**/
+
 .container {
-  width: 95%;
-  max-width: 1200px;
+  max-width: 120rem;
   text-align: center;
 }
 
+/**Main Title**/
+
 .title{
-  font-size: 50px;
+  font-size: 5rem;
   text-transform: uppercase;
-  text-shadow: 3px 4px 7px var(--black);
+  text-shadow: .3rem .4rem .7rem var(--black);
   margin: 0;
   color: var(--board-color);
 }
 
 .title::after, .title::before {
   content: '••••';
-  margin: 0 10px;
+  margin: 0 1rem;
   
 }
 
@@ -65,32 +69,55 @@ body {
   color: var(--player-2-color);
 }
 
+/**Stadistics**/
+
 .stadistics {
   display: flex;
-  justify-content: center;
-  gap: 50px;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+  gap: 3.5rem;
 }
 
-.points {
+.stadistics__points {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 30px;
+  font-size: 3rem;
   font-weight: bold;
-  text-shadow: 2px 2px 5px var(--black);;
+  text-shadow: .2rem .2rem .5rem var(--black);
+  background-color: white;
+  padding: 1rem;
+  border-radius: .5rem;
+  box-shadow: .3rem .3rem .5rem var(--black);
 }
 
-.points:first-of-type {
+.stadistics__h3 {
+  margin: .2rem 0;
+  text-shadow: .1rem .2rem .2rem var(--black);
+}
+
+.stadistics__player-name{
+  letter-spacing: .5rem;
+  text-transform: uppercase;
+  font-size:  2.5rem;
+}
+
+.stadistics__actual-points{
+  font-size: 5rem;
+}
+
+.stadistics__actual-points--red, .stadistics__player-name--red {
   color: var(--player-1-color);
 }
 
-.points:last-of-type {
+.stadistics__actual-points--yellow, .stadistics__player-name--yellow {
   color: var(--player-2-color);
 }
 
-.points h3 {
-  margin: 5px;
-}
+
+
+/**Board**/
 
 .board {
   display: grid;
