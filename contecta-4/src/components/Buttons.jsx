@@ -1,6 +1,9 @@
-import PropTypes from "prop-types";
+import { useContext } from "react";
+import { GameContext } from "../context/GameContext";
 
-const Buttons = ({handleReset, handleResetPoints}) => {
+const Buttons = () => {
+
+  const { handleReset, handleResetPoints } = useContext(GameContext);
   return (
     <div className="buttons">
         <button className="btn btn--reset" onClick={handleReset}>
@@ -14,8 +17,3 @@ const Buttons = ({handleReset, handleResetPoints}) => {
 }
 
 export default Buttons;
-
-Buttons.propTypes = {
-  handleReset: PropTypes.func.isRequired,
-  handleResetPoints: PropTypes.func.isRequired
-}

@@ -1,11 +1,9 @@
 import Turns from "./components/Turns";
 import Stadistics from "./components/Stadistics";
 import Board from "./components/Board";
-import useGame from "./hooks/useGame";
+import { GameProvider } from "./context/GameProvider";
 
 function App() {
-
-  const { board, turn, points, handleClick, handleReset, handleResetPoints } = useGame();
 
   return (
     <>
@@ -13,18 +11,15 @@ function App() {
         <h1 className="title">Conecta 4</h1>
       </div>
 
-      <div className="container">
-        <Turns turn={turn} />
+      <GameProvider>
+        <div className="container">
+          <Turns />
 
-        <Board
-          board={board}
-          handleClick={handleClick}
-          handleReset={handleReset}
-          handleResetPoints={handleResetPoints}
-        />
+          <Board />
 
-        <Stadistics points={points} />
-      </div>
+          <Stadistics />
+        </div>
+      </GameProvider>
     </>
   );
 }

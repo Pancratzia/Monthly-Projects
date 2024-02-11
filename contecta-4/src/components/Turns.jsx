@@ -1,6 +1,10 @@
-import PropTypes from "prop-types";
+import { useContext } from "react";
+import { GameContext } from "../context/GameContext";
 
-const Turns = ({ turn }) => {
+const Turns = () => {
+
+  const { turn } = useContext(GameContext);
+  
   return (
     <div className="turns">
       <div
@@ -18,7 +22,3 @@ const Turns = ({ turn }) => {
 };
 
 export default Turns;
-
-Turns.propTypes = {
-  turn: PropTypes.string.isRequired,
-}

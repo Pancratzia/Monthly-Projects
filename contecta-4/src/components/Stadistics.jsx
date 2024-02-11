@@ -1,6 +1,9 @@
-import PropTypes from "prop-types";
+import { GameContext } from "../context/GameContext";
+import { useContext } from "react";
 
-const Stadistics = ({ points }) => {
+const Stadistics = () => {
+
+  const { points } = useContext(GameContext);
   return (
     <div className="stadistics">
           <div className="stadistics__points">
@@ -24,7 +27,3 @@ const Stadistics = ({ points }) => {
 }
 
 export default Stadistics;
-
-Stadistics.propTypes = {
-  points: PropTypes.array.isRequired
-}

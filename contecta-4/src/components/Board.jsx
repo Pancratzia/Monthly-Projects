@@ -1,6 +1,9 @@
-import PropTypes from "prop-types";
+import { useContext } from "react";
 import Buttons from "./Buttons";
-const Board = ({ board, handleClick, handleReset, handleResetPoints }) => {
+import { GameContext } from "../context/GameContext";
+const Board = () => {
+  const { board, handleClick } =
+    useContext(GameContext);
   return (
     <div className="board">
       {board.map((row, rowIndex) =>
@@ -19,16 +22,9 @@ const Board = ({ board, handleClick, handleReset, handleResetPoints }) => {
           </div>
         ))
       )}
-      <Buttons handleReset={handleReset} handleResetPoints={handleResetPoints} />
+      <Buttons/>
     </div>
   );
 };
 
 export default Board;
-
-Board.propTypes = {
-  board: PropTypes.array.isRequired,
-  handleClick: PropTypes.func.isRequired,
-  handleReset: PropTypes.func.isRequired,
-  handleResetPoints: PropTypes.func.isRequired
-}
