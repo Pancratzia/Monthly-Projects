@@ -1,6 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Protest+Guerrilla&display=swap');
+
+:root{
+  --player-1-color: red;
+  --player-2-color: yellow;
+  --board-color: blue;
+  --buttons-color: darkblue;
+
+  --font-family: 'Protest Guerrilla', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+}
+
 body {
   margin: 0;
   padding: 0;
+  font-size: 1.6rem;
   min-height: 100vh;
   display: grid;
   place-items: center;
@@ -14,15 +39,38 @@ body {
     #dcdbef 95%,
     transparent 96%
   );
-  background-size: 3em 3em;
+  background-size: 6rem 6rem;
   background-color: #ffffff;
   opacity: 1;
+  font-family: var(--font-family);
 }
 
 .container {
   width: 95%;
   max-width: 1200px;
   text-align: center;
+}
+
+.title{
+  font-size: 50px;
+  text-transform: uppercase;
+  text-shadow: 3px 4px 7px rgba(0, 0, 0, 0.5);
+  margin: 0;
+  color: var(--board-color);
+}
+
+.title::after, .title::before {
+  content: '••••';
+  margin: 0 10px;
+  
+}
+
+.title::before {
+  color: var(--player-1-color);
+}
+
+.title::after {
+  color: var(--player-2-color);
 }
 
 .stadistics {

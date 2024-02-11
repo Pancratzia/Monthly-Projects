@@ -136,7 +136,7 @@ function App() {
     <>
       <div className="container">
 
-        <h1>Conecta 4</h1>
+        <h1 className="title">Conecta 4</h1>
         <div className="stadistics">
           <div className="points">
             <h3>Player 1:</h3>
