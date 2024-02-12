@@ -1,5 +1,6 @@
 import confetti from "canvas-confetti";
 import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 const useGame = () => {
   const [board, setBoard] = useState(() => {
@@ -30,6 +31,15 @@ const useGame = () => {
     return board.every((row) => row.every((cell) => cell !== ""));
   };
 
+  const winnerAlert = () => {
+    Swal.fire({
+      title: `We have a winner!`,
+      text: `Player ${turn} wins!`,
+      icon: false,
+      timer: 2000,
+      showConfirmButton: false,
+    })
+  }
   const checkWinningPossibilities = (row, col) => {
     const directions = [
       [
@@ -66,8 +76,14 @@ const useGame = () => {
       }
 
       if (count >= 4) {
-        alert(`Player ${turn} wins!`);
-        confetti();
+        winnerAlert();
+        confetti({
+          colors: [
+            turn === "1" ? "#ff94a2" : "#ffe180",
+            "#fbf7f0"
+          ],
+          zIndex: 9999
+        });
         setWinner(turn);
         setPoints({
           ...points,
@@ -83,7 +99,7 @@ const useGame = () => {
     checkWinningPossibilities(row, col);
 
     if (winner !== 0) {
-      alert(`Player ${winner} wins!`);
+      alert(`There is a winner! Player ${winner} wins!`);
       return;
     }
 
@@ -120,10 +136,14 @@ const useGame = () => {
     alert("Column is full");
   };
 
-  const handleReset = () => {
+  const reset = () => {
     setBoard(getInitialBoard());
     setTurn("1");
     setWinner(0);
+  }
+
+  const handleReset = () => {
+    reset();
   };
 
   const handleResetPoints = () => {
@@ -131,7 +151,7 @@ const useGame = () => {
       1: 0,
       2: 0,
     });
-    handleReset();
+    reset();
   };
 
   function getInitialBoard() {
