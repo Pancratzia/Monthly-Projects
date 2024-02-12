@@ -1,14 +1,30 @@
 import confetti from "canvas-confetti";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const useGame = () => {
-  const [board, setBoard] = useState(getInitialBoard());
-  const [turn, setTurn] = useState("1");
-  const [winner, setWinner] = useState(0);
-  const [points, setPoints] = useState({
-    1: 0,
-    2: 0,
+  const [board, setBoard] = useState(() => {
+    const storedBoard = localStorage.getItem("board");
+    return storedBoard ? JSON.parse(storedBoard) : getInitialBoard();
   });
+  const [turn, setTurn] = useState(() => {
+    const storedTurn = localStorage.getItem("turn");
+    return storedTurn ? storedTurn : "1";
+  });
+  const [winner, setWinner] = useState(() => {
+    const storedWinner = localStorage.getItem("winner");
+    return storedWinner ? parseInt(storedWinner) : 0;
+  });
+  const [points, setPoints] = useState(() => {
+    const storedPoints = localStorage.getItem("points");
+    return storedPoints ? JSON.parse(storedPoints) : { 1: 0, 2: 0 };
+  });
+
+  useEffect(() => {
+    localStorage.setItem("board", JSON.stringify(board));
+    localStorage.setItem("turn", turn);
+    localStorage.setItem("winner", winner.toString());
+    localStorage.setItem("points", JSON.stringify(points));
+  }, [board, turn, winner, points]);
 
   const checkFullBoard = () => {
     return board.every((row) => row.every((cell) => cell !== ""));
