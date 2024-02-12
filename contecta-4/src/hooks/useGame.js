@@ -1,6 +1,8 @@
 import confetti from "canvas-confetti";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import { toast } from "react-toastify";
+
 
 const useGame = () => {
   const [board, setBoard] = useState(() => {
@@ -38,8 +40,10 @@ const useGame = () => {
       icon: false,
       timer: 2000,
       showConfirmButton: false,
-    })
-  }
+    });
+  };
+
+
   const checkWinningPossibilities = (row, col) => {
     const directions = [
       [
@@ -78,11 +82,8 @@ const useGame = () => {
       if (count >= 4) {
         winnerAlert();
         confetti({
-          colors: [
-            turn === "1" ? "#ff94a2" : "#ffe180",
-            "#fbf7f0"
-          ],
-          zIndex: 9999
+          colors: [turn === "1" ? "#ff94a2" : "#ffe180", "#fbf7f0"],
+          zIndex: 9999,
         });
         setWinner(turn);
         setPoints({
@@ -98,13 +99,14 @@ const useGame = () => {
   const checkBoard = (row, col) => {
     checkWinningPossibilities(row, col);
 
-    if (winner !== 0) {
-      alert(`There is a winner! Player ${winner} wins!`);
-      return;
-    }
-
     if (checkFullBoard()) {
-      alert("It's a draw!");
+      Swal.fire({
+        title: `The board is full!`,
+        text: `It's a tie!`,
+        icon: false,
+        timer: 2000,
+        showConfirmButton: false,
+      });
       handleReset();
       return;
     }
@@ -112,12 +114,11 @@ const useGame = () => {
 
   const handleClick = (col) => {
     if (checkFullBoard()) {
-      alert("The board is full");
       return;
     }
 
     if (winner !== 0) {
-      alert(`There is a winner! Player ${winner} wins!`);
+      winnerAlert();
       return;
     }
 
@@ -133,14 +134,23 @@ const useGame = () => {
       }
     }
 
-    alert("Column is full");
+    toast.error('Column is full', {
+      position: "bottom-right",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "light"
+      });
   };
 
   const reset = () => {
     setBoard(getInitialBoard());
     setTurn("1");
     setWinner(0);
-  }
+  };
 
   const handleReset = () => {
     reset();
