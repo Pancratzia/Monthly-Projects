@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import PropTypes from "prop-types";
 
 function useFetch(url, multipleUrl = false) {
@@ -6,10 +6,10 @@ function useFetch(url, multipleUrl = false) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchData = async (url) => {
+  const fetchData = useCallback(
+    async (fetchUrl) => {
       try {
-        const res = await fetch(url);
+        const res = await fetch(fetchUrl);
         const dataRes = await res.json();
         setData((prevData) => ({ ...prevData, ...dataRes }));
         if (dataRes.next !== null && multipleUrl) {
@@ -21,10 +21,15 @@ function useFetch(url, multipleUrl = false) {
         setError(err);
         setLoading(false);
       }
-    };
+    },
+    [multipleUrl]
+  );
 
-    fetchData(url);
-  }, [url, multipleUrl]);
+  useEffect(() => {
+    if (!data) {
+      fetchData(url);
+    }
+  }, [url, data, fetchData]);
 
   return { data, loading, error };
 }
@@ -34,29 +39,30 @@ function App() {
     "https://swapi.dev/api/people/",
     true
   );
-  const [characters, setCharacters] = useState([]);
+  const [characters, setCharacters] = useState(new Set());
 
   useEffect(() => {
-    if (data !== null && data.results !== null) {
-      setCharacters((prevCharacters) => [
-        ...prevCharacters,
-        ...data.results.filter(
-          (newCharacter) =>
-            !prevCharacters.some(
-              (prevCharacter) => prevCharacter.name === newCharacter.name
-            )
-        ),
-      ]);
+    if (data && data.results) {
+      const newCharacters = data.results.filter(
+        (newCharacter) => !characters.has(newCharacter.name)
+      );
+      setCharacters(
+        (prevCharacters) =>
+          new Set([
+            ...prevCharacters,
+            ...newCharacters.map((char) => char.name),
+          ])
+      );
     }
-  }, [data]);
+  }, [data, characters]);
 
   return (
     <>
       <h1>Star Wars Wiki</h1>
       {error && <p>{error.message}</p>}
       {loading && <p>Loading...</p>}
-      {characters.map((character) => (
-        <p key={character.name}>{character.name}</p>
+      {[...characters].map((characterName) => (
+        <p key={characterName}>{characterName}</p>
       ))}
     </>
   );
