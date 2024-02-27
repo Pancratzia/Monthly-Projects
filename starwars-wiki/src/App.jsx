@@ -41,6 +41,9 @@ function App() {
   );
   const [characters, setCharacters] = useState(new Set());
 
+  const [slicedCharacters, setSlicedCharacters] = useState([]);
+  const [page, setPage] = useState(1);
+
   useEffect(() => {
     if (data && data.results) {
       const newCharacters = data.results.filter(
@@ -54,15 +57,25 @@ function App() {
           ])
       );
     }
+
+    if (slicedCharacters.length === 0) {
+      sliceCharacters();
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
+
+  const sliceCharacters = () => {
+    const newCharacters = [...characters];
+    setSlicedCharacters(newCharacters.slice(0,  page * 10));
+    setPage((prevPage) => prevPage + 1);
+  }
 
   return (
     <>
       <h1>Star Wars Wiki</h1>
       {error && <p>{error.message}</p>}
       {loading && <p>Loading...</p>}
-      {[...characters].map((characterName) => (
+      {slicedCharacters.map((characterName) => (
         <p key={characterName}>{characterName}</p>
       ))}
     </>
