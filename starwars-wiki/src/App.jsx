@@ -54,7 +54,8 @@ function App() {
           ])
       );
     }
-  }, [data, characters]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
 
   return (
     <>
