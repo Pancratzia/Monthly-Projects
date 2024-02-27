@@ -58,15 +58,30 @@ function App() {
       );
     }
 
-    if (slicedCharacters.length === 0) {
-      sliceCharacters();
-    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
+  useEffect(() => {
+    
+    if (slicedCharacters.length === 0 && loading === false) {
+      sliceCharacters();
+    }
+  }, [characters]);
+
   const sliceCharacters = () => {
     const newCharacters = [...characters];
-    setSlicedCharacters(newCharacters.slice(0,  page * 10));
+
+    //Si el array tiene menos de 10 elementos, no hay que paginar la lista y solo se copian los elementos
+    if (newCharacters.length < 10) {
+      setSlicedCharacters(newCharacters);
+      return;
+    }
+
+    //Si el array tiene más de 10 elementos, se divide en páginas de 10 elementos
+    const start = (page - 1) * 10;
+    const end = start + 10;
+
+    setSlicedCharacters(newCharacters.slice(start, end));
     setPage((prevPage) => prevPage + 1);
   }
 
