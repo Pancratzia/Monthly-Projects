@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import PropTypes from "prop-types";
 import { memo } from "react";
-import StarfieldAnimation from "react-starfield-animation";
+import StarfieldAnimation from 'react-starfield-animation'
 
 function useFetch(url, multipleUrl = false) {
   const [data, setData] = useState(null);
@@ -62,7 +62,6 @@ export const Background = memo(() => {
         height: "100%",
       }}
       numParticles={800}
-      particleSpeed={0}
       dx={0.000000001}
       dy={0.000000001}
     />
@@ -221,6 +220,10 @@ function App() {
             {">"}
           </button>
         </div>
+      )}
+
+      {filterCharacters.length === 0 && (
+        <p className="alert no-results">No results found</p>
       )}
       </main>
     </>
