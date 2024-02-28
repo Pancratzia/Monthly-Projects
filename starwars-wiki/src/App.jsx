@@ -38,8 +38,24 @@ function useFetch(url, multipleUrl = false) {
 
 // eslint-disable-next-line react/display-name
 export const Background = memo(() => {
+
+  const [containerWidth, setContainerWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setContainerWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <StarfieldAnimation
+      key={containerWidth}
       style={{
         position: "absolute",
         width: "100%",
@@ -157,6 +173,8 @@ function App() {
         <p className="alert loading">Loading...</p>
       </div>
 
+      <main className="main container">
+
       {slicedCharacters.map(
         (
           {
@@ -204,6 +222,7 @@ function App() {
           </button>
         </div>
       )}
+      </main>
     </>
   );
 }

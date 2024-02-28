@@ -55,6 +55,7 @@ ul{
   justify-content: center;
   flex-direction: column;
   position: relative;
+  overflow: hidden;
 
   & .image{
     width: min(70%, 50rem);
@@ -117,6 +118,10 @@ ul{
       width: 50%;
     }
   }
+}
+
+.main{
+  min-height: 50vh;
 }
 
 
