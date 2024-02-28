@@ -40,33 +40,50 @@ function App() {
     true
   );
 
-  const [characters, setCharacters] = useState(new Set());
+  const [characters, setCharacters] = useState([]);
+  const [filteredCharacters, setFilteredCharacters] = useState([]);
   const [slicedCharacters, setSlicedCharacters] = useState([]);
   const [page, setPage] = useState(1);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     if (data && data.results) {
       const newCharacters = data.results.map((newCharacter) => newCharacter);
-      setCharacters((prevCharacters) => new Set([...prevCharacters, ...newCharacters]));
+      setCharacters((prevCharacters) => [...prevCharacters, ...newCharacters]);
     }
   }, [data]);
 
   useEffect(() => {
-    if(!loading) sliceCharacters();
+    if (characters.length > 0) {
+      filterCharacters();
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [characters, page]);
+  }, [characters, search]);
+
+  useEffect(() => {
+    if (!loading) {
+      sliceCharacters();
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filteredCharacters, page, loading]);
+
+  const filterCharacters = () => {
+    const newCharacters = characters.filter((character) =>
+      character.name.toLowerCase().includes(search.toLowerCase())
+    );
+    setFilteredCharacters(newCharacters);
+  };
 
   const sliceCharacters = () => {
-    const newCharacters = [...characters];
     const start = (page - 1) * 10;
     const end = start + 10;
-    setSlicedCharacters(newCharacters.slice(start, end));
+    setSlicedCharacters(filteredCharacters.slice(start, end));
   };
 
   const handleChangePage = (action) => {
     let newPage = page;
 
-    if (action === "next" && page < Math.ceil(characters.size / 10)) {
+    if (action === "next" && page < Math.ceil(filteredCharacters.length / 10)) {
       newPage++;
     } else if (action === "prev" && page > 1) {
       newPage--;
@@ -75,27 +92,37 @@ function App() {
     setPage(newPage);
   };
 
-  console.log(characters);
   return (
     <>
       <h1>Star Wars Wiki</h1>
       {error && <p>{error.message}</p>}
       {loading && <p>Loading...</p>}
-      {slicedCharacters.map(({ name, height, mass, hair_color, skin_color, eye_color, birth_year, gender }, idx) => (
-        <div className="card" key={idx}>
-          <h2>{name}</h2>
-          <p>Gender: {gender}</p>
-          <ul>
-            <li>Height: {height}</li>
-            <li>Mass: {mass}</li>
-            <li>Hair Color: {hair_color}</li>
-            <li>Skin Color: {skin_color}</li>
-            <li>Eye Color: {eye_color}</li>
-            <li>Birth Year: {birth_year}</li>
-          </ul>
-        </div>
-      ))}
-      {characters.size > 10 && !loading && (
+
+      <input
+        type="text"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        placeholder="Search..."
+      />
+
+      {slicedCharacters.map(
+        ({ name, height, mass, hair_color, skin_color, eye_color, birth_year, gender }, idx) => (
+          <div className="card" key={idx}>
+            <h2>{name}</h2>
+            <p>Gender: {gender}</p>
+            <ul>
+              <li>Height: {height} cm</li>
+              <li>Mass: {mass} kg</li>
+              <li>Hair Color: {hair_color}</li>
+              <li>Skin Color: {skin_color}</li>
+              <li>Eye Color: {eye_color}</li>
+              <li>Birth Year: {birth_year}</li>
+            </ul>
+          </div>
+        )
+      )}
+
+      {filteredCharacters.length > 10 && !loading && (
         <div className="buttons">
           <button
             onClick={() => handleChangePage("prev")}
@@ -106,7 +133,7 @@ function App() {
           </button>
           <button
             onClick={() => handleChangePage("next")}
-            disabled={page >= Math.ceil(characters.size / 10)}
+            disabled={page >= Math.ceil(filteredCharacters.length / 10)}
             type="button"
           >
             {">"}
@@ -116,7 +143,6 @@ function App() {
     </>
   );
 }
-
 
 export default App;
 
