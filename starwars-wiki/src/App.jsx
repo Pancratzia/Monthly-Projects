@@ -46,7 +46,7 @@ function App() {
 
   useEffect(() => {
     if (data && data.results) {
-      const newCharacters = data.results.map((newCharacter) => newCharacter.name);
+      const newCharacters = data.results.map((newCharacter) => newCharacter);
       setCharacters((prevCharacters) => new Set([...prevCharacters, ...newCharacters]));
     }
   }, [data]);
@@ -75,13 +75,14 @@ function App() {
     setPage(newPage);
   };
 
+  console.log(characters);
   return (
     <>
       <h1>Star Wars Wiki</h1>
       {error && <p>{error.message}</p>}
       {loading && <p>Loading...</p>}
-      {slicedCharacters.map((characterName) => (
-        <p key={characterName}>{characterName}</p>
+      {slicedCharacters.map((character, idx) => (
+        <p key={idx}>{character.name}</p>
       ))}
       {characters.size > 10 && !loading && (
         <div className="buttons">
