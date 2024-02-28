@@ -1,3 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Days+One&display=swap');
+
+:root{
+  --font-family: 'Days One', sans-serif;
+
+  --white: #fff;
+  --black: #000;
+  --yellow: #ffcc00;
+}
+
 *{
   box-sizing: border-box;
 }
@@ -17,7 +27,7 @@ body{
   font-size: 1.6rem;
 }
 
-h1, h2, h3, h4, h5, h6{
+h1, h2, h3, h4, h5, h6, p{
   margin: 0;
   padding: 0;
 }
@@ -31,4 +41,51 @@ ul{
   padding: 0;
   list-style: none;
 }
+
+.header{
+  background-color: var(--black);
+  height: 60rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+
+  & .image{
+    width: min(70%, 50rem);
+  }
+
+  & .by, .powered, .title{
+    color: var(--white);
+    font-family: var(--font-family);
+  }
+
+  & .title{
+    font-size: 2.5rem;
+    letter-spacing: 1rem;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 3rem 0;
+  }
+
+  & .link{
+    color: var(--yellow);
+    font-weight: normal;
+  }
+
+  & .by{
+    margin: 2rem 0;
+    font-size: 1.6rem;
+  }
+
+  & .powered{
+    font-size: 1.2rem;
+  }
+
+  & .by, .powered{
+    z-index: 2;
+  }
+}
+
+
 
