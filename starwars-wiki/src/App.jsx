@@ -81,8 +81,19 @@ function App() {
       <h1>Star Wars Wiki</h1>
       {error && <p>{error.message}</p>}
       {loading && <p>Loading...</p>}
-      {slicedCharacters.map((character, idx) => (
-        <p key={idx}>{character.name}</p>
+      {slicedCharacters.map(({ name, height, mass, hair_color, skin_color, eye_color, birth_year, gender }, idx) => (
+        <div className="card" key={idx}>
+          <h2>{name}</h2>
+          <p>Gender: {gender}</p>
+          <ul>
+            <li>Height: {height}</li>
+            <li>Mass: {mass}</li>
+            <li>Hair Color: {hair_color}</li>
+            <li>Skin Color: {skin_color}</li>
+            <li>Eye Color: {eye_color}</li>
+            <li>Birth Year: {birth_year}</li>
+          </ul>
+        </div>
       ))}
       {characters.size > 10 && !loading && (
         <div className="buttons">
