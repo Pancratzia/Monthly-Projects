@@ -1,5 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
 import PropTypes from "prop-types";
+import { memo } from "react";
 import StarfieldAnimation from "react-starfield-animation";
 
 function useFetch(url, multipleUrl = false) {
@@ -35,7 +36,8 @@ function useFetch(url, multipleUrl = false) {
   return { data, loading, error };
 }
 
-function Background() {
+// eslint-disable-next-line react/display-name
+export const Background = memo(() => {
   return (
     <StarfieldAnimation
       style={{
@@ -49,7 +51,7 @@ function Background() {
       dy={0.000000001}
     />
   );
-}
+});
 
 function App() {
   const { data, loading, error } = useFetch(

@@ -93,6 +93,7 @@ ul{
 }
 
 .search-bar{
+  text-align: center;
   & .search{
     margin: 2rem 0;
     width: 100%;
@@ -102,13 +103,22 @@ ul{
     font-size: 1.6rem;
     font-family: var(--font-family);
     box-shadow: .2rem .2rem .3rem var(--black);
-    
+    transition: all 0.3s ease-in-out;
 
     &:focus{
       outline: none;
     }
+
+    @media screen and (min-width: 768px) {
+      width: 75%;
+    }
+
+    @media screen and (min-width: 1024px) {
+      width: 50%;
+    }
   }
 }
+
 
 
 
