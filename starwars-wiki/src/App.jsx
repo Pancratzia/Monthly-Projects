@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import PropTypes from "prop-types";
 import { memo } from "react";
-import StarfieldAnimation from 'react-starfield-animation'
+import StarfieldAnimation from "react-starfield-animation";
 
 function useFetch(url, multipleUrl = false) {
   const [data, setData] = useState(null);
@@ -38,7 +38,6 @@ function useFetch(url, multipleUrl = false) {
 
 // eslint-disable-next-line react/display-name
 export const Background = memo(() => {
-
   const [containerWidth, setContainerWidth] = useState(window.innerWidth);
 
   useEffect(() => {
@@ -170,61 +169,65 @@ function App() {
         <p className="alert error">Ha ocurrido un error</p>
         {loading && <p>Loading...</p>}
         <p className="alert loading">Loading...</p>
+
+        
       </div>
 
       <main className="main container">
+        {slicedCharacters.map(
+          (
+            {
+              name,
+              height,
+              mass,
+              hair_color,
+              skin_color,
+              eye_color,
+              birth_year,
+              gender,
+            },
+            idx
+          ) => (
+            <div className="card" key={idx}>
+              <h2>{name}</h2>
+              <p>Gender: {gender}</p>
+              <ul>
+                <li>Height: {height} cm</li>
+                <li>Mass: {mass} kg</li>
+                <li>Hair Color: {hair_color}</li>
+                <li>Skin Color: {skin_color}</li>
+                <li>Eye Color: {eye_color}</li>
+                <li>Birth Year: {birth_year}</li>
+              </ul>
+            </div>
+          )
+        )}
 
-      {slicedCharacters.map(
-        (
-          {
-            name,
-            height,
-            mass,
-            hair_color,
-            skin_color,
-            eye_color,
-            birth_year,
-            gender,
-          },
-          idx
-        ) => (
-          <div className="card" key={idx}>
-            <h2>{name}</h2>
-            <p>Gender: {gender}</p>
-            <ul>
-              <li>Height: {height} cm</li>
-              <li>Mass: {mass} kg</li>
-              <li>Hair Color: {hair_color}</li>
-              <li>Skin Color: {skin_color}</li>
-              <li>Eye Color: {eye_color}</li>
-              <li>Birth Year: {birth_year}</li>
-            </ul>
+        {(filteredCharacters.length > 10 && !loading) ? (
+          <div className="buttons">
+            <button
+              onClick={() => handleChangePage("prev")}
+              disabled={page === 1}
+              type="button"
+            >
+              {"<"}
+            </button>
+            <button
+              onClick={() => handleChangePage("next")}
+              disabled={page >= Math.ceil(filteredCharacters.length / 10)}
+              type="button"
+            >
+              {">"}
+            </button>
           </div>
+        ) : 
+        (
+          <p>No characters found</p>
         )
-      )}
+        }
+        
 
-      {filteredCharacters.length > 10 && !loading && (
-        <div className="buttons">
-          <button
-            onClick={() => handleChangePage("prev")}
-            disabled={page === 1}
-            type="button"
-          >
-            {"<"}
-          </button>
-          <button
-            onClick={() => handleChangePage("next")}
-            disabled={page >= Math.ceil(filteredCharacters.length / 10)}
-            type="button"
-          >
-            {">"}
-          </button>
-        </div>
-      )}
 
-      {filterCharacters.length === 0 && (
-        <p className="alert no-results">No results found</p>
-      )}
       </main>
     </>
   );
