@@ -5,7 +5,11 @@
 
   --white: #fff;
   --black: #000;
-  --yellow: #ffcc00;
+  --opaqueYellow: rgba(255, 255, 0, 0.3);
+  --yellow: #FAEC1D;
+
+  --opaqueRed: rgba(255, 0, 0, 0.3);
+  --red: #9e0000;
 }
 
 *{
@@ -120,9 +124,52 @@ ul{
   }
 }
 
+.messages{
+  font-family: var(--font-family);
+  margin: 0 auto 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+
+  & .alert{
+    width: 100%;
+    text-align: center;
+    padding: 1rem 0;
+  }
+
+  & .error{
+    background-color: var(--opaqueRed);
+    border-left: .5rem solid var(--red);
+    border-right: .5rem solid var(--red);
+  }
+
+  & .loading{
+    background-color: var(--opaqueYellow);
+    border-left: .5rem solid var(--yellow);
+    border-right: .5rem solid var(--yellow);
+  }
+}
+
 .main{
   min-height: 50vh;
+
+  
+
+  & .not-found{
+    height: 20rem;
+
+    & .not-found-text{
+      color: var(--black);
+      font-size: 3rem;
+      font-family: var(--font-family);
+      text-align: center;
+      line-height: 20rem;
+    }
+  }
 }
+
+
 
 
 

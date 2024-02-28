@@ -164,11 +164,9 @@ function App() {
         />
       </div>
 
-      <div className="messages">
-        {error && <p>{error.message}</p>}
-        <p className="alert error">Ha ocurrido un error</p>
-        {loading && <p>Loading...</p>}
-        <p className="alert loading">Loading...</p>
+      <div className="messages container">
+        {error && <p className="alert error">{error.message}</p>}
+        {loading && <p className="alert loading">Loading...</p>}
 
         
       </div>
@@ -203,7 +201,7 @@ function App() {
           )
         )}
 
-        {(filteredCharacters.length > 10 && !loading) ? (
+        {(filteredCharacters.length > 10 && !loading) && (
           <div className="buttons">
             <button
               onClick={() => handleChangePage("prev")}
@@ -220,14 +218,16 @@ function App() {
               {">"}
             </button>
           </div>
-        ) : 
-        (
-          <p>No characters found</p>
-        )
+        ) 
         }
+
+        {(filteredCharacters.length === 0 && !loading) && (
+          <div className="not-found">
+            <p className="not-found-text">No characters found</p>
+          </div>
+        )}
         
-
-
+        
       </main>
     </>
   );
