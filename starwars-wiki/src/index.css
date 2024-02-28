@@ -42,6 +42,11 @@ ul{
   list-style: none;
 }
 
+.container{
+  width: min(90%, 120rem);
+  margin: 0 auto;
+}
+
 .header{
   background-color: var(--black);
   height: 60rem;
@@ -84,6 +89,24 @@ ul{
 
   & .by, .powered{
     z-index: 2;
+  }
+}
+
+.search-bar{
+  & .search{
+    margin: 2rem 0;
+    width: 100%;
+    padding: 1rem;
+    border: .3rem solid var(--black);
+    border-radius: 1rem;
+    font-size: 1.6rem;
+    font-family: var(--font-family);
+    box-shadow: .2rem .2rem .3rem var(--black);
+    
+
+    &:focus{
+      outline: none;
+    }
   }
 }
 

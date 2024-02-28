@@ -2,7 +2,6 @@ import { useEffect, useState, useCallback } from "react";
 import PropTypes from "prop-types";
 import StarfieldAnimation from "react-starfield-animation";
 
-
 function useFetch(url, multipleUrl = false) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -36,17 +35,17 @@ function useFetch(url, multipleUrl = false) {
   return { data, loading, error };
 }
 
-function Background(){
+function Background() {
   return (
     <StarfieldAnimation
       style={{
         position: "absolute",
         width: "100%",
-        height: "100%"
+        height: "100%",
       }}
       numParticles={800}
       particleSpeed={0}
-      dx={0.000000001} // x speed of stars in px/frame, default 0.05
+      dx={0.000000001}
       dy={0.000000001}
     />
   );
@@ -113,7 +112,6 @@ function App() {
   return (
     <>
       <header className="header">
-
         <Background />
         <img
           className="image"
@@ -122,18 +120,40 @@ function App() {
         />
 
         <h1 className="title">Star Wars Wiki</h1>
-        <p className="by">By: <a className="link" target="_blank" href="https://github.com/Pancratzia">Pancratzia</a></p>
-        <small className="powered">Powered by <a className="link" target="_blank" href="https://swapi.dev/">Star Wars API</a></small>
+        <p className="by">
+          By:{" "}
+          <a
+            className="link"
+            target="_blank"
+            href="https://github.com/Pancratzia"
+          >
+            Pancratzia
+          </a>
+        </p>
+        <small className="powered">
+          Powered by{" "}
+          <a className="link" target="_blank" href="https://swapi.dev/">
+            Star Wars API
+          </a>
+        </small>
       </header>
-      {error && <p>{error.message}</p>}
-      {loading && <p>Loading...</p>}
 
-      <input
-        type="text"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        placeholder="Search..."
-      />
+      <div className="search-bar container">
+        <input
+          className="search"
+          type="text"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="Search your character by name..."
+        />
+      </div>
+
+      <div className="messages">
+        {error && <p>{error.message}</p>}
+        <p className="alert error">Ha ocurrido un error</p>
+        {loading && <p>Loading...</p>}
+        <p className="alert loading">Loading...</p>
+      </div>
 
       {slicedCharacters.map(
         (
