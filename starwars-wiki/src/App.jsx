@@ -131,7 +131,7 @@ function App() {
         <Background />
         <img
           className="image"
-          src="https://imagizer.imageshack.com/a/img922/3783/oyvsRd.png"
+          src="/img/logo-StarWars.png"
           alt="Star Wars Logo"
         />
 
