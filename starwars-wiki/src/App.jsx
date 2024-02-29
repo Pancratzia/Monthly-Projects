@@ -130,6 +130,7 @@ function App() {
   }, [filteredCharacters, page, loading]);
 
   const filterCharacters = () => {
+    setPage(1);
     const newCharacters = characters.filter((character) =>
       character.name.toLowerCase().includes(search.toLowerCase())
     );
