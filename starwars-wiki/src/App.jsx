@@ -67,34 +67,32 @@ export const Background = memo(() => {
   );
 });
 
-export const Info = ({ copy = false}) => {
-  return(
+export const Info = ({ copy = false }) => {
+  return (
     <div className="info">
-          <p className="by">
-            By:{" "}
-            <a
-              className="link"
-              target="_blank"
-              href="https://github.com/Pancratzia"
-            >
-              Pancratzia
-            </a>
-          </p>
-          <small className="powered">
-            Powered by{" "}
-            <a className="link" target="_blank" href="https://swapi.dev/">
-              The Star Wars API
-            </a>
-          </small>
+      <p className="by">
+        By:{" "}
+        <a
+          className="link"
+          target="_blank"
+          href="https://github.com/Pancratzia"
+        >
+          Pancratzia
+        </a>
+      </p>
+      <small className="powered">
+        Powered by{" "}
+        <a className="link" target="_blank" href="https://swapi.dev/">
+          The Star Wars API
+        </a>
+      </small>
 
-          {copy && (
-            <small className="copyright">
-              &copy; 2024 - All rights reserved
-            </small>
-          )}
-        </div>
+      {copy && (
+        <small className="copyright">&copy; 2024 - All rights reserved</small>
+      )}
+    </div>
   );
-}
+};
 
 function App() {
   const { data, loading, error } = useFetch(
@@ -107,6 +105,8 @@ function App() {
   const [slicedCharacters, setSlicedCharacters] = useState([]);
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
+
+  const CHARACTERS_PER_PAGE = 6;
 
   useEffect(() => {
     if (data && data.results) {
@@ -138,15 +138,15 @@ function App() {
   };
 
   const sliceCharacters = () => {
-    const start = (page - 1) * 10;
-    const end = start + 10;
+    const start = (page - 1) * CHARACTERS_PER_PAGE;
+    const end = start + CHARACTERS_PER_PAGE;
     setSlicedCharacters(filteredCharacters.slice(start, end));
   };
 
   const handleChangePage = (action) => {
     let newPage = page;
 
-    if (action === "next" && page < Math.ceil(filteredCharacters.length / 10)) {
+    if (action === "next" && page < Math.ceil(filteredCharacters.length / CHARACTERS_PER_PAGE)) {
       newPage++;
     } else if (action === "prev" && page > 1) {
       newPage--;
@@ -186,36 +186,21 @@ function App() {
       </div>
 
       <main className="main container">
-        {slicedCharacters.map(
-          (
-            {
-              name,
-              height,
-              mass,
-              hair_color,
-              skin_color,
-              eye_color,
-              birth_year,
-              gender,
-            },
-            idx
-          ) => (
+        <div className="cards">
+          {slicedCharacters.map((character, idx) => (
             <div className="card" key={idx}>
-              <h2>{name}</h2>
-              <p>Gender: {gender}</p>
-              <ul>
-                <li>Height: {height} cm</li>
-                <li>Mass: {mass} kg</li>
-                <li>Hair Color: {hair_color}</li>
-                <li>Skin Color: {skin_color}</li>
-                <li>Eye Color: {eye_color}</li>
-                <li>Birth Year: {birth_year}</li>
-              </ul>
+              <h2>{character.name}</h2>
             </div>
-          )
-        )}
+          ))}
 
-        {filteredCharacters.length > 10 && !loading && (
+          {filteredCharacters.length === 0 && !loading && (
+            <div className="not-found">
+              <p className="not-found-text">No characters found</p>
+            </div>
+          )}
+        </div>
+
+        {filteredCharacters.length > CHARACTERS_PER_PAGE && !loading && (
           <div className="buttons">
             <button
               onClick={() => handleChangePage("prev")}
@@ -226,17 +211,11 @@ function App() {
             </button>
             <button
               onClick={() => handleChangePage("next")}
-              disabled={page >= Math.ceil(filteredCharacters.length / 10)}
+              disabled={page >= Math.ceil(filteredCharacters.length / CHARACTERS_PER_PAGE)}
               type="button"
             >
               {">"}
             </button>
-          </div>
-        )}
-
-        {filteredCharacters.length === 0 && !loading && (
-          <div className="not-found">
-            <p className="not-found-text">No characters found</p>
           </div>
         )}
       </main>
@@ -256,4 +235,4 @@ useFetch.propTypes = {
 
 Info.propTypes = {
   copy: PropTypes.bool,
-}
+};

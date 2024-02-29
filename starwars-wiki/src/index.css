@@ -6,7 +6,7 @@
   --white: #fff;
   --black: #000;
   --opaqueYellow: rgba(255, 255, 0, 0.3);
-  --yellow: #faec1d;
+  --yellow: #FFC500;
 
   --opaqueRed: rgba(255, 0, 0, 0.3);
   --red: #9e0000;
@@ -192,17 +192,63 @@ ul {
 
 /**Main**/
 .main {
-  & .not-found {
-    height: 20rem;
 
-    & .not-found-text {
-      color: var(--black);
-      font-size: 3rem;
-      font-family: var(--font-family);
-      text-align: center;
-      line-height: 20rem;
+  & .cards{
+    min-height: 20rem;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 3rem;
+    margin: 4rem 0;
+    padding: 0 2rem;
+    overflow: hidden;
+    justify-items: center;
+
+    @media screen and (min-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
     }
+      
+    @media screen and (min-width: 1024px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    & .card{
+      width: 100%;
+      height: 20rem;
+      border-radius: 1rem;
+      overflow: hidden;
+      border: .5rem solid var(--black);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: scale 0.3s ease-in-out;
+
+      & h2 {
+        color: var(--black);
+        font-size: 1.8rem;
+        font-family: var(--font-family);
+        text-align: center;
+        font-weight: 400;
+      }  
+    }
+
+    & .card:hover {
+      cursor: pointer;
+      scale: .98;
+      transition: scale 0.3s ease-in-out;
+    }
+
+    & .not-found {
+      & .not-found-text {
+        color: var(--black);
+        font-size: 3rem;
+        font-family: var(--font-family);
+        text-align: center;
+        line-height: 20rem;
+      }
+    }
+
   }
+  
 }
 
 /**Footer**/
