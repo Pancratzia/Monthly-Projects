@@ -67,6 +67,35 @@ export const Background = memo(() => {
   );
 });
 
+export const Info = ({ copy = false}) => {
+  return(
+    <div className="info">
+          <p className="by">
+            By:{" "}
+            <a
+              className="link"
+              target="_blank"
+              href="https://github.com/Pancratzia"
+            >
+              Pancratzia
+            </a>
+          </p>
+          <small className="powered">
+            Powered by{" "}
+            <a className="link" target="_blank" href="https://swapi.dev/">
+              The Star Wars API
+            </a>
+          </small>
+
+          {copy && (
+            <small className="copyright">
+              &copy; 2024 - All rights reserved
+            </small>
+          )}
+        </div>
+  );
+}
+
 function App() {
   const { data, loading, error } = useFetch(
     "https://swapi.dev/api/people/",
@@ -137,24 +166,7 @@ function App() {
 
         <h1 className="title">Star Wars Wiki</h1>
 
-        <div className="info">
-          <p className="by">
-            By:{" "}
-            <a
-              className="link"
-              target="_blank"
-              href="https://github.com/Pancratzia"
-            >
-              Pancratzia
-            </a>
-          </p>
-          <small className="powered">
-            Powered by{" "}
-            <a className="link" target="_blank" href="https://swapi.dev/">
-              The Star Wars API
-            </a>
-          </small>
-        </div>
+        <Info />
       </header>
 
       <div className="search-bar container">
@@ -229,28 +241,7 @@ function App() {
       </main>
 
       <footer className="footer">
-        <div className="info">
-          <p className="by">
-            By:{" "}
-            <a
-              className="link"
-              target="_blank"
-              href="https://github.com/Pancratzia"
-            >
-              Pancratzia
-            </a>
-          </p>
-          <small className="powered">
-            Powered by{" "}
-            <a className="link" target="_blank" href="https://swapi.dev/">
-              The Star Wars API
-            </a>
-          </small>
-
-          <small className="copyright">
-            &copy; 2024 - All rights reserved
-          </small>
-        </div>
+        <Info copy={true} />
       </footer>
     </>
   );
@@ -261,3 +252,7 @@ export default App;
 useFetch.propTypes = {
   url: PropTypes.string.isRequired,
 };
+
+Info.propTypes = {
+  copy: PropTypes.bool,
+}
