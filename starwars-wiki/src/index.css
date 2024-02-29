@@ -1,57 +1,106 @@
-@import url('https://fonts.googleapis.com/css2?family=Days+One&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Days+One&display=swap");
 
-:root{
-  --font-family: 'Days One', sans-serif;
+:root {
+  --font-family: "Days One", sans-serif;
 
   --white: #fff;
   --black: #000;
   --opaqueYellow: rgba(255, 255, 0, 0.3);
-  --yellow: #FAEC1D;
+  --yellow: #faec1d;
 
   --opaqueRed: rgba(255, 0, 0, 0.3);
   --red: #9e0000;
 }
 
-*{
+* {
   box-sizing: border-box;
 }
 
 *::before,
-*::after{
+*::after {
   box-sizing: inherit;
 }
 
-html{
+html {
   font-size: 62.5%;
 }
 
-body{
+body {
   margin: 0;
   padding: 0;
   font-size: 1.6rem;
 }
 
-h1, h2, h3, h4, h5, h6, p{
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
   margin: 0;
   padding: 0;
 }
 
-a{
+a {
   text-decoration: none;
 }
 
-ul{
+ul {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.container{
+.container {
   width: min(90%, 120rem);
   margin: 0 auto;
 }
 
-.header{
+/*Reutilizables*/
+
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+
+  & .by,
+  .powered {
+    color: var(--white);
+    font-family: var(--font-family);
+  }
+
+  & .link {
+    color: var(--yellow);
+    font-weight: normal;
+  }
+
+  & .by {
+    font-size: 1.6rem;
+  }
+
+  & .powered {
+    font-size: 1.2rem;
+  }
+
+  & .by,
+  .powered {
+    z-index: 2;
+  }
+
+  & .copyright {
+    color: var(--white);
+    font-size: 1.2rem;
+    font-family: var(--font-family);
+    text-align: center;
+    z-index: 2;
+  }
+}
+
+/**Header**/
+
+.header {
   background-color: var(--black);
   height: 60rem;
   display: flex;
@@ -61,16 +110,16 @@ ul{
   position: relative;
   overflow: hidden;
 
-  & .image{
+  & .image {
     width: min(70%, 50rem);
   }
 
-  & .by, .powered, .title{
+  & .title {
     color: var(--white);
     font-family: var(--font-family);
   }
 
-  & .title{
+  & .title {
     font-size: 2.5rem;
     letter-spacing: 1rem;
     text-transform: uppercase;
@@ -78,39 +127,27 @@ ul{
     margin: 3rem 0;
   }
 
-  & .link{
-    color: var(--yellow);
-    font-weight: normal;
-  }
-
-  & .by{
+  & .by {
     margin: 2rem 0;
-    font-size: 1.6rem;
-  }
-
-  & .powered{
-    font-size: 1.2rem;
-  }
-
-  & .by, .powered{
-    z-index: 2;
   }
 }
 
-.search-bar{
+/**Search Bar**/
+
+.search-bar {
   text-align: center;
-  & .search{
+  & .search {
     margin: 2rem 0;
     width: 100%;
     padding: 1rem;
-    border: .3rem solid var(--black);
+    border: 0.3rem solid var(--black);
     border-radius: 1rem;
     font-size: 1.6rem;
     font-family: var(--font-family);
-    box-shadow: .2rem .2rem .3rem var(--black);
+    box-shadow: 0.2rem 0.2rem 0.3rem var(--black);
     transition: all 0.3s ease-in-out;
 
-    &:focus{
+    &:focus {
       outline: none;
     }
 
@@ -124,7 +161,9 @@ ul{
   }
 }
 
-.messages{
+/**Messages**/
+
+.messages {
   font-family: var(--font-family);
   margin: 0 auto 2rem;
   display: flex;
@@ -132,34 +171,31 @@ ul{
   align-items: center;
   gap: 1rem;
 
-  & .alert{
+  & .alert {
     width: 100%;
     text-align: center;
     padding: 1rem 0;
   }
 
-  & .error{
+  & .error {
     background-color: var(--opaqueRed);
-    border-left: .5rem solid var(--red);
-    border-right: .5rem solid var(--red);
+    border-left: 0.5rem solid var(--red);
+    border-right: 0.5rem solid var(--red);
   }
 
-  & .loading{
+  & .loading {
     background-color: var(--opaqueYellow);
-    border-left: .5rem solid var(--yellow);
-    border-right: .5rem solid var(--yellow);
+    border-left: 0.5rem solid var(--yellow);
+    border-right: 0.5rem solid var(--yellow);
   }
 }
 
-.main{
-  min-height: 50vh;
-
-  
-
-  & .not-found{
+/**Main**/
+.main {
+  & .not-found {
     height: 20rem;
 
-    & .not-found-text{
+    & .not-found-text {
       color: var(--black);
       font-size: 3rem;
       font-family: var(--font-family);
@@ -169,8 +205,21 @@ ul{
   }
 }
 
+/**Footer**/
+.footer {
+  background-color: var(--black);
+  padding: 2rem 0;
+
+  & .info{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1.2rem;
 
 
-
-
-
+    & .copyright {
+      font-size: 1rem;
+    }
+  }
+}

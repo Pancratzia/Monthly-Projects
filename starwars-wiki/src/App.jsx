@@ -136,22 +136,25 @@ function App() {
         />
 
         <h1 className="title">Star Wars Wiki</h1>
-        <p className="by">
-          By:{" "}
-          <a
-            className="link"
-            target="_blank"
-            href="https://github.com/Pancratzia"
-          >
-            Pancratzia
-          </a>
-        </p>
-        <small className="powered">
-          Powered by{" "}
-          <a className="link" target="_blank" href="https://swapi.dev/">
-            Star Wars API
-          </a>
-        </small>
+
+        <div className="info">
+          <p className="by">
+            By:{" "}
+            <a
+              className="link"
+              target="_blank"
+              href="https://github.com/Pancratzia"
+            >
+              Pancratzia
+            </a>
+          </p>
+          <small className="powered">
+            Powered by{" "}
+            <a className="link" target="_blank" href="https://swapi.dev/">
+              The Star Wars API
+            </a>
+          </small>
+        </div>
       </header>
 
       <div className="search-bar container">
@@ -167,8 +170,6 @@ function App() {
       <div className="messages container">
         {error && <p className="alert error">{error.message}</p>}
         {loading && <p className="alert loading">Loading...</p>}
-
-        
       </div>
 
       <main className="main container">
@@ -201,7 +202,7 @@ function App() {
           )
         )}
 
-        {(filteredCharacters.length > 10 && !loading) && (
+        {filteredCharacters.length > 10 && !loading && (
           <div className="buttons">
             <button
               onClick={() => handleChangePage("prev")}
@@ -218,17 +219,39 @@ function App() {
               {">"}
             </button>
           </div>
-        ) 
-        }
+        )}
 
-        {(filteredCharacters.length === 0 && !loading) && (
+        {filteredCharacters.length === 0 && !loading && (
           <div className="not-found">
             <p className="not-found-text">No characters found</p>
           </div>
         )}
-        
-        
       </main>
+
+      <footer className="footer">
+        <div className="info">
+          <p className="by">
+            By:{" "}
+            <a
+              className="link"
+              target="_blank"
+              href="https://github.com/Pancratzia"
+            >
+              Pancratzia
+            </a>
+          </p>
+          <small className="powered">
+            Powered by{" "}
+            <a className="link" target="_blank" href="https://swapi.dev/">
+              The Star Wars API
+            </a>
+          </small>
+
+          <small className="copyright">
+            &copy; 2024 - All rights reserved
+          </small>
+        </div>
+      </footer>
     </>
   );
 }
