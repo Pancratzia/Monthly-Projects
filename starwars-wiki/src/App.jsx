@@ -1,7 +1,8 @@
 import { useEffect, useState, useCallback } from "react";
 import PropTypes from "prop-types";
-import { memo } from "react";
-import StarfieldAnimation from "react-starfield-animation";
+import { Background } from "./components/Background/Background";
+import { Info } from "./components/Info/Info";
+import { Modal } from "./components/Modal/Modal";
 
 function useFetch(url, multipleUrl = false) {
   const [data, setData] = useState(null);
@@ -35,101 +36,6 @@ function useFetch(url, multipleUrl = false) {
 
   return { data, loading, error };
 }
-
-// eslint-disable-next-line react/display-name
-export const Background = memo(() => {
-  const [containerWidth, setContainerWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setContainerWidth(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-  return (
-    <StarfieldAnimation
-      key={containerWidth}
-      style={{
-        position: "absolute",
-        width: "100%",
-        height: "100%",
-      }}
-      numParticles={800}
-      dx={0.000000001}
-      dy={0.000000001}
-    />
-  );
-});
-
-export const Info = ({ copy = false }) => {
-  return (
-    <div className="info">
-      <p className="by">
-        By:{" "}
-        <a
-          className="link"
-          target="_blank"
-          href="https://github.com/Pancratzia"
-        >
-          Pancratzia
-        </a>
-      </p>
-      <small className="powered">
-        Powered by{" "}
-        <a className="link" target="_blank" href="https://swapi.dev/">
-          The Star Wars API
-        </a>
-      </small>
-
-      {copy && (
-        <small className="copyright">&copy; 2024 - All rights reserved</small>
-      )}
-    </div>
-  );
-};
-
-export const Modal = ({ character, closeModal }) => {
-  const {
-    name,
-    height,
-    mass,
-    hair_color,
-    skin_color,
-    eye_color,
-    birth_year,
-    gender,
-  } = character;
-  return (
-    <div className="modal">
-      <div className="modal-content">
-        <div className="modal-header">
-          <button className="close" onClick={closeModal}>
-            &times;
-          </button>
-        </div>
-        <div className="modal-body">
-          <h2 className="modal-title">{name}</h2>
-          <h4 className="modal-subtitle">Birth Year: {birth_year}</h4>
-
-          <ul className="modal-main-info">
-            <li><span>Gender:</span> {gender.toUpperCase()}</li>
-            <li><span>Height:</span> {height} cm</li>
-            <li><span>Mass:</span> {mass} kg</li>
-            <li><span>Hair Color:</span> {hair_color}</li>
-            <li><span>Skin Color:</span> {skin_color}</li>
-            <li><span>Eye Color:</span> {eye_color}</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  );
-};
 
 function App() {
   const { data, loading, error } = useFetch(
@@ -300,13 +206,4 @@ export default App;
 
 useFetch.propTypes = {
   url: PropTypes.string.isRequired,
-};
-
-Info.propTypes = {
-  copy: PropTypes.bool,
-};
-
-Modal.propTypes = {
-  character: PropTypes.object,
-  closeModal: PropTypes.func,
 };
