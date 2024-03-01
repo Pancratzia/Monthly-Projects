@@ -4,6 +4,7 @@ import { Main } from "./components/layout/Main/Main";
 import { Footer } from "./components/layout/Footer/Footer";
 import { Messages } from "./components/Messages/Messages";
 import { CharacterProvider } from "./context/CharacterProvider";
+import { PlanetsProvider } from "./context/PlanetsProvider";
 
 function App() {
   return (
@@ -13,7 +14,9 @@ function App() {
 
       <Messages />
 
-      <Main />
+      <PlanetsProvider>
+        <Main />
+      </PlanetsProvider>
       <Footer />
     </CharacterProvider>
   );
