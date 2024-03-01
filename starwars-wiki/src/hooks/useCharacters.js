@@ -89,6 +89,7 @@ export const useCharacters = () => {
     isModalOpen,
     setIsModalOpen,
     loading,
-    error
+    error,
+    CHARACTERS_PER_PAGE
   }
 }

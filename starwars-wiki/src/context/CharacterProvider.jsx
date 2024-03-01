@@ -20,6 +20,7 @@ export const CharacterProvider = ({ children }) => {
     setIsModalOpen,
     loading,
     error,
+    CHARACTERS_PER_PAGE
   } = useCharacters();
 
   return (
@@ -41,6 +42,7 @@ export const CharacterProvider = ({ children }) => {
         setIsModalOpen,
         loading,
         error,
+        CHARACTERS_PER_PAGE
       }}
     >
       {children}

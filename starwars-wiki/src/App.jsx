@@ -1,14 +1,13 @@
 import { useContext } from "react";
-import PropTypes from "prop-types";
 import { Background } from "./components/Background/Background";
 import { Info } from "./components/Info/Info";
 import { Modal } from "./components/Modal/Modal";
-import { useFetch } from "./hooks/useFetch";
 import { CharacterContext } from "./context/CharacterContext";
 
 
 function App() {
-  const {  error, loading, search, setSearch, page, handleChangePage, openModal, closeModal, selectedCharacter, isModalOpen, filteredCharacters, CHARACTERS_PER_PAGE, slicedCharacters } = useContext(CharacterContext);
+  const {  error, loading, search, setSearch, page, handleChangePage, openModal, isModalOpen, filteredCharacters, CHARACTERS_PER_PAGE, slicedCharacters } = useContext(CharacterContext);
+
   return (
     <>
       <header className="header">
@@ -87,7 +86,7 @@ function App() {
         </div>
 
         {isModalOpen && (
-          <Modal character={selectedCharacter} closeModal={closeModal} />
+          <Modal />
         )}
       </main>
 
@@ -100,6 +99,3 @@ function App() {
 
 export default App;
 
-useFetch.propTypes = {
-  url: PropTypes.string.isRequired,
-};

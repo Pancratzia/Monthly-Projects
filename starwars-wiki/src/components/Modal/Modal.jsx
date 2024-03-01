@@ -1,5 +1,8 @@
-import PropTypes from "prop-types";
-export const Modal = ({ character, closeModal }) => {
+import { useContext } from "react";
+import { CharacterContext } from "../../context/CharacterContext";
+export const Modal = () => {
+
+  const { selectedCharacter, closeModal } = useContext(CharacterContext);
     const {
       name,
       height,
@@ -9,7 +12,7 @@ export const Modal = ({ character, closeModal }) => {
       eye_color,
       birth_year,
       gender,
-    } = character;
+    } = selectedCharacter;
     return (
       <div className="modal">
         <div className="modal-content">
@@ -34,9 +37,4 @@ export const Modal = ({ character, closeModal }) => {
         </div>
       </div>
     );
-  };
-
-  Modal.propTypes = {
-    character: PropTypes.object,
-    closeModal: PropTypes.func,
   };
