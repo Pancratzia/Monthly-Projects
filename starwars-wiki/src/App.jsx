@@ -4,12 +4,11 @@ import { Background } from "./components/Background/Background";
 import { Info } from "./components/Info/Info";
 import { Modal } from "./components/Modal/Modal";
 import { useFetch } from "./hooks/useFetch";
+import { findAll } from "./services/charactersService";
+
 
 function App() {
-  const { data, loading, error } = useFetch(
-    "https://swapi.dev/api/people/",
-    true
-  );
+  const { data, loading, error } = findAll();
 
   const [characters, setCharacters] = useState([]);
   const [filteredCharacters, setFilteredCharacters] = useState([]);
