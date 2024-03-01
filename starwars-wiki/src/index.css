@@ -370,6 +370,36 @@ ul {
         }
       }
 
+      & .modal-side-info{
+        border-top: .3rem dotted var(--opaqueBlack);
+        margin-top: 2rem;
+        display: flex;
+        justify-content: space-around;
+
+        & .modal-side-info-item{
+          margin-top: 2rem;
+          font-size: 1.4rem;
+          text-transform: uppercase;
+          
+          & span{
+            font-weight: 700;
+            background-color: var(--opaqueYellow);
+            padding: 0.5rem 1rem;
+            border-radius: .5rem;
+            display: block;
+          }
+
+          & ul{
+            margin-top: 1rem;
+          }
+
+          & li{
+            font-size: 1.2rem;
+            text-transform: capitalize;
+          }
+        }
+      }
+
       & .modal-footer{
         border-top: .3rem dotted var(--opaqueBlack);
         margin-top: 2rem;

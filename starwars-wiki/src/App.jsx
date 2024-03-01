@@ -6,6 +6,8 @@ import { Messages } from "./components/Messages/Messages";
 import { CharacterProvider } from "./context/CharacterProvider";
 import { PlanetProvider } from "./context/PlanetProvider";
 import { FilmProvider } from "./context/FilmProvider";
+import { VehicleProvider } from "./context/VehicleProvider";
+import { StarshipProvider } from "./context/StarshipProvider";
 
 function App() {
   return (
@@ -17,7 +19,11 @@ function App() {
 
       <PlanetProvider>
         <FilmProvider>
-          <Main />
+          <VehicleProvider>
+            <StarshipProvider>
+              <Main />
+            </StarshipProvider>
+          </VehicleProvider>
         </FilmProvider>
       </PlanetProvider>
       <Footer />

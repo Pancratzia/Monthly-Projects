@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { findAll } from "../services/StarshipsService";
+import { findAll } from "../services/starshipsService";
 
 export const useStarships = () =>{
 
@@ -9,7 +9,7 @@ export const useStarships = () =>{
 
     useEffect(() => {
         if (data && data.results) {
-          const newStarships = data.results.map((newFilm) => newFilm.title);
+          const newStarships = data.results.map((newStarship) => newStarship.name);
           setStarships((prevStarships) => [...prevStarships, ...newStarships]);
         }
       }, [data]);

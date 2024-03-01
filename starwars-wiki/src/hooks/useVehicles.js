@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { findAll } from "../services/VehiclesService";
+import { findAll } from "../services/vehiclesService";
 
 export const useVehicles = () =>{
 
@@ -9,7 +9,7 @@ export const useVehicles = () =>{
 
     useEffect(() => {
         if (data && data.results) {
-          const newVehicles = data.results.map((newFilm) => newFilm.title);
+          const newVehicles = data.results.map((newVehicle) => newVehicle.name);
           setVehicles((prevVehicles) => [...prevVehicles, ...newVehicles]);
         }
       }, [data]);

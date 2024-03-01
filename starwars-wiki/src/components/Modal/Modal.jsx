@@ -2,10 +2,16 @@ import { useContext } from "react";
 import { CharacterContext } from "../../context/CharacterContext";
 import { PlanetContext } from "../../context/PlanetContext";
 import { FilmContext } from "../../context/FilmContext";
+import { VehicleContext } from "../../context/VehicleContext";
+import { StarshipContext } from "../../context/StarshipContext";
+import { useFetch } from "../../hooks/useFetch";
+
 export const Modal = () => {
   const { selectedCharacter, closeModal } = useContext(CharacterContext);
   const { planets } = useContext(PlanetContext);
   const { films } = useContext(FilmContext);
+  const { vehicles } = useContext(VehicleContext);
+  const { starships } = useContext(StarshipContext);
   const {
     name,
     height,
@@ -19,23 +25,41 @@ export const Modal = () => {
   } = selectedCharacter;
 
   const homeworldNumber = extractNumberFromUrl(homeworld);
-  const characterFilms = findSelectedcharacterFilms();
-  
+  const homeworldName = planets[homeworldNumber - 1];
+
+  const characterFilms = findSelectedCharacterProperty(
+    selectedCharacter.films,
+    films,
+    "https://swapi.dev/api/films"
+  );
+  const characterVehicles = findSelectedCharacterProperty(
+    selectedCharacter.vehicles,
+    vehicles,
+    "https://swapi.dev/api/vehicles"
+  );
+  const characterStarships = findSelectedCharacterProperty(
+    selectedCharacter.starships,
+    starships,
+    "https://swapi.dev/api/starships"
+  );
 
   function extractNumberFromUrl(url) {
     return +url.split("/")[5];
   }
-  function findSelectedcharacterFilms() {
-    
-    const filmsNumbers = selectedCharacter.films.map((film) => {
-      return extractNumberFromUrl(film);
-    });
 
-    const filmsTitles = filmsNumbers.map((filmNumber) => {
-      return films[filmNumber - 1];
+  function findSelectedCharacterProperty(propertyArray, propertyContext, fetchUrl = "https://swapi.dev/api") {
+    const propertyNumbers = propertyArray.map((item) => extractNumberFromUrl(item));
+    const propertyTitles = propertyNumbers.map((itemNumber) => {
+      if (itemNumber !== undefined && propertyContext[itemNumber - 1] === undefined) {
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        const { data, loading, error } = useFetch(`${fetchUrl}/${itemNumber}`);
+        if (!loading && !error && data) {
+          return data.name;
+        }
+      }
+      return propertyContext[itemNumber - 1];
     });
-
-    return filmsTitles;
+    return propertyTitles;
   }
 
   return (
@@ -51,9 +75,7 @@ export const Modal = () => {
 
           <div className="subtitles">
             {homeworld && (
-              <h4 className="modal-subtitle">
-                Homeworld: {planets[homeworldNumber - 1]}
-              </h4>
+              <h4 className="modal-subtitle">Homeworld: {homeworldName}</h4>
             )}
             <h4 className="modal-subtitle">Birth Year: {birth_year}</h4>
           </div>
@@ -79,13 +101,38 @@ export const Modal = () => {
             </li>
           </ul>
 
-          <ul className="modal-side-info"></ul>
+          {((characterVehicles.length > 0 ||
+            (characterStarships.length > 0)) && (
+              <ul className="modal-side-info">
+                {characterVehicles.length > 0 && (
+                  <li className="modal-side-info-item">
+                    <span>Vehicles </span>
+                    <ul>
+                      {characterVehicles.map((vehicle, idx) => {
+                        return <li key={idx}>{vehicle}</li>;
+                      })}
+                    </ul>
+                  </li>
+                )}
+
+                {characterStarships.length > 0 && (
+                  <li className="modal-side-info-item">
+                    <span>Starships</span>
+                    <ul>
+                      {characterStarships.map((starship, idx) => {
+                        return <li key={idx}>{starship}</li>;
+                      })}
+                    </ul>
+                  </li>
+                )}
+              </ul>
+            ))}
 
           <footer className="modal-footer">
             <h5>Films</h5>
             <ul className="films">
-              {characterFilms.map((film) => {
-                return <li key={film}>{film}</li>;
+              {characterFilms.map((film, idx) => {
+                return <li key={idx}>{film}</li>;
               })}
             </ul>
           </footer>
