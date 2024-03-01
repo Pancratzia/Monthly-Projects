@@ -193,6 +193,32 @@ ul {
 /**Main**/
 .main {
 
+  & .buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    & .page{
+      font-size: 1.6rem;
+      font-family: var(--font-family);
+      font-weight: bold;
+      min-width: 6rem;
+      text-align: center;
+    }
+
+    & .button{
+      padding: .5rem 2rem;
+      border: 0.3rem solid var(--black);
+      border-radius: 1rem;
+      font-size: 1.6rem;
+      font-family: var(--font-family);
+      font-weight: bold;
+      cursor: pointer;
+      background-color: transparent;
+    }
+  }
+
   & .cards{
     min-height: 20rem;
     display: grid;

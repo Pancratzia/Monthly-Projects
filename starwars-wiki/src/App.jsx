@@ -186,6 +186,29 @@ function App() {
       </div>
 
       <main className="main container">
+
+      {filteredCharacters.length > CHARACTERS_PER_PAGE && !loading && (
+          <div className="buttons">
+            <button
+              className="button"
+              onClick={() => handleChangePage("prev")}
+              disabled={page === 1}
+              type="button"
+            >
+              {"<"}
+            </button>
+            <p className="page">{page}/{Math.ceil(filteredCharacters.length / CHARACTERS_PER_PAGE)}</p>
+            <button
+              className="button"
+              onClick={() => handleChangePage("next")}
+              disabled={page >= Math.ceil(filteredCharacters.length / CHARACTERS_PER_PAGE)}
+              type="button"
+            >
+              {">"}
+            </button>
+          </div>
+        )}
+
         <div className="cards">
           {slicedCharacters.map((character, idx) => (
             <div className="card" key={idx}>
@@ -200,24 +223,7 @@ function App() {
           )}
         </div>
 
-        {filteredCharacters.length > CHARACTERS_PER_PAGE && !loading && (
-          <div className="buttons">
-            <button
-              onClick={() => handleChangePage("prev")}
-              disabled={page === 1}
-              type="button"
-            >
-              {"<"}
-            </button>
-            <button
-              onClick={() => handleChangePage("next")}
-              disabled={page >= Math.ceil(filteredCharacters.length / CHARACTERS_PER_PAGE)}
-              type="button"
-            >
-              {">"}
-            </button>
-          </div>
-        )}
+        
       </main>
 
       <footer className="footer">
