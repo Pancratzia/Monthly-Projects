@@ -5,6 +5,7 @@
 
   --white: #fff;
   --black: #000;
+  --opaqueBlack: rgba(0, 0, 0, 0.3);
   --opaqueYellow: rgba(255, 255, 0, 0.3);
   --yellow: #FFC500;
 
@@ -292,6 +293,44 @@ ul {
 
     & .copyright {
       font-size: 1rem;
+    }
+  }
+}
+
+/**Modal**/
+
+.modal {
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--opaqueBlack);
+  color: var(--white);
+  display: grid;
+  place-items: center;
+  overflow-y: auto;
+
+  & .modal-content {
+    background-color: var(--black);
+    padding: 2rem 2rem 4rem;
+    border-radius: 1rem;
+    width: min(80%, 70rem);
+
+    & .modal-header{
+      text-align: right;
+
+      & .close{
+        color: var(--white);
+        font-size: 5rem;
+        font-weight: bold;
+        font-family: var(--font-family);
+        cursor: pointer;
+        border: none;
+        background-color: transparent;
+        height: auto;
+      }
     }
   }
 }

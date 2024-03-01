@@ -94,6 +94,22 @@ export const Info = ({ copy = false }) => {
   );
 };
 
+export const Modal = ({ character, closeModal }) => {
+  return (
+    <div className="modal">
+      <div className="modal-content">
+        <div className="modal-header">
+          <button className="close" onClick={closeModal}>
+            &times;
+          </button>
+        </div>
+        <h2>{character.name}</h2>
+        <p>Gender: {character.gender}</p>
+      </div>
+    </div>
+  );
+};
+
 function App() {
   const { data, loading, error } = useFetch(
     "https://swapi.dev/api/people/",
@@ -105,6 +121,8 @@ function App() {
   const [slicedCharacters, setSlicedCharacters] = useState([]);
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
+  const [selectedCharacter, setSelectedCharacter] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const CHARACTERS_PER_PAGE = 6;
 
@@ -146,13 +164,26 @@ function App() {
   const handleChangePage = (action) => {
     let newPage = page;
 
-    if (action === "next" && page < Math.ceil(filteredCharacters.length / CHARACTERS_PER_PAGE)) {
+    if (
+      action === "next" &&
+      page < Math.ceil(filteredCharacters.length / CHARACTERS_PER_PAGE)
+    ) {
       newPage++;
     } else if (action === "prev" && page > 1) {
       newPage--;
     }
 
     setPage(newPage);
+  };
+
+  const openModal = (character) => {
+    setSelectedCharacter(character);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setSelectedCharacter(null);
+    setIsModalOpen(false);
   };
 
   return (
@@ -186,8 +217,7 @@ function App() {
       </div>
 
       <main className="main container">
-
-      {filteredCharacters.length > CHARACTERS_PER_PAGE && !loading && (
+        {filteredCharacters.length > CHARACTERS_PER_PAGE && !loading && (
           <div className="buttons">
             <button
               className="button"
@@ -197,11 +227,17 @@ function App() {
             >
               {"<"}
             </button>
-            <p className="page">{page}/{Math.ceil(filteredCharacters.length / CHARACTERS_PER_PAGE)}</p>
+            <p className="page">
+              {page}/
+              {Math.ceil(filteredCharacters.length / CHARACTERS_PER_PAGE)}
+            </p>
             <button
               className="button"
               onClick={() => handleChangePage("next")}
-              disabled={page >= Math.ceil(filteredCharacters.length / CHARACTERS_PER_PAGE)}
+              disabled={
+                page >=
+                Math.ceil(filteredCharacters.length / CHARACTERS_PER_PAGE)
+              }
               type="button"
             >
               {">"}
@@ -211,7 +247,11 @@ function App() {
 
         <div className="cards">
           {slicedCharacters.map((character, idx) => (
-            <div className="card" key={idx}>
+            <div
+              className="card"
+              key={idx}
+              onClick={() => openModal(character)}
+            >
               <h2>{character.name}</h2>
             </div>
           ))}
@@ -223,7 +263,9 @@ function App() {
           )}
         </div>
 
-        
+        {isModalOpen && (
+          <Modal character={selectedCharacter} closeModal={closeModal} />
+        )}
       </main>
 
       <footer className="footer">
@@ -241,4 +283,9 @@ useFetch.propTypes = {
 
 Info.propTypes = {
   copy: PropTypes.bool,
+};
+
+Modal.propTypes = {
+  character: PropTypes.object,
+  closeModal: PropTypes.func,
 };
