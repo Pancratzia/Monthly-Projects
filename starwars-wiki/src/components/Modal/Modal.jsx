@@ -13,7 +13,7 @@ export const Modal = () => {
     eye_color,
     birth_year,
     gender,
-    homeworld
+    homeworld,
   } = selectedCharacter;
 
   const homeworldNumber = +homeworld.split("/")[5];
@@ -28,8 +28,15 @@ export const Modal = () => {
         </div>
         <div className="modal-body">
           <h2 className="modal-title">{name}</h2>
-          <h4 className="modal-subtitle">Birth Year: {birth_year}</h4>
 
+          <div className="subtitles">
+            {homeworld && (
+              <h4 className="modal-subtitle">
+                Homeworld: {planets[homeworldNumber - 1]}
+              </h4>
+            )}
+            <h4 className="modal-subtitle">Birth Year: {birth_year}</h4>
+          </div>
           <ul className="modal-main-info">
             <li>
               <span>Gender:</span> {gender.toUpperCase()}
@@ -51,9 +58,7 @@ export const Modal = () => {
             </li>
           </ul>
 
-          <ul className="modal-side-info">
-            <li>Homeworld: {planets[homeworldNumber - 1]}</li>
-          </ul>
+          <ul className="modal-side-info"></ul>
         </div>
       </div>
     </div>

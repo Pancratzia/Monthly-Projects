@@ -346,10 +346,17 @@ ul {
         border-bottom: .5rem solid var(--black);
       }
 
-      & .modal-subtitle{
-        text-align: right;
-        font-size: 2rem;
+      & .subtitles{
+        margin: 1rem 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        & .modal-subtitle{
+          font-size: 2rem;
+        }
       }
+
+      
 
       & .modal-main-info{
         margin-top: 2rem;
