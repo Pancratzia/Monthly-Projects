@@ -4,7 +4,8 @@ import { Main } from "./components/layout/Main/Main";
 import { Footer } from "./components/layout/Footer/Footer";
 import { Messages } from "./components/Messages/Messages";
 import { CharacterProvider } from "./context/CharacterProvider";
-import { PlanetsProvider } from "./context/PlanetsProvider";
+import { PlanetProvider } from "./context/PlanetProvider";
+import { FilmProvider } from "./context/FilmProvider";
 
 function App() {
   return (
@@ -14,9 +15,11 @@ function App() {
 
       <Messages />
 
-      <PlanetsProvider>
-        <Main />
-      </PlanetsProvider>
+      <PlanetProvider>
+        <FilmProvider>
+          <Main />
+        </FilmProvider>
+      </PlanetProvider>
       <Footer />
     </CharacterProvider>
   );

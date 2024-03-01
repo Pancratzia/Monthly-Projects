@@ -1,9 +1,11 @@
 import { useContext } from "react";
 import { CharacterContext } from "../../context/CharacterContext";
-import { PlanetsContext } from "../../context/PlanetsContext";
+import { PlanetContext } from "../../context/PlanetContext";
+import { FilmContext } from "../../context/FilmContext";
 export const Modal = () => {
   const { selectedCharacter, closeModal } = useContext(CharacterContext);
-  const { planets } = useContext(PlanetsContext);
+  const { planets } = useContext(PlanetContext);
+  const { films } = useContext(FilmContext);
   const {
     name,
     height,
@@ -16,7 +18,25 @@ export const Modal = () => {
     homeworld,
   } = selectedCharacter;
 
-  const homeworldNumber = +homeworld.split("/")[5];
+  const homeworldNumber = extractNumberFromUrl(homeworld);
+  const characterFilms = findSelectedcharacterFilms();
+  
+
+  function extractNumberFromUrl(url) {
+    return +url.split("/")[5];
+  }
+  function findSelectedcharacterFilms() {
+    
+    const filmsNumbers = selectedCharacter.films.map((film) => {
+      return extractNumberFromUrl(film);
+    });
+
+    const filmsTitles = filmsNumbers.map((filmNumber) => {
+      return films[filmNumber - 1];
+    });
+
+    return filmsTitles;
+  }
 
   return (
     <div className="modal">
@@ -37,6 +57,7 @@ export const Modal = () => {
             )}
             <h4 className="modal-subtitle">Birth Year: {birth_year}</h4>
           </div>
+
           <ul className="modal-main-info">
             <li>
               <span>Gender:</span> {gender.toUpperCase()}
@@ -59,6 +80,15 @@ export const Modal = () => {
           </ul>
 
           <ul className="modal-side-info"></ul>
+
+          <footer className="modal-footer">
+            <h5>Films</h5>
+            <ul>
+              {characterFilms.map((film) => {
+                return <li key={film}>{film}</li>;
+              })}
+            </ul>
+          </footer>
         </div>
       </div>
     </div>
