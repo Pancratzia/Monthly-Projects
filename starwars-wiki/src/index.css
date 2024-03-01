@@ -369,6 +369,29 @@ ul {
           font-weight: 700;
         }
       }
+
+      & .modal-footer{
+        border-top: .3rem dotted var(--opaqueBlack);
+        margin-top: 2rem;
+        text-align: center;
+
+        & h5{
+          margin: 1rem 0;
+        }
+
+        & .films{
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 1rem;
+          font-size: 1.2rem;
+
+          & li{
+            background-color: var(--opaqueYellow);
+            padding: 1rem;
+          }
+        }
+      }
     }
   }
 }

@@ -83,7 +83,7 @@ export const Modal = () => {
 
           <footer className="modal-footer">
             <h5>Films</h5>
-            <ul>
+            <ul className="films">
               {characterFilms.map((film) => {
                 return <li key={film}>{film}</li>;
               })}
