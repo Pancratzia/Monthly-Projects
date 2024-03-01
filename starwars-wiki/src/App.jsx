@@ -9,7 +9,6 @@ import { findAll } from "./services/charactersService";
 
 function App() {
   const { data, loading, error } = findAll();
-
   const [characters, setCharacters] = useState([]);
   const [filteredCharacters, setFilteredCharacters] = useState([]);
   const [slicedCharacters, setSlicedCharacters] = useState([]);
