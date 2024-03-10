@@ -1,9 +1,23 @@
-
+import { useUsers } from "../hooks/useUsers";
 
 const UserPage = () => {
-  return (
-    <div>UserPage</div>
-  )
-}
+  const { handleSubmit } = useUsers();
 
-export default UserPage
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="name">Name: </label>
+        <input
+          type="text"
+          name="name"
+          id="name"
+          placeholder="Enter your name"
+
+        />
+        <input type="submit" value="Submit" />
+      </form>
+    </div>
+  );
+};
+
+export default UserPage;
