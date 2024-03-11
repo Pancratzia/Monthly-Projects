@@ -1,26 +1,55 @@
-import { database } from "../firebase.js"
+import { useEffect, useState } from "react";
+import { database } from "../firebase.js";
 
 const QuizPage = () => {
+  const name = sessionStorage.getItem("name");
 
-    const name = sessionStorage.getItem("name");
+  if (!name) {
+    window.location.href = "/";
+  }
 
-    if (!name) {
-      window.location.href = "/";
-    }
+  const [questions, setQuestions] = useState([]);
+  const [selectedQuestions, setSelectedQuestions] = useState([]);
 
-    //Obtener las preguntas de la base de datos que están dentro de la coleccion "questions"
-
+  const getQuestions = () => {
     const questionsRef = database.collection("questions");
 
-    questionsRef.get().then((querySnapshot) => {
+    questionsRef
+      .get()
+      .then((querySnapshot) => {
+        const q = [];
         querySnapshot.forEach((doc) => {
-            console.log(doc.id, " => ", doc.data());
+          const data = doc.data();
+          const question = {
+            id: doc.id,
+            pregunta: data.pregunta,
+            respuestas: data.respuestas,
+          };
+          q.push(question);
         });
-    });
+        setQuestions(q);
+      })
+      .catch((error) => {
+        console.error("Error getting questions: ", error);
+      });
+  };
 
-  return (
-    <div>QuizPage</div>
-  )
-}
+  const getNRandomQuestions = (n) => {
+    const shuffled = questions.sort(() => 0.5 - Math.random());
 
-export default QuizPage
+    return shuffled.slice(0, n);
+  };
+
+  useEffect(() => {
+    getQuestions();
+    const randomQuestions = getNRandomQuestions(10);
+    setSelectedQuestions(randomQuestions);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  console.log(selectedQuestions);
+
+  return <div>QuizPage</div>;
+};
+
+export default QuizPage;
