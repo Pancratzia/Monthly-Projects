@@ -8,42 +8,37 @@ const QuizPage = () => {
     window.location.href = "/";
   }
 
-  const [questions, setQuestions] = useState([]);
   const [selectedQuestions, setSelectedQuestions] = useState([]);
 
-  const getQuestions = () => {
-    const questionsRef = database.collection("questions");
+  const getQuestions = async () => {
+    try {
+      const questionsRef = database.collection("questions");
+      const querySnapshot = await questionsRef.get();
 
-    questionsRef
-      .get()
-      .then((querySnapshot) => {
-        const q = [];
-        querySnapshot.forEach((doc) => {
-          const data = doc.data();
-          const question = {
-            id: doc.id,
-            pregunta: data.pregunta,
-            respuestas: data.respuestas,
-          };
-          q.push(question);
-        });
-        setQuestions(q);
-      })
-      .catch((error) => {
-        console.error("Error getting questions: ", error);
+      const q = [];
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        const question = {
+          id: doc.id,
+          pregunta: data.pregunta,
+          respuestas: data.respuestas,
+        };
+        q.push(question);
       });
+
+      setSelectedQuestions(getNRandomQuestions(q, 10));
+    } catch (error) {
+      console.error("Error getting questions: ", error);
+    }
   };
 
-  const getNRandomQuestions = (n) => {
+  const getNRandomQuestions = (questions, n) => {
     const shuffled = questions.sort(() => 0.5 - Math.random());
-
     return shuffled.slice(0, n);
   };
 
   useEffect(() => {
     getQuestions();
-    const randomQuestions = getNRandomQuestions(10);
-    setSelectedQuestions(randomQuestions);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -53,3 +48,4 @@ const QuizPage = () => {
 };
 
 export default QuizPage;
+
