@@ -91,6 +91,7 @@ const QuizPage = () => {
       {actualQuestion < selectedQuestions.length && (
         <div>
           <h2>{selectedQuestions[actualQuestion].pregunta}</h2>
+          <h4>Question #{actualQuestion + 1}</h4>
 
           <div>
             <h3 className="timer">{timer} seconds left</h3>
