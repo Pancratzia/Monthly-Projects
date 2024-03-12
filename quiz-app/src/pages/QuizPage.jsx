@@ -54,13 +54,27 @@ const QuizPage = () => {
     setTimer(30);
   };
 
-  const handleFinishTest = async() => {
+  const handleFinishTest = async () => {
     alert("Your score is: " + score + " and will be saved in the ranking");
 
-
+    //TODO: If name is not in the ranking, add it. Else, overwrite it
     const queryRef = database.collection("rank");
-    await queryRef.add({ nombre: name, puntaje: score });
 
+    const querySnapshot = await queryRef.where("nombre", "==", name).get();
+
+    if (querySnapshot.empty === true) {
+      await queryRef.add({
+        nombre: name,
+        puntaje: score,
+      });
+    } else {
+      await queryRef.doc(querySnapshot.docs[0].id).set(
+        {
+          puntaje: score,
+        },
+        { merge: true }
+      );
+    }
 
     window.location.href = "/ranking";
   };
