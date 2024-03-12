@@ -46,7 +46,18 @@ const QuizPage = () => {
       setScore(score + 1);
     }
 
+    if(actualQuestion + 1 === selectedQuestions.length){
+      handleFinishTest();
+    }
+
     setActualQuestion(actualQuestion + 1);
+  }
+
+  const handleFinishTest = () => {
+    alert("Your score is: " + score);
+
+    sessionStorage.removeItem("name");
+    window.location.href = "/ranking";
   }
 
   useEffect(() => {
