@@ -11,6 +11,7 @@ const QuizPage = () => {
   const [selectedQuestions, setSelectedQuestions] = useState([]);
   const [actualQuestion, setActualQuestion] = useState(0);
   const [score, setScore] = useState(0);
+  const [timer, setTimer] = useState(30);
 
   const getQuestions = async () => {
     try {
@@ -39,31 +40,43 @@ const QuizPage = () => {
     const shuffled = questions.sort(() => 0.5 - Math.random());
     return shuffled.slice(0, n);
   };
-  
-  const handleSelectedAnswer = (correcta) => {
 
+  const handleSelectedAnswer = (correcta) => {
     if (correcta) {
-      setScore(score + 1);
+      setScore(score + timer);
     }
 
-    if(actualQuestion + 1 === selectedQuestions.length){
+    if (actualQuestion + 1 === selectedQuestions.length) {
       handleFinishTest();
     }
 
     setActualQuestion(actualQuestion + 1);
-  }
+    setTimer(30);
+  };
 
   const handleFinishTest = () => {
     alert("Your score is: " + score);
 
-    sessionStorage.removeItem("name");
     window.location.href = "/ranking";
-  }
+  };
 
   useEffect(() => {
     getQuestions();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (timer > 0) {
+        setTimer(timer - 1);
+      } else {
+        setActualQuestion(actualQuestion + 1);
+        setTimer(30);
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [actualQuestion, timer]);
 
   return (
     <div className="quiz">
@@ -74,8 +87,11 @@ const QuizPage = () => {
         <div>
           <h2>{selectedQuestions[actualQuestion].pregunta}</h2>
 
-          <ul className="options">
+          <div>
+            <h3 className="timer">{timer} seconds left</h3>
+          </div>
 
+          <ul className="options">
             {selectedQuestions[actualQuestion].respuestas.map(
               (option, index) => (
                 <li key={index}>
