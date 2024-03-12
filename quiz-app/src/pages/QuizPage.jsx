@@ -54,8 +54,13 @@ const QuizPage = () => {
     setTimer(30);
   };
 
-  const handleFinishTest = () => {
-    alert("Your score is: " + score);
+  const handleFinishTest = async() => {
+    alert("Your score is: " + score + " and will be saved in the ranking");
+
+
+    const queryRef = database.collection("rank");
+    await queryRef.add({ nombre: name, puntaje: score });
+
 
     window.location.href = "/ranking";
   };
