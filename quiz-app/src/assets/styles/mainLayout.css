@@ -1,0 +1,128 @@
+/*HEADER*/
+
+.header {
+    background-color: var(--amarillo);
+    padding: 2rem 0;
+  
+    & .container {
+      display: grid;
+      gap: 2rem;
+  
+      @media (min-width: 768px) {
+        grid-template-columns: 45% 55%;
+        gap: 3rem;
+      }
+  
+      @media (min-width: 1024px) {
+        grid-template-columns: 2fr 1fr;
+        gap: 5rem;
+      }
+  
+      .left {
+          text-align: left;
+        
+        & .title {
+          position: relative;
+          background-color: var(--verde);
+          display: inline-block;
+          padding: 1rem 3rem;
+          font-size: clamp(6rem, 5vw, 4rem);
+          color: var(--blanco);
+          border-radius: 5rem;
+          transform: rotate(-5deg);
+          margin: 3rem 0;
+          box-shadow: var(--box-shadow);
+          text-shadow: var(--text-shadow);
+          text-align: center;
+          overflow: hidden;
+  
+          &::before {
+              content: '';
+              position: absolute;
+              top: 0;
+              left: -100%;
+              width: 100%;
+              height: 100%;
+              background-color: var(--rojo);
+              transition: left 0.3s;
+              z-index: -1;
+              transition: left .3s ease-in;
+            }
+  
+          &:hover::before{
+              left: 0;
+          }
+        }
+  
+        & .subtitle {
+            text-align: center;
+            color: var( --blanco);
+            text-shadow: var(--text-shadow);
+            font-size: 2rem;
+        }
+      }
+  
+      .right{
+  
+        & .nav{
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 1rem;
+  
+          @media (min-width: 768px) {
+            flex-direction: row;
+            gap: 3rem;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+          }
+  
+          & .link{
+            background-color: var(--azul);
+            color: var(--blanco);
+            padding: 1rem 3rem;
+            border-radius: 5rem;
+            text-shadow: var(--text-shadow);
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            transition: font-size .3s ease-in;
+  
+            @media (min-width: 768px) {
+              font-size: 1.8rem;
+              padding: 1.5rem 4rem;
+            }
+  
+            @media (min-width: 1024px) {
+              font-size: 2rem;
+            }
+  
+            &.active{
+              background-color: var(--verde);
+              cursor: default;
+              text-decoration: underline;
+            }
+  
+            &::before {
+              content: '';
+              position: absolute;
+              top: 0;
+              left: -100%;
+              width: 100%;
+              height: 100%;
+              background-color: var(--rojo);
+              transition: left 0.3s;
+              z-index: -1;
+              transition: left .3s ease-in;
+            }
+  
+            &:hover:not(.active)::before {
+              left: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+  

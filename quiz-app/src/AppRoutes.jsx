@@ -4,23 +4,11 @@ import UserPage from "./pages/UserPage";
 import QuizPage from "./pages/QuizPage";
 import RankingPage from "./pages/RankingPage";
 import ErrorPage from "./pages/ErrorPage";
-import Header from "./components/layouts/Header";
-import Footer from "./components/layouts/Footer";
+import MainLayout from "./components/layouts/MainLayout";
 
 const AppRoutes = () => {
 
   const name = sessionStorage.getItem("name");
-
-  const MainLayout = ({ page, children }) => {
-    return (
-      <>
-        <Header page={page} />
-        {children}
-        <Footer />
-      </>
-    );
-  }
-
 
   return (
     <Routes>
