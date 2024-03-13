@@ -1,0 +1,45 @@
+:root{
+    --azul-oscuro: #2b3d4f;
+    --azul: #3398db;
+    --verde: #2ecc70;
+    --amarillo: #f39c12;
+    --rojo: #e74d3c;
+
+    --black: #000;
+    --white: #fff;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+*::before, *::after{
+    box-sizing: inherit;
+}
+
+html{
+    font-size: 62.5%;
+}
+
+body{
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.6rem;
+}
+
+h1, h2, h3, h4, h5, h6, p{
+    margin: 0;
+    padding: 0;
+}
+
+ul, ol{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+a{
+    text-decoration: none;
+}
+
