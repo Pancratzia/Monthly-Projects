@@ -1,16 +1,33 @@
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
-const Header = ({page}) => {
+const Header = ({ page }) => {
   return (
     <header className="header">
-      <h1>Quiz App</h1>
-      <h2>Test your knowledge about programming with this awesome quiz!</h2>
+      <div className="container">
+        <div className="left">
+          <h1 className="title">
+            <Link to="/">Quiz App</Link>
+          </h1>
+          <h2 className="subtitle">
+            Test your knowledge about programming with this awesome quiz!
+          </h2>
+        </div>
 
-      <nav className="nav">
-        <Link to="/" className={page === "home" ? "active" : ""}>Home</Link>
-        <Link to="/rank" className={page === "rank" ? "active" : ""}>Ranking</Link>
-      </nav>
+        <div className="right">
+          <nav className="nav">
+            <Link to="/" className={page === "home" ? "active link" : "link"}>
+              Home
+            </Link>
+            <Link
+              to="/ranking"
+              className={page === "rank" ? "active link" : "link"}
+            >
+              Ranking
+            </Link>
+          </nav>
+        </div>
+      </div>
     </header>
   );
 };
@@ -18,5 +35,5 @@ const Header = ({page}) => {
 export default Header;
 
 Header.propTypes = {
-  page: PropTypes.string
-}
+  page: PropTypes.string,
+};

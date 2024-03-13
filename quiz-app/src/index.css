@@ -1,45 +1,132 @@
-:root{
-    --azul-oscuro: #2b3d4f;
-    --azul: #3398db;
-    --verde: #2ecc70;
-    --amarillo: #f39c12;
-    --rojo: #e74d3c;
+@import url("https://fonts.googleapis.com/css2?family=Rowdies:wght@300;400;700&display=swap");
 
-    --black: #000;
-    --white: #fff;
+:root {
+  --azul-oscuro: #2b3d4f;
+  --azul: #3398db;
+  --verde: #2ecc70;
+  --amarillo: #f39c12;
+  --rojo: #e74d3c;
+
+  --negro: #000;
+  --blanco: #fff;
+
+  --font-family: "Rowdies", cursive;
+  --box-shadow: 0.5rem 0.5rem 0.5rem var(--negro);
+  --text-shadow: 0.2rem 0.2rem 0.5rem var(--negro);
 }
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-*::before, *::after{
-    box-sizing: inherit;
+*::before,
+*::after {
+  box-sizing: inherit;
 }
 
-html{
-    font-size: 62.5%;
+html {
+  font-size: 62.5%;
 }
 
-body{
-    font-family: 'Roboto', sans-serif;
-    font-size: 1.6rem;
+body {
+  font-family: var(--font-family);
+  font-size: 1.6rem;
 }
 
-h1, h2, h3, h4, h5, h6, p{
-    margin: 0;
-    padding: 0;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  padding: 0;
 }
 
-ul, ol{
-    list-style: none;
-    margin: 0;
-    padding: 0;
+ul,
+ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-a{
-    text-decoration: none;
+a {
+  text-decoration: none;
+  color: inherit;
 }
+
+/*UTILIDADES*/
+
+.container {
+  width: min(90%, 120rem);
+  margin: 0 auto;
+}
+
+/*HEADER*/
+
+.header {
+  background-color: var(--amarillo);
+  padding: 2rem 0;
+
+  & .container {
+    display: grid;
+    gap: 2rem;
+
+    @media (min-width: 768px) {
+      grid-template-columns: 2fr 1fr;
+      gap: 5rem;
+    }
+
+    .left {
+        text-align: left;
+      
+      & .title {
+        position: relative;
+        background-color: var(--verde);
+        display: inline-block;
+        padding: 1rem 3rem;
+        font-size: clamp(6rem, 5vw, 4rem);
+        color: var(--blanco);
+        border-radius: 5rem;
+        transform: rotate(-5deg);
+        margin: 3rem 0;
+        box-shadow: var(--box-shadow);
+        text-shadow: var(--text-shadow);
+        text-align: center;
+        overflow: hidden;
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background-color: var(--rojo);
+            transition: left 0.3s;
+            z-index: -1;
+          }
+
+        &:hover::before{
+            left: 0;
+        }
+      }
+
+      & .subtitle {
+          text-align: center;
+          color: var( --blanco);
+          text-shadow: var(--text-shadow);
+          font-size: 2rem;
+
+        @media (min-width: 1024px) {
+          text-align: right;
+        }
+      }
+    }
+  }
+}
+
 
