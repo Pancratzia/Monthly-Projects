@@ -21,7 +21,7 @@ const Header = ({ page }) => {
             </Link>
             <Link
               to="/ranking"
-              className={page === "rank" ? "active link" : "link"}
+              className={page === "ranking" ? "active link" : "link"}
             >
               Ranking
             </Link>
