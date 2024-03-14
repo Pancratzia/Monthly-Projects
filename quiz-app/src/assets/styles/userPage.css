@@ -1,0 +1,33 @@
+.userPage {
+  text-align: center;
+  margin: 2rem auto !important;
+  border-radius: 5rem;
+  padding: 2rem;
+  background-color: var(--blanco);
+  background-clip: padding-box;
+  border: solid 0.5rem transparent;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    margin: -0.5rem;
+    border-radius: 5rem;
+    background: linear-gradient(0deg, var(--rojo), var(--amarillo));
+  }
+
+  & .title {
+    font-size: 3rem;
+    text-transform: capitalize;
+    margin-bottom: 2rem;
+    color: var(--amarillo);
+    text-shadow: var(--text-shadow);
+    stroke: var(--rojo);
+    -webkit-text-stroke: 0.05rem var(--rojo);
+  }
+}
