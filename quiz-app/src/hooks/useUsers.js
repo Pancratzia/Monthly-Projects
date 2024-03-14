@@ -1,10 +1,20 @@
+import { useState } from "react";
 import { database } from "../firebase.js";
 
 export const useUsers = () => {
+
+  const [error, setError] = useState("");
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
     const name = event.target.name.value;
+
+    if (!name || name.trim() === "") {
+      setError("Nickname is required");
+      return;
+    }
+
 
     if (isNameInRank(name) === true) {
       const confirm = window.confirm(
@@ -27,5 +37,5 @@ export const useUsers = () => {
     return !querySnapshot.empty;
   };
 
-  return { handleSubmit };
+  return { handleSubmit, error };
 };

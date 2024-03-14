@@ -3,7 +3,7 @@ import { useUsers } from "../hooks/useUsers";
 import "../assets/styles/userPage.css";
 
 const UserPage = () => {
-  const { handleSubmit } = useUsers();
+  const { handleSubmit, error } = useUsers();
 
   return (
     <div className="userPage container">
@@ -33,13 +33,16 @@ const UserPage = () => {
         <label className="label" htmlFor="name">
           Nickname:{" "}
         </label>
-        <input
-          type="text"
-          name="name"
-          id="name"
-          placeholder="Enter your nickname"
-          className="input"
-        />
+        <div className="input-container">
+          <input
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Enter your nickname"
+            className="input"
+          />
+          {error && <small className="error">{error}</small>}
+        </div>
         <input className="submit" type="submit" value="Submit" />
       </form>
     </div>
