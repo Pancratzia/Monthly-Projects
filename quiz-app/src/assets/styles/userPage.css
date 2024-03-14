@@ -18,16 +18,45 @@
     z-index: -1;
     margin: -0.5rem;
     border-radius: 5rem;
-    background: linear-gradient(0deg, var(--rojo), var(--amarillo));
+    background: linear-gradient(to left bottom, var(--rojo), var(--amarillo));
   }
 
   & .title {
     font-size: 3rem;
     text-transform: capitalize;
-    margin-bottom: 2rem;
+    margin-bottom: 4rem;
     color: var(--amarillo);
     text-shadow: var(--text-shadow);
     stroke: var(--rojo);
     -webkit-text-stroke: 0.05rem var(--rojo);
+  }
+
+  & .subtitle, & .instructions {
+    text-align: left;
+  }
+
+  & .subtitle {
+    font-size: 2rem;
+    text-transform: uppercase;
+    color: var(--rojo);
+  }
+
+  & .instructions {
+    font-size: 1.6rem;
+    margin: 1rem 0 4rem;
+    color: var(--azul-oscuro);
+    list-style: upper-roman;
+    list-style-position: inside;
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+
+    & li {
+        background:  linear-gradient(to right, var(--azul-oscuro), var(--azul));
+        color: transparent;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+    }
   }
 }

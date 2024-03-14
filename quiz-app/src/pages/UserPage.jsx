@@ -15,7 +15,7 @@ const UserPage = () => {
         <li>Press "Submit".</li>
         <li>There willl be 10 questions, each one with three possible answers, but only one will be correct.</li>
         <li>You'll have 30 seconds to answer each question. If you don't answer in time, the question will be skipped.</li>
-        <li>If you answer correctly, you'll as many points as time left in seconds.</li>
+        <li>If you answer correctly, you'll get as many points as time left in seconds.</li>
       </ol>
 
       <form onSubmit={handleSubmit}>
