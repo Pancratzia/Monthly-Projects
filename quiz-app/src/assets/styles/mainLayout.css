@@ -102,7 +102,7 @@
           }
 
           &.active {
-            background-color: var(--verde);
+            background-color: var(--azul-oscuro);
             cursor: default;
             text-decoration: underline;
           }
@@ -124,6 +124,22 @@
             left: 0;
           }
         }
+      }
+    }
+  }
+}
+
+.footer{
+  background-color: var(--amarillo);
+  text-align: center;
+  padding: 2rem 0;
+  color: var(--blanco);
+  text-shadow: var(--text-shadow);
+
+  & .made-with{
+    & small{
+      & .author{
+        text-decoration: underline;
       }
     }
   }
