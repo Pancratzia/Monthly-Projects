@@ -89,7 +89,7 @@ const QuizPage = () => {
       if (timer > 0) {
         setTimer(timer - 1);
       } else {
-        setActualQuestion(actualQuestion + 1);
+        //setActualQuestion(actualQuestion + 1);
         setTimer(30);
       }
     }, 1000);

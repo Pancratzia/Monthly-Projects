@@ -27,15 +27,15 @@ export const useUsers = () => {
         cancelButtonText: "No",
         iconColor: "#f39c12",
       }).then((result) => {
-        if (result.isConfirmed) {
-          sessionStorage.setItem("name", name);
-          window.location.href = "/quiz";
-        } else {
+        if (!result.isConfirmed) {
           setError("");
           return;
         }
       });
     }
+
+    sessionStorage.setItem("name", name);
+    window.location.href = "/quiz";
   };
 
   const isNameInRank = async (name) => {
