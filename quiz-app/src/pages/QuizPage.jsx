@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import "../assets/styles/quizPage.css";
 import { database } from "../firebase.js";
 
 const QuizPage = () => {
@@ -12,6 +13,7 @@ const QuizPage = () => {
   const [actualQuestion, setActualQuestion] = useState(0);
   const [score, setScore] = useState(0);
   const [timer, setTimer] = useState(30);
+  const [timerPercentage, setTimerPercentage] = useState(100);
 
   const getQuestions = async () => {
     try {
@@ -57,7 +59,6 @@ const QuizPage = () => {
   const handleFinishTest = async () => {
     alert("Your score is: " + score + " and will be saved in the ranking");
 
-    //TODO: If name is not in the ranking, add it. Else, overwrite it
     const queryRef = database.collection("rank");
 
     const querySnapshot = await queryRef.where("nombre", "==", name).get();
@@ -88,8 +89,10 @@ const QuizPage = () => {
     const interval = setInterval(() => {
       if (timer > 0) {
         setTimer(timer - 1);
+        setTimerPercentage(((timer-1) / 30) * 100);
       } else {
         //setActualQuestion(actualQuestion + 1);
+        setTimerPercentage(100);
         setTimer(30);
       }
     }, 1000);
@@ -98,19 +101,28 @@ const QuizPage = () => {
   }, [actualQuestion, timer]);
 
   return (
-    <div className="quiz">
-      <h1>Answer As Fast As You Can!</h1>
-      <h3>Actual Score: {score}</h3>
+    <div className="quiz container">
+      <h2 className="subtitle">Hi {name}! Answer as fast as you can!</h2>
+      <h3 className="score">
+        Actual Score: <span>{score}</span>
+      </h3>
 
+      <div className="timer-container">
+        <h3
+          className="timer"
+          style={{
+            background: `conic-gradient(transparent ${
+              100 - timerPercentage
+            }%, var(--amarillo) ${100 - timerPercentage}%)`,
+          }}
+        >
+          <span>{timer}</span>
+        </h3>
+      </div>
       {actualQuestion < selectedQuestions.length && (
         <div>
           <h2>{selectedQuestions[actualQuestion].pregunta}</h2>
           <h4>Question #{actualQuestion + 1}</h4>
-
-          <div>
-            <h3 className="timer">{timer} seconds left</h3>
-          </div>
-
           <ul className="options">
             {selectedQuestions[actualQuestion].respuestas.map(
               (option, index) => (

@@ -66,14 +66,27 @@ a {
   margin: 0 auto;
 }
 
+.main-title {
+  background-color: var(--verde);
+  display: inline-block;
+  padding: 1rem 3rem;
+  font-size: clamp(6rem, 5vw, 4rem);
+  color: var(--blanco);
+  border-radius: 5rem;
+  transform: rotate(-5deg);
+  margin: 3rem 0;
+  box-shadow: var(--box-shadow);
+  text-shadow: var(--text-shadow);
+  text-align: center;
+}
+
+/*Extra Styles*/
+
 .swal2-modal {
   font-family: var(--font-family);
   font-size: 1.6rem;
 
-  & button{
+  & button {
     font-family: inherit;
   }
 }
-
-
-

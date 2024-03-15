@@ -6,7 +6,7 @@ const Header = ({ page }) => {
     <header className="header">
       <div className="container">
         <div className="left">
-          <h1 className="title">
+          <h1 className="main-title title">
             <Link to="/">Quiz App</Link>
           </h1>
           <h2 className="subtitle">
