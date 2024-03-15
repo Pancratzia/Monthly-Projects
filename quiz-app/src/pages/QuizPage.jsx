@@ -44,6 +44,8 @@ const QuizPage = () => {
   };
 
   const handleSelectedAnswer = (correcta) => {
+
+    
     if (correcta) {
       setScore(score + timer);
     }
@@ -91,7 +93,7 @@ const QuizPage = () => {
         setTimer(timer - 1);
         setTimerPercentage(((timer-1) / 30) * 100);
       } else {
-        //setActualQuestion(actualQuestion + 1);
+        setActualQuestion(actualQuestion + 1);
         setTimerPercentage(100);
         setTimer(30);
       }
@@ -120,9 +122,8 @@ const QuizPage = () => {
         </h3>
       </div>
       {actualQuestion < selectedQuestions.length && (
-        <div>
-          <h2>{selectedQuestions[actualQuestion].pregunta}</h2>
-          <h4>Question #{actualQuestion + 1}</h4>
+        <div className="question">
+          <h2 className="question-text">{actualQuestion + 1} - {selectedQuestions[actualQuestion].pregunta}</h2>
           <ul className="options">
             {selectedQuestions[actualQuestion].respuestas.map(
               (option, index) => (

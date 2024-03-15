@@ -58,4 +58,43 @@
             }
         }
     }
+
+    & .question{
+        & .question-text{
+            font-size: 2rem;
+            color: var(--rojo);
+            margin-bottom: 2rem;
+        }
+
+        & .options{
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+
+            @media screen and (min-width: 768px) {
+                flex-direction: row;
+                gap: 2rem;
+                flex-wrap: wrap;
+            }
+
+            & li{
+                list-style: none;
+
+                & button{
+                    font-size: 1.6rem;
+                    padding: 1rem 2rem;
+                    border-radius: 1rem;
+                    border: .2rem solid var(--azul);
+                    color: var(--azul);
+                    -webkit-text-stroke: .02rem var(--azul-oscuro);
+                    background-color: transparent;
+                    cursor: pointer;
+                    transition: all .3s ease-in-out;
+                    font-family: inherit;
+                }
+            }
+        }
+    }
 }
