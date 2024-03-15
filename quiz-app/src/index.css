@@ -66,5 +66,14 @@ a {
   margin: 0 auto;
 }
 
+.swal2-modal {
+  font-family: var(--font-family);
+  font-size: 1.6rem;
+
+  & button{
+    font-family: inherit;
+  }
+}
+
 
 

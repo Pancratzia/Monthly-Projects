@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { database } from "../firebase.js";
+import Swal from "sweetalert2";
 
 export const useUsers = () => {
-
   const [error, setError] = useState("");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     const name = event.target.name.value;
@@ -15,20 +15,27 @@ export const useUsers = () => {
       return;
     }
 
-
-    if (isNameInRank(name) === true) {
-      const confirm = window.confirm(
-        "There is already an user with that name. Do you want to overwrite it?"
-      );
-
-      if (!confirm) {
-        return;
-      }
+    if ((await isNameInRank(name)) === true) {
+      Swal.fire({
+        title: "User already exists",
+        text: "Do you want to overwrite it?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#2ecc70",
+        cancelButtonColor: "#e74d3c",
+        confirmButtonText: "Yes",
+        cancelButtonText: "No",
+        iconColor: "#f39c12",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          sessionStorage.setItem("name", name);
+          window.location.href = "/quiz";
+        } else {
+          setError("");
+          return;
+        }
+      });
     }
-
-    sessionStorage.setItem("name", name);
-
-    window.location.href = "/quiz";
   };
 
   const isNameInRank = async (name) => {
