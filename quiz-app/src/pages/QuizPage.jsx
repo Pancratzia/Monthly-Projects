@@ -2,6 +2,7 @@
 import "../assets/styles/quizPage.css";
 import { useQuiz } from "../hooks/useQuiz";
 import Timer from "../components/quiz/Timer";
+import Questions from "../components/quiz/Questions";
 
 const QuizPage = () => {
   const {
@@ -9,7 +10,7 @@ const QuizPage = () => {
     selectedQuestions,
     actualQuestion,
     score,
-    handleSelectedAnswer,
+    handleSelectedAnswer
   } = useQuiz();
 
   return (
@@ -28,25 +29,7 @@ const QuizPage = () => {
             Actual Score: <span>{score}</span>
           </h3>
           <Timer />
-          <div className="question">
-            <h2 className="question-text">
-              {actualQuestion + 1} -{" "}
-              {selectedQuestions[actualQuestion].pregunta}
-            </h2>
-            <ul className="options">
-              {selectedQuestions[actualQuestion].respuestas.map(
-                (option, index) => (
-                  <li key={index}>
-                    <button
-                      onClick={() => handleSelectedAnswer(option.correcta)}
-                    >
-                      {option.texto}
-                    </button>
-                  </li>
-                )
-              )}
-            </ul>
-          </div>
+          <Questions selectedQuestions={selectedQuestions} actualQuestion={actualQuestion} handleSelectedAnswer={handleSelectedAnswer} />
         </>
       )}
     </div>
