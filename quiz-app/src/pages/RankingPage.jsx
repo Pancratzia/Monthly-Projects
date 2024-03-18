@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import "../assets/styles/rankingPage.css";
 import { database } from "../firebase.js";
 
 const RankingPage = () => {
@@ -33,11 +34,11 @@ const RankingPage = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Ranking</h1>
+    <div className="rankingPage container">
+      <h1 className="title">Ranking</h1>
 
-      <table>
-        <thead>
+      <table className="table">
+        <thead className="thead">
           <tr>
             <th>#</th>
             <th>Nombre</th>
@@ -45,7 +46,7 @@ const RankingPage = () => {
           </tr>
         </thead>
 
-        <tbody>
+        <tbody className="tbody">
           {ranking.map((user, index) => (
             <tr key={index}>
               <td>{index + 1}</td>

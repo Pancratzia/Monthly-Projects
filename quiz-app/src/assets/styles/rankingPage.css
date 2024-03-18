@@ -1,0 +1,97 @@
+.rankingPage {
+  margin: 5rem auto !important;
+
+  & .title {
+    font-size: 3rem;
+    text-align: center;
+    color: var(--amarillo);
+    text-shadow: var(--text-shadow);
+    stroke: var(--rojo);
+    -webkit-text-stroke: 0.05rem var(--rojo);
+    margin-bottom: 3rem;
+  }
+
+  & .table {
+    margin: 0 auto;
+    text-align: center;
+    border: solid 0.5rem var(--azul);
+    border-radius: 1rem;
+    border-collapse: collapse;
+    width: min(95%, 60rem);
+
+    & .thead {
+      background-color: var(--azul);
+      color: var(--blanco);
+      font-size: 1.8rem;
+
+      & th {
+        padding: 0.5rem 1rem;
+      }
+    }
+
+    & .tbody {
+      background-color: var(--blanco);
+      color: var(--azul);
+
+      & tr {
+        &:first-child {
+          & td:nth-child(1) {
+            font-size: 2.4rem;
+            color: white;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &::before {
+              content: "🥇";
+              position: absolute;
+              height: 100%;
+              width: 100%;
+
+            }
+          }
+        }
+
+        &:nth-child(2) {
+          & td:nth-child(1) {
+            font-size: 2.4rem;
+            color: white;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            &::before {
+              content: "🥈";
+              position: absolute;
+              height: 100%;
+              width: 100%;
+            }
+          }
+        }
+
+        &:nth-child(3) {
+          & td:nth-child(1) {
+            font-size: 2.4rem;
+            color: white;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            &::before {
+              content: "🥉";
+              position: absolute;
+              height: 100%;
+              width: 100%;
+            }
+          }
+        }
+
+        & td {
+          padding: 0.5rem 1rem;
+          font-size: 1.6rem;
+        }
+      }
+    }
+  }
+}
