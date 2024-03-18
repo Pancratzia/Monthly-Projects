@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 import { database } from "../firebase.js";
 
 const RankingPage = () => {
-
   const [ranking, setRanking] = useState([]);
 
   const getRanking = async () => {
     const rankingRef = database.collection("rank");
-    const querySnapshot = await rankingRef.get();
+    const querySnapshot = await rankingRef
+      .orderBy("puntaje", "desc")
+      .limit(10)
+      .get();
 
     const ranking = [];
 
@@ -15,16 +17,14 @@ const RankingPage = () => {
       const data = doc.data();
       const user = {
         nombre: data.nombre,
-        puntaje: data.puntaje
-      }
+        puntaje: data.puntaje,
+      };
 
       ranking.push(user);
     });
 
-    ranking.sort((a, b) => b.puntaje - a.puntaje);
-
     return ranking;
-  }
+  };
 
   useEffect(() => {
     getRanking().then((ranking) => {
@@ -56,7 +56,7 @@ const RankingPage = () => {
         </tbody>
       </table>
     </div>
-  )
-}
+  );
+};
 
-export default RankingPage
+export default RankingPage;
