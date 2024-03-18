@@ -1,0 +1,19 @@
+.errorPage{
+    margin: 5rem auto !important;
+    text-align: center;
+
+
+    & .title {
+      text-transform: uppercase;
+      text-align: center;
+      color: var(--amarillo);
+      stroke: var(--rojo);
+      -webkit-text-stroke: 0.05rem var(--rojo);
+      margin-bottom: 3rem;
+    }
+
+    & .subtitle {
+      text-transform: uppercase;
+      color: var(--verde);
+    }
+}
