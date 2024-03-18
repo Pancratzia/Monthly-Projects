@@ -6,6 +6,12 @@ export const useUsers = () => {
   const [error, setError] = useState("");
 
   const handleSubmit = async (event) => {
+
+    const goToQuiz = (player) => {
+      sessionStorage.setItem("name", player);
+      window.location.href = "/quiz";
+
+    }
     event.preventDefault();
 
     const name = event.target.name.value;
@@ -30,12 +36,13 @@ export const useUsers = () => {
         if (!result.isConfirmed) {
           setError("");
           return;
+        }else if(result.isConfirmed){
+          goToQuiz(name);
         }
       });
+    }else{
+      goToQuiz(name);
     }
-
-    sessionStorage.setItem("name", name);
-    window.location.href = "/quiz";
   };
 
   const isNameInRank = async (name) => {
