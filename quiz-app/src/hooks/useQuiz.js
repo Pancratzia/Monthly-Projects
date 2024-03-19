@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { database } from "../firebase.js";
+import { getQuestionsFromFirestore, saveFinalScore } from "../services/quizService.js";
 
 export const useQuiz = () => {
   const name = sessionStorage.getItem("name");
@@ -16,19 +16,8 @@ export const useQuiz = () => {
 
   const getQuestions = async () => {
     try {
-      const questionsRef = database.collection("questions");
-      const querySnapshot = await questionsRef.get();
 
-      const q = [];
-      querySnapshot.forEach((doc) => {
-        const data = doc.data();
-        const question = {
-          id: doc.id,
-          pregunta: data.pregunta,
-          respuestas: data.respuestas,
-        };
-        q.push(question);
-      });
+      const q = await getQuestionsFromFirestore();
 
       setSelectedQuestions(getNRandomQuestions(q, 10));
       setActualQuestion(0);
@@ -58,23 +47,7 @@ export const useQuiz = () => {
   const handleFinishTest = async () => {
     alert("Your score is: " + score + " and will be saved in the ranking");
 
-    const queryRef = database.collection("rank");
-
-    const querySnapshot = await queryRef.where("nombre", "==", name).get();
-
-    if (querySnapshot.empty === true) {
-      await queryRef.add({
-        nombre: name,
-        puntaje: score,
-      });
-    } else {
-      await queryRef.doc(querySnapshot.docs[0].id).set(
-        {
-          puntaje: score,
-        },
-        { merge: true }
-      );
-    }
+    await saveFinalScore(name, score);
 
     window.location.href = "/ranking";
   };
