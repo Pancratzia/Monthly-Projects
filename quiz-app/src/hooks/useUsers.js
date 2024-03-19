@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { database } from "../firebase.js";
 import Swal from "sweetalert2";
+import { isNameInRank } from "../services/userService";
 
 export const useUsers = () => {
   const [error, setError] = useState("");
@@ -45,11 +45,6 @@ export const useUsers = () => {
     }
   };
 
-  const isNameInRank = async (name) => {
-    const queryRef = database.collection("rank");
-    const querySnapshot = await queryRef.where("nombre", "==", name).get();
-    return !querySnapshot.empty;
-  };
 
   return { handleSubmit, error };
 };
