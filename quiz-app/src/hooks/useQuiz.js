@@ -36,17 +36,12 @@ export const useQuiz = () => {
       setScore(score + timer);
     }
 
-    if (actualQuestion + 1 === selectedQuestions.length) {
-      handleFinishTest();
-    }
-
     setActualQuestion(actualQuestion + 1);
     setTimerPercentage(100);
     setTimer(30);
   };
 
   const handleFinishTest = async () => {
-    alert("Your score is: " + score + " and will be saved in the ranking");
 
     await saveFinalScore(name, score);
 
@@ -72,6 +67,13 @@ export const useQuiz = () => {
 
     return () => clearInterval(interval);
   }, [actualQuestion, timer]);
+
+  useEffect(() => {
+    if ((actualQuestion === selectedQuestions.length) && selectedQuestions.length > 0) {
+      handleFinishTest();
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [actualQuestion]);
 
   return {
     name,
