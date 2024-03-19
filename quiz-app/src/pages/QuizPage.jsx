@@ -17,7 +17,7 @@ const QuizPage = () => {
 
   return (
     <>
-      {name && (
+      {name && name.trim() !== "" && (
         <div className="quiz container">
           {selectedQuestions.length > 0 &&
             actualQuestion >= selectedQuestions.length && (

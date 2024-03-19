@@ -6,7 +6,7 @@ export const useQuiz = () => {
   const navigate = useNavigate();
   const name = sessionStorage.getItem("name");
 
-  if (!name) {
+  if (!name || name.trim() === "") {
     navigate("/");
   }
   
