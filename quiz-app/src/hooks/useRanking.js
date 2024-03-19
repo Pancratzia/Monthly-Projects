@@ -3,6 +3,7 @@ import { getRankData } from "../services/rankingService";
 
 
 export const useRanking = () => {
+  sessionStorage.clear();
   const [ranking, setRanking] = useState([]);
 
   const getRanking = async () => {

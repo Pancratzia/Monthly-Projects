@@ -9,6 +9,7 @@ import { confirmAlertConfig } from "../utils/utils";
 
 export const useUsers = () => {
 
+  sessionStorage.clear();
   const dispatch = useDispatch();
   const { error } = useSelector((state) => state.users);
   const navigate = useNavigate();
