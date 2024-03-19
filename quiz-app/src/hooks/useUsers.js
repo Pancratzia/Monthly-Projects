@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import { isNameInRank } from "../services/userService";
 import { useDispatch } from "react-redux";
 import { CLEAR_ERROR, SET_ERROR } from "../store/slices/users/userSlice";
+import { confirmAlertConfig } from "../utils/utils";
 
 
 export const useUsers = () => {
@@ -28,17 +29,7 @@ export const useUsers = () => {
     }
 
     if ((await isNameInRank(name)) === true) {
-      Swal.fire({
-        title: "User already exists",
-        text: "Do you want to overwrite it?",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#2ecc70",
-        cancelButtonColor: "#e74d3c",
-        confirmButtonText: "Yes",
-        cancelButtonText: "No",
-        iconColor: "#f39c12",
-      }).then((result) => {
+      Swal.fire(confirmAlertConfig("Nickname already exists", "Do you want to overwrite the score?")).then((result) => {
         if (!result.isConfirmed) {
           dispatch({ type: CLEAR_ERROR.type });
         }else if(result.isConfirmed){
