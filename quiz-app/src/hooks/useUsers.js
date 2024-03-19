@@ -1,23 +1,29 @@
-import { useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { isNameInRank } from "../services/userService";
+import { useDispatch } from "react-redux";
+import { CLEAR_ERROR, SET_ERROR } from "../store/slices/users/userSlice";
+
 
 export const useUsers = () => {
-  const [error, setError] = useState("");
+
+  const dispatch = useDispatch();
+  const { error } = useSelector((state) => state.users);
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
 
     const goToQuiz = (player) => {
       sessionStorage.setItem("name", player);
-      window.location.href = "/quiz";
-
+      navigate("/quiz");
     }
     event.preventDefault();
 
     const name = event.target.name.value;
 
     if (!name || name.trim() === "") {
-      setError("Nickname is required");
+      dispatch({ type: SET_ERROR.type, payload: "Name cannot be empty" });
       return;
     }
 
@@ -34,8 +40,7 @@ export const useUsers = () => {
         iconColor: "#f39c12",
       }).then((result) => {
         if (!result.isConfirmed) {
-          setError("");
-          return;
+          dispatch({ type: CLEAR_ERROR.type });
         }else if(result.isConfirmed){
           goToQuiz(name);
         }
