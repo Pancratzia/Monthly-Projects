@@ -8,7 +8,6 @@ import MainLayout from "./components/layouts/MainLayout";
 
 const AppRoutes = () => {
 
-  const name = sessionStorage.getItem("name");
 
   return (
     <Routes>
@@ -16,7 +15,7 @@ const AppRoutes = () => {
         path="/"
         element={<MainLayout page="home"><UserPage /></MainLayout>}
       />
-      {name && <Route path="/quiz" element={<QuizPage />} />}
+      <Route path="/quiz" element={<QuizPage />} />
       <Route
         path="/ranking"
         element={<MainLayout page="ranking"><RankingPage /></MainLayout>}

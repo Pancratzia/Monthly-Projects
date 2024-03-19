@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { getQuestionsFromFirestore, saveFinalScore } from "../services/quizService.js";
 
 export const useQuiz = () => {
+  const navigate = useNavigate();
   const name = sessionStorage.getItem("name");
 
   if (!name) {
-    window.location.href = "/";
+    navigate("/");
   }
-
+  
   const [selectedQuestions, setSelectedQuestions] = useState([]);
   const [actualQuestion, setActualQuestion] = useState(0);
   const [score, setScore] = useState(0);
@@ -45,7 +47,7 @@ export const useQuiz = () => {
 
     await saveFinalScore(name, score);
 
-    window.location.href = "/ranking";
+    navigate("/ranking");
   };
 
   useEffect(() => {
