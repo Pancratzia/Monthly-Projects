@@ -1,7 +1,6 @@
-import { useQuiz } from "../../hooks/useQuiz";
+import PropTypes from 'prop-types';
 
-const Timer = () => {
-  const { timer, timerPercentage } = useQuiz();
+const Timer = ( { timer, timerPercentage }) => {
   return (
     <div className="timer-container">
       <h3
@@ -19,3 +18,8 @@ const Timer = () => {
 };
 
 export default Timer;
+
+Timer.propTypes = {
+  timer: PropTypes.number.isRequired,
+  timerPercentage: PropTypes.number.isRequired
+}

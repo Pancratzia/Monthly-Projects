@@ -41,6 +41,7 @@ export const useQuiz = () => {
     }
 
     setActualQuestion(actualQuestion + 1);
+    setTimerPercentage(100);
     setTimer(30);
   };
 

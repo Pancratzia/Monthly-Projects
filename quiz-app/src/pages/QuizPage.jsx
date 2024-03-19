@@ -10,7 +10,9 @@ const QuizPage = () => {
     selectedQuestions,
     actualQuestion,
     score,
-    handleSelectedAnswer
+    handleSelectedAnswer,
+    timer,
+    timerPercentage,
   } = useQuiz();
 
   return (
@@ -28,7 +30,7 @@ const QuizPage = () => {
           <h3 className="score">
             Actual Score: <span>{score}</span>
           </h3>
-          <Timer />
+          <Timer timer={timer} timerPercentage={timerPercentage} />
           <Questions selectedQuestions={selectedQuestions} actualQuestion={actualQuestion} handleSelectedAnswer={handleSelectedAnswer} />
         </>
       )}
