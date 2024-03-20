@@ -3,6 +3,7 @@ import "../assets/styles/quizPage.css";
 import { useQuiz } from "../hooks/useQuiz";
 import Timer from "../components/quiz/Timer";
 import Questions from "../components/quiz/Questions";
+import { useTranslation } from "react-i18next";
 
 const QuizPage = () => {
   const {
@@ -12,6 +13,8 @@ const QuizPage = () => {
     score
   } = useQuiz();
 
+  const { t } = useTranslation("global");
+
   return (
     <>
       {name && name.trim() !== "" && (
@@ -19,9 +22,9 @@ const QuizPage = () => {
           {selectedQuestions.length > 0 &&
             actualQuestion >= selectedQuestions.length && (
               <>
-                <h3 className="score">Your final score is: {score}</h3>
+                <h3 className="score">{t("QuizPage.score.finalScore")} {score}</h3>
                 <h5 className="subtitle">
-                  You're being redirected to the ranking page. Please wait...
+                  {t("QuizPage.score.subtitle")}
                 </h5>
               </>
             )}
@@ -29,10 +32,10 @@ const QuizPage = () => {
           {actualQuestion < selectedQuestions.length && (
             <>
               <h2 className="subtitle">
-                Hi {name}! Answer as fast as you can!
+                {t("QuizPage.title.greeting")} {name}!... {t("QuizPage.title.text")}
               </h2>
               <h3 className="score">
-                Actual Score: <span>{score}</span>
+                {t("QuizPage.score.actualScore")} <span>{score}</span>
               </h3>
               <Timer />
               <Questions />

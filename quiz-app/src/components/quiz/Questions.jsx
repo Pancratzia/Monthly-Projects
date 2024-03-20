@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { useQuiz } from '../../hooks/useQuiz';
 
 
@@ -25,9 +24,3 @@ const Questions = () => {
 };
 
 export default Questions;
-
-Questions.propTypes = {
-  selectedQuestions: PropTypes.array.isRequired,
-  actualQuestion: PropTypes.number.isRequired,
-  handleSelectedAnswer: PropTypes.func.isRequired
-}

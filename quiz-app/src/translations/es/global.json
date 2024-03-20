@@ -37,5 +37,17 @@
         "buttonYes": "Sí",
         "buttonNo": "No"
     }
+  },
+  "QuizPage":{
+    "title": {
+        "greeting": "¡Hola ",
+        "text": "¡Responde tan rápido como puedas!"
+    },
+    "score":
+    {
+        "actualScore": "Puntaje Actual: ",
+        "finalScore": "Puntaje Final: ",
+        "subtitle": "Estás siendo redirigido al Ranking. Por favor espera.."
+    }
   }
 }
