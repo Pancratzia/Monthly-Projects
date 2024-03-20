@@ -57,5 +57,9 @@
         "name": "Nombre",
         "score": "Puntaje"
     }
+  },
+  "ErrorPage":{
+    "title": "Error 404",
+    "text": "Página no encontrada"
   }
 }
