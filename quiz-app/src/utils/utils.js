@@ -1,4 +1,5 @@
-export const confirmAlertConfig = (title, text) => {
+
+export const confirmAlertConfig = (title, text, yesButton, noButton) => {
   return {
     title,
     text,
@@ -6,8 +7,8 @@ export const confirmAlertConfig = (title, text) => {
     showCancelButton: true,
     confirmButtonColor: "#2ecc70",
     cancelButtonColor: "#e74d3c",
-    confirmButtonText: "Yes",
-    cancelButtonText: "No",
+    confirmButtonText: yesButton,
+    cancelButtonText: noButton,
     iconColor: "#f39c12",
   };
 };

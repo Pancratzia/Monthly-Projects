@@ -1,25 +1,20 @@
 /* eslint-disable react/no-unescaped-entities */
+import { useTranslation } from "react-i18next";
 
 const Instructions = () => {
+
+  const { t } = useTranslation("global");
+
   return (
     <div className="instructions-container">
-      <h3 className="subtitle">Instructions:</h3>
+      <h3 className="subtitle">{t("userPage.instructions.title")}</h3>
 
       <ol className="instructions">
-        <li>Enter an original nickname.</li>
-        <li>Press "Submit".</li>
-        <li>
-          There willl be 10 questions, each one with three possible answers, but
-          only one will be correct.
-        </li>
-        <li>
-          You'll have 30 seconds to answer each question. If you don't answer in
-          time, the question will be skipped.
-        </li>
-        <li>
-          If you answer correctly, you'll get as many points as time left in
-          seconds.
-        </li>
+        {Array.from({ length: 5 }).map((_, index) => (
+          <li key={index}>
+            {t(`userPage.instructions.${index + 1}`)}
+          </li>
+        ))}
       </ol>
     </div>
   );

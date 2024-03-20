@@ -10,5 +10,32 @@
   "footer": {
     "copyright": "Todos los derechos reservados.",
     "made": "Hecho con 💜 "
+  },
+  "userPage": {
+    "title": "¡Hola! ¿Quisieras poner a prueba tus conocimientos?",
+    "instructions":{
+        "title": "Instrucciones",
+        "1": "Ingresa un nombre de usuario original.",
+        "2": "Presiona el botón de \"Enviar\" para iniciar el quiz.",
+        "3": "Habrán 10 preguntas, cada una con tres respuestas posibles, pero solo una será la correcta.",
+        "4": "Tendrás 30 segundos para responder cada pregunta. Si no respondes correctamente, se pasará a la siguiente pregunta.",
+        "5": "Si respondes correctamente, se te darán tantos puntos como segundos restantes tengas en el reloj."
+    },
+    "form":{
+        "label": "Nombre de Usuario",
+        "placeholder": "Ingresa tu nombre de usuario",
+        "button": "Enviar"
+    }
+  },
+  "errors":{
+    "emptyName": "El nombre de usuario no puede estar vacío."
+  },
+  "Swal": {
+    "confirmAlertDialog":{
+        "title": "El nombre de usuario ya existe",
+        "text": "¿Deseas sobrescribir tu puntaje?",
+        "buttonYes": "Sí",
+        "buttonNo": "No"
+    }
   }
 }
