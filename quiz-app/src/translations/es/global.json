@@ -1,0 +1,14 @@
+{
+  "title": "Quiz App",
+  "header":{
+    "subtitle": "¡Pon a prueba tus conocimientos sobre programación con este quiz!"
+  },
+  "nav":{
+    "home": "Inicio",
+    "ranking": "Ranking"
+  },
+  "footer": {
+    "copyright": "Todos los derechos reservados.",
+    "made": "Hecho con 💜 "
+  }
+}
