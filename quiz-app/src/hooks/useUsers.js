@@ -25,7 +25,7 @@ export const useUsers = () => {
     const name = event.target.name.value;
 
     if (!name || name.trim() === "") {
-      dispatch({ type: SET_ERROR.type, payload: "Name cannot be empty" });
+      dispatch({ type: SET_ERROR.type, payload: "Nickname cannot be empty" });
       return;
     }
 

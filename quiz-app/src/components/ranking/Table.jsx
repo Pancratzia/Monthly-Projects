@@ -2,7 +2,7 @@ import { useRanking } from "../../hooks/useRanking"
 
 
 const Table = () => {
-    const { ranking } = useRanking()
+    const { ranking } = useRanking();
   return (
     <table className="table">
         <thead className="thead">
