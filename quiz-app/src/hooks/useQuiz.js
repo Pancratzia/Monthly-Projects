@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getQuestionsFromFirestore, saveFinalScore } from "../services/quizService.js";
+import { useDispatch, useSelector } from "react-redux";
+import { CHANGE_QUESTION, RESET_QUIZ_TO_DEFAULT, SET_QUESTIONS, SET_SCORE, SUBSTRACT_ONE_SECOND } from "../store/slices/quiz/quizSlice.js";
 
 export const useQuiz = () => {
   const navigate = useNavigate();
@@ -9,20 +11,19 @@ export const useQuiz = () => {
   if (!name || name.trim() === "") {
     navigate("/");
   }
-  
-  const [selectedQuestions, setSelectedQuestions] = useState([]);
-  const [actualQuestion, setActualQuestion] = useState(0);
-  const [score, setScore] = useState(0);
-  const [timer, setTimer] = useState(30);
-  const [timerPercentage, setTimerPercentage] = useState(100);
+
+  const dispatch = useDispatch();
+  const { selectedQuestions, actualQuestion, score, timer, timerPercentage } = useSelector((state) => state.quiz);
+
 
   const getQuestions = async () => {
     try {
 
       const q = await getQuestionsFromFirestore();
+      const questions = getNRandomQuestions(q, 10);
 
-      setSelectedQuestions(getNRandomQuestions(q, 10));
-      setActualQuestion(0);
+      dispatch({ type: SET_QUESTIONS.type, payload: questions });
+      
     } catch (error) {
       console.error("Error getting questions: ", error);
     }
@@ -35,17 +36,18 @@ export const useQuiz = () => {
 
   const handleSelectedAnswer = (correcta) => {
     if (correcta) {
-      setScore(score + timer);
+      const newScore = score + timer;
+      dispatch({ type: SET_SCORE.type, payload: newScore });
     }
 
-    setActualQuestion(actualQuestion + 1);
-    setTimerPercentage(100);
-    setTimer(30);
+    dispatch({ type: CHANGE_QUESTION.type });
+ 
   };
 
   const handleFinishTest = async () => {
 
     await saveFinalScore(name, score);
+    dispatch({ type: RESET_QUIZ_TO_DEFAULT.type });
 
     navigate("/ranking");
   };
@@ -58,16 +60,14 @@ export const useQuiz = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       if (timer > 0) {
-        setTimer(timer - 1);
-        setTimerPercentage(((timer - 1) / 30) * 100);
+        dispatch({ type: SUBSTRACT_ONE_SECOND.type });
       } else {
-        setActualQuestion(actualQuestion + 1);
-        setTimerPercentage(100);
-        setTimer(30);
+        dispatch({ type: CHANGE_QUESTION.type });
       }
     }, 1000);
 
     return () => clearInterval(interval);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [actualQuestion, timer]);
 
   useEffect(() => {

@@ -33,8 +33,6 @@ const saveFinalScore = async (name, score) => {
   } else {
     const docId = querySnapshot.docs[0].id;
 
-    //use set and merge instead of update
-
     await queryRef.doc(docId).set(
       {
         puntaje: score,
