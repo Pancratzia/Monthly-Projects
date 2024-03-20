@@ -1,7 +1,10 @@
 import PropTypes from 'prop-types';
+import { useQuiz } from '../../hooks/useQuiz';
 
 
-const Questions = ( { selectedQuestions, actualQuestion, handleSelectedAnswer } ) => {
+const Questions = () => {
+
+  const { selectedQuestions, actualQuestion, handleSelectedAnswer } = useQuiz();
 
   return (
     <div className="question">
