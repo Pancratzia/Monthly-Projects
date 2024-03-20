@@ -28,7 +28,8 @@
     }
   },
   "errors":{
-    "emptyName": "El nombre de usuario no puede estar vacío."
+    "emptyName": "El nombre de usuario no puede estar vacío.",
+    "errorGettingQuestions": "Error al obtener las preguntas: "
   },
   "Swal": {
     "confirmAlertDialog":{

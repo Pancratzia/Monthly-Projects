@@ -3,9 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { getQuestionsFromFirestore, saveFinalScore } from "../services/quizService.js";
 import { useDispatch, useSelector } from "react-redux";
 import { CHANGE_QUESTION, RESET_QUIZ_TO_DEFAULT, SET_QUESTIONS, SET_SCORE, SUBSTRACT_ONE_SECOND } from "../store/slices/quiz/quizSlice.js";
+import { useTranslation } from "react-i18next";
 
 export const useQuiz = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const name = sessionStorage.getItem("name");
 
   if (!name || name.trim() === "") {
@@ -25,7 +27,7 @@ export const useQuiz = () => {
       dispatch({ type: SET_QUESTIONS.type, payload: questions });
       
     } catch (error) {
-      console.error("Error getting questions: ", error);
+      console.error(t("errors.errorGettingQuestions"), error);
     }
   };
 
