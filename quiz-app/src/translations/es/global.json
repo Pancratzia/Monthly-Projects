@@ -49,5 +49,12 @@
         "finalScore": "Puntaje Final: ",
         "subtitle": "Estás siendo redirigido al Ranking. Por favor espera.."
     }
+  },
+  "RankingPage":{
+    "title": "Ranking",
+    "fields":{
+        "name": "Nombre",
+        "score": "Puntaje"
+    }
   }
 }
