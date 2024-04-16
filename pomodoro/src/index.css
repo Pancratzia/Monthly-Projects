@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components{
+    .container{
+        width: min(90%, 1200px) !important;
+        @apply mx-auto
+    }
+}
