@@ -8,3 +8,12 @@
         @apply mx-auto
     }
 }
+
+#phone{
+  background-image: url("./img/phone.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  width: 360px;
+  height: 722px;
+}
