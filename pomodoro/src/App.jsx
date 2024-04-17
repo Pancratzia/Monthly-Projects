@@ -1,15 +1,11 @@
-import PhoneLayout from "./components/layouts/PhoneLayout";
+import AppRoutes from "./AppRoutes";
+import { BrowserRouter } from "react-router-dom";
 
 function App() {
   return (
-    <>
-      <div className="min-h-screen w-screen bg-purple-950 flex justify-center items-center py-2">
-
-        <PhoneLayout >
-          <h1>Hola</h1>
-        </PhoneLayout>
-      </div>
-    </>
+    <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
   );
 }
 
