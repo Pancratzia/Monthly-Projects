@@ -7,7 +7,9 @@ export default {
   theme: {
     container: false,
     extend: {
-      
+      fontFamily:{
+        rubik: ['Rubik', 'sans-serif']
+      }
     },
   },
   corePlugins: {
