@@ -1,8 +1,12 @@
+import Clock from "../components/Clock"
+import InteriorLayout from "../components/layouts/InteriorLayout"
 
 
 const Home = () => {
   return (
-    <h1>Home</h1>
+    <InteriorLayout>
+        <Clock />
+    </InteriorLayout>
   )
 }
 
