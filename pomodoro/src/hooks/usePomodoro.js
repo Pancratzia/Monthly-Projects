@@ -2,12 +2,18 @@ import { useEffect, useState } from "react";
 
 export const usePomodoro = () => {
   const SECONDS = 60;
-  const MINUTES = 25;
+
+  const activityNames = ["Trabajando", "Descansando"];
 
 
-  const [timer, setTimer] = useState(SECONDS * MINUTES);
+  const [workingTime, setWorkingTime] = useState(25);
+  const [breakTime, setBreakTime] = useState(5);
+
+  const [timer, setTimer] = useState(SECONDS * workingTime);
   const [progress, setProgress] = useState(100);
   const [time, setTime] = useState(formatTimer());
+  const [activity, setActivity] = useState(activityNames[0]);
+
 
   function formatTimer(){
     const minutes = Math.floor(timer / 60);
@@ -23,7 +29,7 @@ export const usePomodoro = () => {
     const interval = setInterval(() => {
       if (timer >= 0) {
         setTimer(timer - 1);
-        setProgress(((timer) / (SECONDS * MINUTES)) * 100);
+        setProgress(((timer) / (SECONDS * workingTime)) * 100);
         setTime(formatTimer());
       }
     }, 1000);
@@ -32,5 +38,5 @@ export const usePomodoro = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timer]);
 
-  return [progress, time];
+  return [progress, time, activity];
 };

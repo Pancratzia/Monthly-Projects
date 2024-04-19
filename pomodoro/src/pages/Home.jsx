@@ -5,10 +5,10 @@ import { usePomodoro } from "../hooks/usePomodoro";
 
 const Home = () => {
 
-  const [progress, time] = usePomodoro();
+  const [progress, time, activity] = usePomodoro();
   return (
     <InteriorLayout>
-        <Clock progress={progress} time={time} />
+        <Clock progress={progress} time={time} activity={activity} />
     </InteriorLayout>
   )
 }
