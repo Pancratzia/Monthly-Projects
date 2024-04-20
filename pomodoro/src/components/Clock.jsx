@@ -6,7 +6,7 @@ import {
 import "react-circular-progressbar/dist/styles.css";
 
 const Clock = ({
-  percentage = 60,
+  percentage = 0,
   activity = "Trabajando",
   time = "25:00",
 }) => {

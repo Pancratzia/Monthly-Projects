@@ -1,23 +1,26 @@
 import { useEffect, useState } from "react";
 
+const SECONDS = 60;
+const INITIAL_TIME_DIVISION = [
+  { name: "Trabajando", time: 25 },
+  { name: "Descansando", time: 5 },
+];
+
 export const usePomodoro = () => {
-  const SECONDS = 60;
+  const [timeDivision] = useState(INITIAL_TIME_DIVISION);
+  const [stateIndex, setStateIndex] = useState(0);
+  const [activity, setActivity] = useState(
+    INITIAL_TIME_DIVISION[stateIndex].name
+  );
+  const [timeInSeconds, setTimeInSeconds] = useState(
+    INITIAL_TIME_DIVISION[stateIndex].time * SECONDS
+  );
+  const [time, setTime] = useState(formatTimer(timeInSeconds));
+  const [percentage, setPercentage] = useState(0);
 
-  const activityNames = ["Trabajando", "Descansando"];
-
-
-  const [workingTime, setWorkingTime] = useState(25);
-  const [breakTime, setBreakTime] = useState(5);
-
-  const [timer, setTimer] = useState(SECONDS * workingTime);
-  const [progress, setProgress] = useState(100);
-  const [time, setTime] = useState(formatTimer());
-  const [activity, setActivity] = useState(activityNames[0]);
-
-
-  function formatTimer(){
-    const minutes = Math.floor(timer / 60);
-    const seconds = timer % 60;
+  function formatTimer(timeInSeconds) {
+    const minutes = Math.floor(timeInSeconds / 60);
+    const seconds = timeInSeconds % 60;
 
     const secToStr = (sec) => String(sec).padStart(2, "0");
     const minutesToStr = (min) => String(min).padStart(2, "0");
@@ -25,18 +28,41 @@ export const usePomodoro = () => {
     return `${minutesToStr(minutes)}:${secToStr(seconds)}`;
   }
 
+  function calculatePercentage() {
+    const totalTime = timeDivision[stateIndex].time * SECONDS;
+    const timeLeft = totalTime - timeInSeconds;
+    const percentage = (timeLeft / totalTime) * 100;
+
+    setPercentage(Math.floor(percentage.toFixed(2)));
+  }
+
   useEffect(() => {
+    if (
+      time === formatTimer(timeDivision[stateIndex].time * SECONDS) &&
+      percentage === 0
+    ) {
+      setActivity(timeDivision[stateIndex].name);
+    }
+
     const interval = setInterval(() => {
-      if (timer >= 0) {
-        setTimer(timer - 1);
-        setProgress(((timer) / (SECONDS * workingTime)) * 100);
-        setTime(formatTimer());
+      if (timeInSeconds >= 0) {
+        setTimeInSeconds(timeInSeconds - 1);
+        setTime(formatTimer(timeInSeconds));
+        calculatePercentage();
       }
     }, 1000);
 
+    if (timeInSeconds < 0) {
+      const newIndex = stateIndex === 0 ? 1 : 0;
+
+      setStateIndex(newIndex);
+      setTimeInSeconds(timeDivision[newIndex].time * SECONDS);
+      calculatePercentage();
+    }
+
     return () => clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [timer]);
+  }, [time, timeInSeconds, stateIndex]);
 
-  return [progress, time, activity];
+  return [time, activity, percentage];
 };
