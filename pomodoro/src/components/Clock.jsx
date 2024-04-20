@@ -1,13 +1,30 @@
 import PropTypes from "prop-types";
+import {
+  CircularProgressbarWithChildren,
+  buildStyles,
+} from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 
-const Clock = ({ progress, time, activity  }) => {
-
+const Clock = ({
+  percentage = 60,
+  activity = "Trabajando",
+  time = "25:00",
+}) => {
   return (
-    <div className="flex flex-col justify-center items-center  rounded-full w-44 h-44 drop-shadow-2xl conic-gradient-progress" style={{ "--progress": `${progress}%` }}>
-      <div className="flex flex-col justify-center items-center rounded-full w-40 h-40 bg-purple-200">
-        <h3 className="text-3xl font-bold text-purple-950">{time}</h3>
-        <h4 className="text-sm text-purple-950">{activity}</h4>
-      </div>
+    <div className="w-48 h-48">
+      <CircularProgressbarWithChildren
+        value={percentage}
+        styles={buildStyles({
+          textColor: "rgb(59 7 100)",
+          pathColor: "rgb(59 7 100)",
+          trailColor: "transparent",
+        })}
+      >
+        <div className="w-full h-full flex justify-center items-center flex-col">
+          <p className="text-3xl text-purple-950">{time}</p>
+          <p className="text-sm text-purple-950">{activity}</p>
+        </div>
+      </CircularProgressbarWithChildren>
     </div>
   );
 };
@@ -15,7 +32,7 @@ const Clock = ({ progress, time, activity  }) => {
 export default Clock;
 
 Clock.propTypes = {
-  progress: PropTypes.number.isRequired,
-  time: PropTypes.string.isRequired,
-  activity: PropTypes.string.isRequired
-}
+  percentage: PropTypes.number,
+  activity: PropTypes.string,
+  time: PropTypes.string,
+};

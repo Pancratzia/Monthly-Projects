@@ -17,7 +17,3 @@
   width: 360px;
   height: 722px;
 }
-
-.conic-gradient-progress {
-  background-image: conic-gradient(rgb(59 7 100) calc(100% - var(--progress)), transparent calc(100% - var(--progress)));
-}
