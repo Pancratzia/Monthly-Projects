@@ -15,5 +15,7 @@
   background-size: contain;
   background-position: center;
   width: 360px;
+  min-width: 360px;
+  min-height: 722px;
   height: 722px;
 }
