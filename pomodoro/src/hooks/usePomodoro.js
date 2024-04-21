@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 
 const SECONDS = 60;
 const INITIAL_TIME_DIVISION = [
-  { name: "Trabajando", time: 25 },
-  { name: "Descansando", time: 5 },
+  { name: "Trabajando", time: .1 },
+  { name: "Descansando", time: .05 },
 ];
 
 export const usePomodoro = () => {
@@ -17,6 +17,11 @@ export const usePomodoro = () => {
   );
   const [time, setTime] = useState(formatTimer(timeInSeconds));
   const [percentage, setPercentage] = useState(0);
+  const [isTimerRunning, setIsTimerRunning] = useState(false);
+
+  {
+    /** Functions **/
+  }
 
   function formatTimer(timeInSeconds) {
     const minutes = Math.floor(timeInSeconds / 60);
@@ -36,33 +41,52 @@ export const usePomodoro = () => {
     setPercentage(Math.floor(percentage.toFixed(2)));
   }
 
-  useEffect(() => {
-    if (
-      time === formatTimer(timeDivision[stateIndex].time * SECONDS) &&
-      percentage === 0
-    ) {
-      setActivity(timeDivision[stateIndex].name);
-    }
+  function toogleTime() {
+    setIsTimerRunning(!isTimerRunning);
+  }
 
-    const interval = setInterval(() => {
-      if (timeInSeconds >= 0) {
-        setTimeInSeconds(timeInSeconds - 1);
-        setTime(formatTimer(timeInSeconds));
+  function resetTimer() {
+    setIsTimerRunning(false);
+    setStateIndex(0);
+    setPercentage(0);
+    setTimeInSeconds(timeDivision[stateIndex].time * SECONDS);
+    setTime(formatTimer(timeDivision[stateIndex].time * SECONDS));
+    setActivity(timeDivision[stateIndex].name);
+  }
+
+  {
+    /** Effects **/
+  }
+
+  useEffect(() => {
+    if (isTimerRunning === true) {
+      if (
+        time === formatTimer(timeDivision[stateIndex].time * SECONDS) &&
+        percentage === 0
+      ) {
+        setActivity(timeDivision[stateIndex].name);
+      }
+
+      const interval = setInterval(() => {
+        if (timeInSeconds >= 0) {
+          setTimeInSeconds(timeInSeconds - 1);
+          setTime(formatTimer(timeInSeconds));
+          calculatePercentage();
+        }
+      }, 1000);
+
+      if (timeInSeconds < 0) {
+        const newIndex = stateIndex === 0 ? 1 : 0;
+
+        setStateIndex(newIndex);
+        setTimeInSeconds(timeDivision[newIndex].time * SECONDS);
         calculatePercentage();
       }
-    }, 1000);
 
-    if (timeInSeconds < 0) {
-      const newIndex = stateIndex === 0 ? 1 : 0;
-
-      setStateIndex(newIndex);
-      setTimeInSeconds(timeDivision[newIndex].time * SECONDS);
-      calculatePercentage();
+      return () => clearInterval(interval);
     }
-
-    return () => clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [time, timeInSeconds, stateIndex]);
+  }, [time, timeInSeconds, stateIndex, isTimerRunning]);
 
-  return [time, activity, percentage];
+  return [time, activity, percentage, toogleTime, isTimerRunning, resetTimer];
 };
