@@ -11,7 +11,7 @@ const Clock = ({
   time = "25:00",
 }) => {
   return (
-    <div className="w-48 h-48">
+    <div className="w-48 h-48 rounded-full border border-transparent shadow-xl shador-purple-950">
       <CircularProgressbarWithChildren
         value={percentage}
         styles={buildStyles({
