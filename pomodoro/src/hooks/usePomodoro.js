@@ -47,11 +47,12 @@ export const usePomodoro = () => {
 
   function resetTimer() {
     setIsTimerRunning(false);
-    setStateIndex(0);
     setPercentage(0);
-    setTimeInSeconds(timeDivision[stateIndex].time * SECONDS);
-    setTime(formatTimer(timeDivision[stateIndex].time * SECONDS));
-    setActivity(timeDivision[stateIndex].name);
+    const newIndex = 0;
+    setStateIndex(newIndex);
+    setTimeInSeconds(timeDivision[newIndex].time * SECONDS);
+    setActivity(timeDivision[newIndex].name);
+    setTime(formatTimer(timeDivision[newIndex].time * SECONDS));
   }
 
   {
