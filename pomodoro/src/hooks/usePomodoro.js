@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 
 const SECONDS = 60;
 const INITIAL_TIME_DIVISION = [
-  { name: "Trabajando", time: .1 },
-  { name: "Descansando", time: .05 },
+  { name: "Trabajando", time: 0.1 },
+  { name: "Descansando", time: 0.05 },
 ];
 
 export const usePomodoro = () => {
@@ -18,6 +18,9 @@ export const usePomodoro = () => {
   const [time, setTime] = useState(formatTimer(timeInSeconds));
   const [percentage, setPercentage] = useState(0);
   const [isTimerRunning, setIsTimerRunning] = useState(false);
+
+  const [activityHasAName, setActivityHasAName] = useState(false);
+  const [activityName, setActivityName] = useState("");
 
   {
     /** Functions **/
@@ -53,6 +56,14 @@ export const usePomodoro = () => {
     setTimeInSeconds(timeDivision[newIndex].time * SECONDS);
     setActivity(timeDivision[newIndex].name);
     setTime(formatTimer(timeDivision[newIndex].time * SECONDS));
+    setActivityName("");
+    setActivityHasAName(false);
+  }
+
+  function submitActivity() {
+    setActivityHasAName(true);
+    const getActivityName = document.getElementById("activity").value;
+    setActivityName(getActivityName);
   }
 
   {
@@ -89,5 +100,15 @@ export const usePomodoro = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [time, timeInSeconds, stateIndex, isTimerRunning]);
 
-  return [time, activity, percentage, toogleTime, isTimerRunning, resetTimer];
+  return [
+    time,
+    activity,
+    percentage,
+    toogleTime,
+    isTimerRunning,
+    resetTimer,
+    activityHasAName,
+    activityName,
+    submitActivity,
+  ];
 };

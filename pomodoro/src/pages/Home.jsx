@@ -2,45 +2,69 @@ import Clock from "../components/Clock";
 import InteriorLayout from "../components/layouts/InteriorLayout";
 import Button from "../components/utils/Button";
 import Input from "../components/utils/Input";
+import Label from "../components/utils/Label";
 import { usePomodoro } from "../hooks/usePomodoro";
-import { FaCircleStop, FaCirclePlay, FaCirclePause } from "react-icons/fa6";
+import {
+  FaCircleStop,
+  FaCirclePlay,
+  FaCirclePause,
+  FaCircleCheck,
+} from "react-icons/fa6";
 
 const Home = () => {
-  const [time, activity, percentage, toogleTime, isTimerRunning, resetTimer] =
-    usePomodoro();
+  const [
+    time,
+    activity,
+    percentage,
+    toogleTime,
+    isTimerRunning,
+    resetTimer,
+    activityHasAName,
+    activityName,
+    submitActivity,
+  ] = usePomodoro();
 
   return (
     <InteriorLayout>
-      <div className="container">
-        <Input placeholder="Actividad" name="activity" required={true} />
-        <span className="text-purple-950 opacity-50
-        text-xs">Presione &quot;Enter&quot; para iniciar</span>
-      </div>
+      {!activityHasAName ? (
+        <div className="container flex gap-2">
+          <Input placeholder="Actividad" name="activity" required={true} id="activity" />
+          <Button
+            icon={<FaCircleCheck className="w-8 h-8" />}
+            onClick={submitActivity}
+          >
+            {"Iniciar Actividad"}
+          </Button>
+        </div>
+      ) : (
+        <>
+          <Label text={activityName} />
 
-      <Clock percentage={percentage} time={time} activity={activity} />
+          <Clock percentage={percentage} time={time} activity={activity} />
 
-      <div className="flex gap-5 h-16">
-        <Button
-          classNameProp="w-16 h-16"
-          onClick={toogleTime}
-          icon={
-            isTimerRunning ? (
-              <FaCirclePause className="w-8 h-8" />
-            ) : (
-              <FaCirclePlay className="w-8 h-8" />
-            )
-          }
-        >
-          {isTimerRunning ? "Pausar" : "Iniciar"}
-        </Button>
+          <div className="flex gap-5 h-16">
+            <Button
+              onClick={toogleTime}
+              icon={
+                isTimerRunning ? (
+                  <FaCirclePause className="w-8 h-8" />
+                ) : (
+                  <FaCirclePlay className="w-8 h-8" />
+                )
+              }
+            >
+              {isTimerRunning ? "Pausar" : "Iniciar"}
+            </Button>
 
-        <Button
-          icon={<FaCircleStop className="w-8 h-8" />}
-          onClick={resetTimer}
-        >
-          {"Detener"}
-        </Button>
-      </div>
+            <Button
+              icon={<FaCircleStop className="w-8 h-8" />}
+              onClick={resetTimer}
+            >
+              {"Detener"}
+            </Button>
+          </div>
+        </>
+      )}
     </InteriorLayout>
   );
 };

@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-const Input = ({ placeholder, name, type = "text", required = false, actionKeyDown = () => {} }) => {
+const Input = ({ placeholder, name, type = "text", required = false, id="" }) => {
   return (
     <input
       type={type}
@@ -8,7 +8,7 @@ const Input = ({ placeholder, name, type = "text", required = false, actionKeyDo
       placeholder={placeholder}
       className="w-full px-2 py-1 border border-purple-950 rounded-xl text-center  focus:outline-none text-purple-950 font-rubik"
       required={required}
-      onKeyDown={actionKeyDown}
+      id={id}
     />
   );
 };
@@ -20,5 +20,5 @@ Input.propTypes = {
   name: PropTypes.string.isRequired,
   type: PropTypes.string,
   required: PropTypes.bool,
-  actionKeyDown: PropTypes.func
+  id: PropTypes.string
 };
