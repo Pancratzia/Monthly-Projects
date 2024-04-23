@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 const Button = ({ children, icon, onClick }) => {
   return (
-    <button type="button" onClick={onClick}>
+    <button className="text-purple-950 drop-shadow-md shadow-purple-950" type="button" onClick={onClick}>
       {icon}
       <span className="sr-only">{children}</span>
     </button>

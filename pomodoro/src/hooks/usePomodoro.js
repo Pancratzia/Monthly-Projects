@@ -5,6 +5,7 @@ const INITIAL_TIME_DIVISION = [
   { name: "Trabajando", time: 0.1 },
   { name: "Descansando", time: 0.05 },
 ];
+const INITIAL_ERRORS = [];
 
 export const usePomodoro = () => {
   const [timeDivision] = useState(INITIAL_TIME_DIVISION);
@@ -23,6 +24,7 @@ export const usePomodoro = () => {
   const [activityName, setActivityName] = useState("");
   const [cicles] = useState(2);
   const [currentCicle, setCurrentCicle] = useState(1);
+  const [errors, setErrors] = useState(INITIAL_ERRORS);
 
   {
     /** Functions **/
@@ -60,12 +62,23 @@ export const usePomodoro = () => {
     setTime(formatTimer(timeDivision[newIndex].time * SECONDS));
     setActivityName("");
     setActivityHasAName(false);
+    setErrors(INITIAL_ERRORS);
     setCurrentCicle(1);
   }
 
   function submitActivity() {
-    setActivityHasAName(true);
+    setErrors(INITIAL_ERRORS);
     const getActivityName = document.getElementById("activity").value;
+    
+    if (getActivityName === "") {
+      setErrors((prevErrors) => [
+        ...prevErrors,
+        { name: "Activity", errors: ["El campo no puede estar vacío"] },
+      ])
+
+      return;
+    }
+    setActivityHasAName(true);
     setActivityName(getActivityName);
   }
 
@@ -124,5 +137,6 @@ export const usePomodoro = () => {
     activityHasAName,
     activityName,
     submitActivity,
+    errors
   ];
 };

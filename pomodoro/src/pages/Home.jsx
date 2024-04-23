@@ -22,25 +22,36 @@ const Home = () => {
     activityHasAName,
     activityName,
     submitActivity,
+    errors,
   ] = usePomodoro();
+
+  console.log(errors.length);
 
   return (
     <InteriorLayout>
       {!activityHasAName ? (
-        <div className="container flex gap-2">
-          <Input
-            placeholder="Actividad"
-            name="activity"
-            required={true}
-            id="activity"
-          />
-          <Button
-            icon={<FaCircleCheck className="w-8 h-8" />}
-            onClick={submitActivity}
-          >
-            {"Iniciar Actividad"}
-          </Button>
-        </div>
+        <>
+          <div className="container flex gap-2">
+            <Input
+              placeholder="Actividad"
+              name="activity"
+              required={true}
+              id="activity"
+            />
+            <Button
+              icon={<FaCircleCheck className="w-8 h-8" />}
+              onClick={submitActivity}
+            >
+              {"Iniciar Actividad"}
+            </Button>
+          </div>
+
+          {errors.length > 0 ? (
+            <div className="text-purple-950 text-[10px] text-left container mt-[-16px] ml-4">
+              <Label text={errors[0].errors[0]} />
+            </div>
+          ) : null}
+        </>
       ) : (
         <>
           <Label text={activityName} />
@@ -70,10 +81,9 @@ const Home = () => {
           </div>
           {!isTimerRunning && (
             <div className="opacity-50 text-sm container">
-            <Label text={"Presiona el botón para hacer avanzar el tiempo"} />
-          </div>
+              <Label text={"Presiona el botón para hacer avanzar el tiempo"} />
+            </div>
           )}
-          
         </>
       )}
     </InteriorLayout>
