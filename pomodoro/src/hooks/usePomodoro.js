@@ -21,6 +21,8 @@ export const usePomodoro = () => {
 
   const [activityHasAName, setActivityHasAName] = useState(false);
   const [activityName, setActivityName] = useState("");
+  const [cicles] = useState(2);
+  const [currentCicle, setCurrentCicle] = useState(1);
 
   {
     /** Functions **/
@@ -58,6 +60,7 @@ export const usePomodoro = () => {
     setTime(formatTimer(timeDivision[newIndex].time * SECONDS));
     setActivityName("");
     setActivityHasAName(false);
+    setCurrentCicle(1);
   }
 
   function submitActivity() {
@@ -72,6 +75,11 @@ export const usePomodoro = () => {
 
   useEffect(() => {
     if (isTimerRunning === true) {
+      if (currentCicle > cicles) {
+        resetTimer();
+        return;
+      }
+
       if (
         time === formatTimer(timeDivision[stateIndex].time * SECONDS) &&
         percentage === 0
@@ -87,12 +95,20 @@ export const usePomodoro = () => {
         }
       }, 1000);
 
-      if (timeInSeconds < 0) {
-        const newIndex = stateIndex === 0 ? 1 : 0;
+      console.log("cicle", currentCicle);
 
-        setStateIndex(newIndex);
-        setTimeInSeconds(timeDivision[newIndex].time * SECONDS);
-        calculatePercentage();
+      if (timeInSeconds < 0) {
+        if (currentCicle <= cicles) {
+          const newIndex = stateIndex === 0 ? 1 : 0;
+          setStateIndex(newIndex);
+          setTimeInSeconds(timeDivision[newIndex].time * SECONDS);
+          calculatePercentage();
+
+          if (stateIndex === 1) {
+            const newCicle = currentCicle + 1;
+            setCurrentCicle(newCicle);
+          }
+        }
       }
 
       return () => clearInterval(interval);
