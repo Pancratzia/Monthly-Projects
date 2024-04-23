@@ -95,8 +95,6 @@ export const usePomodoro = () => {
         }
       }, 1000);
 
-      console.log("cicle", currentCicle);
-
       if (timeInSeconds < 0) {
         if (currentCicle <= cicles) {
           const newIndex = stateIndex === 0 ? 1 : 0;

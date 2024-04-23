@@ -28,7 +28,12 @@ const Home = () => {
     <InteriorLayout>
       {!activityHasAName ? (
         <div className="container flex gap-2">
-          <Input placeholder="Actividad" name="activity" required={true} id="activity" />
+          <Input
+            placeholder="Actividad"
+            name="activity"
+            required={true}
+            id="activity"
+          />
           <Button
             icon={<FaCircleCheck className="w-8 h-8" />}
             onClick={submitActivity}
@@ -63,6 +68,12 @@ const Home = () => {
               {"Detener"}
             </Button>
           </div>
+          {!isTimerRunning && (
+            <div className="opacity-50 text-sm container">
+            <Label text={"Presiona el botón para hacer avanzar el tiempo"} />
+          </div>
+          )}
+          
         </>
       )}
     </InteriorLayout>
