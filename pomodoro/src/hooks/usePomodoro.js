@@ -139,6 +139,7 @@ export const usePomodoro = () => {
     submitActivity,
     errors,
     currentCicle,
-    cicles
+    cicles,
+    timeDivision
   ];
 };

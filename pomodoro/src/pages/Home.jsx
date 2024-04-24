@@ -25,6 +25,7 @@ const Home = () => {
     errors,
     currentCicle,
     cicles,
+    timeDivision,
   ] = usePomodoro();
 
   return (
@@ -51,6 +52,12 @@ const Home = () => {
               <Label text={errors[0].errors[0]} />
             </div>
           ) : null}
+
+          <div className="flex flex-col gap-1 text-xs opacity-50 text-left">
+            <Label text={`Ciclos a realizar: ${cicles}`} />
+            <Label text={`Tiempo de Trabajo: ${timeDivision[0].time} minutos`} />
+            <Label text={`Tiempo de Descanso: ${timeDivision[1].time} minutos`} />
+          </div>
         </>
       ) : (
         <>
