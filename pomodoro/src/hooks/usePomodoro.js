@@ -22,7 +22,7 @@ export const usePomodoro = () => {
 
   const [activityHasAName, setActivityHasAName] = useState(false);
   const [activityName, setActivityName] = useState("");
-  const [cicles] = useState(2);
+  const [cicles] = useState(4);
   const [currentCicle, setCurrentCicle] = useState(1);
   const [errors, setErrors] = useState(INITIAL_ERRORS);
 
@@ -137,6 +137,8 @@ export const usePomodoro = () => {
     activityHasAName,
     activityName,
     submitActivity,
-    errors
+    errors,
+    currentCicle,
+    cicles
   ];
 };

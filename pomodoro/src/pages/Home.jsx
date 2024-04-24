@@ -23,9 +23,9 @@ const Home = () => {
     activityName,
     submitActivity,
     errors,
+    currentCicle,
+    cicles,
   ] = usePomodoro();
-
-  console.log(errors.length);
 
   return (
     <InteriorLayout>
@@ -56,7 +56,13 @@ const Home = () => {
         <>
           <Label text={activityName} />
 
-          <Clock percentage={percentage} time={time} activity={activity} />
+          <Clock
+            percentage={percentage}
+            time={time}
+            activity={activity}
+            cicles={cicles}
+            currentCicle={currentCicle}
+          />
 
           <div className="flex gap-5 h-16">
             <Button
