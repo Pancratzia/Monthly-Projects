@@ -3,7 +3,7 @@ import InteriorLayout from "../components/layouts/InteriorLayout";
 import Button from "../components/utils/Button";
 import Input from "../components/utils/Input";
 import Label from "../components/utils/Label";
-import { usePomodoro } from "../hooks/usePomodoro";
+import PropTypes from "prop-types";
 import {
   FaCircleStop,
   FaCirclePlay,
@@ -11,22 +11,21 @@ import {
   FaCircleCheck,
 } from "react-icons/fa6";
 
-const Home = () => {
-  const [
-    time,
-    activity,
-    percentage,
-    toogleTime,
-    isTimerRunning,
-    resetTimer,
-    activityHasAName,
-    activityName,
-    submitActivity,
-    errors,
-    currentCicle,
-    cicles,
-    timeDivision,
-  ] = usePomodoro();
+const Home = ({
+  time,
+  activity,
+  percentage,
+  toogleTime,
+  isTimerRunning,
+  resetTimer,
+  activityHasAName,
+  activityName,
+  submitActivity,
+  errors,
+  currentCicle,
+  cicles,
+  timeDivision,
+}) => {
 
   return (
     <InteriorLayout>
@@ -55,8 +54,12 @@ const Home = () => {
 
           <div className="flex flex-col gap-1 text-xs opacity-50 text-left">
             <Label text={`Ciclos a realizar: ${cicles}`} />
-            <Label text={`Tiempo de Trabajo: ${timeDivision[0].time} minutos`} />
-            <Label text={`Tiempo de Descanso: ${timeDivision[1].time} minutos`} />
+            <Label
+              text={`Tiempo de Trabajo: ${timeDivision[0].time} minutos`}
+            />
+            <Label
+              text={`Tiempo de Descanso: ${timeDivision[1].time} minutos`}
+            />
           </div>
         </>
       ) : (
@@ -104,3 +107,19 @@ const Home = () => {
 };
 
 export default Home;
+
+Home.propTypes = {
+  time: PropTypes.string.isRequired,
+  activity: PropTypes.string.isRequired,
+  percentage: PropTypes.number.isRequired,
+  toogleTime: PropTypes.func.isRequired,
+  isTimerRunning: PropTypes.bool.isRequired,
+  resetTimer: PropTypes.func.isRequired,
+  activityHasAName: PropTypes.bool.isRequired,
+  activityName: PropTypes.string.isRequired,
+  submitActivity: PropTypes.func.isRequired,
+  errors: PropTypes.array.isRequired,
+  currentCicle: PropTypes.number.isRequired,
+  cicles: PropTypes.number.isRequired,
+  timeDivision: PropTypes.array.isRequired,
+}

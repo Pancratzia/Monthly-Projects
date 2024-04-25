@@ -8,7 +8,7 @@ const INITIAL_TIME_DIVISION = [
 const INITIAL_ERRORS = [];
 
 export const usePomodoro = () => {
-  const [timeDivision] = useState(INITIAL_TIME_DIVISION);
+  const [timeDivision, setTimeDivision] = useState(INITIAL_TIME_DIVISION);
   const [stateIndex, setStateIndex] = useState(0);
   const [activity, setActivity] = useState(
     INITIAL_TIME_DIVISION[stateIndex].name
@@ -22,7 +22,7 @@ export const usePomodoro = () => {
 
   const [activityHasAName, setActivityHasAName] = useState(false);
   const [activityName, setActivityName] = useState("");
-  const [cicles] = useState(4);
+  const [cicles, setCicles] = useState(4);
   const [currentCicle, setCurrentCicle] = useState(1);
   const [errors, setErrors] = useState(INITIAL_ERRORS);
 
@@ -80,6 +80,30 @@ export const usePomodoro = () => {
     }
     setActivityHasAName(true);
     setActivityName(getActivityName);
+  }
+
+  function handleSaveConfig() {
+    const workingTime = document.getElementById("working_time").value;
+    const breakTime = document.getElementById("break_time").value;
+    const cycles = document.getElementById("cycles").value;
+
+    if (workingTime === "" || breakTime === "" || cycles === "") {
+      setErrors((prevErrors) => [
+        ...prevErrors,
+        { name: "Configuration", errors: ["Todos los campos son obligatorios"] },
+      ])
+    }
+
+    setErrors(INITIAL_ERRORS);
+
+    setTimeDivision([
+      { name: "Trabajando", time: workingTime },
+      { name: "Descansando", time: breakTime },
+    ])
+
+    setCicles(cycles);
+
+    alert("Configuración guardada");
   }
 
   {
@@ -140,6 +164,7 @@ export const usePomodoro = () => {
     errors,
     currentCicle,
     cicles,
-    timeDivision
+    timeDivision,
+    handleSaveConfig,
   ];
 };
