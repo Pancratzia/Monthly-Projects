@@ -95,11 +95,11 @@ const Home = ({
               {"Detener"}
             </Button>
           </div>
-          {!isTimerRunning && (
+          
             <div className="opacity-50 text-sm container">
-              <Label text={"Presiona el botón para hacer avanzar el tiempo"} />
+              <Label text={isTimerRunning ? "El tiempo está corriendo. Recuerda que si sales de la actividad, la misma será cancelada" : "Presiona el botón para hacer avanzar el tiempo y continuar con tu ciclo de trabajo definido"} />
             </div>
-          )}
+          
         </>
       )}
     </InteriorLayout>
