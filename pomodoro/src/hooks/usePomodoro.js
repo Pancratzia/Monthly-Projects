@@ -78,6 +78,8 @@ export const usePomodoro = () => {
 
       return;
     }
+
+    resetTimer();
     setActivityHasAName(true);
     setActivityName(getActivityName);
   }
