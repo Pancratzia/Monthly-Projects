@@ -1,5 +1,7 @@
 # Pomodoro App
 
+## Abril - 2024
+
 ### POMODORO: Crea un "Pomodoro" configurable que guarde todo tu historial de tareas.
 
 - Poseerá un campo de texto para introducir el nombre de la tarea que se está llevando a cabo. Cada vez que se cambia la tarea, el pomodoro comienza de cero. Sólo se puede cambiar la tarea si el pomodoro se detiene completamente (en caso contrario no será editable). El pomodoro no puede iniciarse si no se ha definido una tarea.
