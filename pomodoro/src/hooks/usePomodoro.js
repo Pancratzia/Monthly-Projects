@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const SECONDS = 60;
 const INITIAL_TIME_DIVISION = [
@@ -25,6 +26,8 @@ export const usePomodoro = () => {
   const [cicles, setCicles] = useState(4);
   const [currentCicle, setCurrentCicle] = useState(1);
   const [errors, setErrors] = useState(INITIAL_ERRORS);
+
+  const navigate = useNavigate();
 
   {
     /** Functions **/
@@ -106,6 +109,8 @@ export const usePomodoro = () => {
     setCicles(cycles);
 
     alert("Configuración guardada");
+
+    navigate("/");
   }
 
   {
