@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 
 const SECONDS = 60;
 const INITIAL_TIME_DIVISION = [
-  { name: "Trabajando", time: 0.1 },
-  { name: "Descansando", time: 0.05 },
+  { name: "Trabajando", time: 25 },
+  { name: "Descansando", time: 5 },
 ];
 const INITIAL_ERRORS = [];
 
