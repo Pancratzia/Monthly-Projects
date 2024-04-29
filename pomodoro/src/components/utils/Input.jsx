@@ -17,7 +17,7 @@ export default Input;
 
 Input.propTypes = {
   placeholder: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
   type: PropTypes.string,
   required: PropTypes.bool,
   id: PropTypes.string

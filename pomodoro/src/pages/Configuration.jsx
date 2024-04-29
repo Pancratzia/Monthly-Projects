@@ -4,8 +4,11 @@ import Button from "../components/utils/Button";
 import Input from "../components/utils/Input";
 import PropTypes from "prop-types";
 
-const Configuration = ({handleSaveConfig}) => {
+const Configuration = ({handleSaveConfig, timeDivision, cicles}) => {
 
+
+  const workingTime = timeDivision[0].time;
+  const breakTime = timeDivision[1].time;
 
   return (
     <InteriorLayout>
@@ -14,7 +17,7 @@ const Configuration = ({handleSaveConfig}) => {
           <label className="w-3/4">
             Minutos de Trabajo
           </label>
-            <Input type="number" placeholder="25" id="working_time"/>
+            <Input type="number" placeholder={workingTime} id="working_time"/>
         </div>
 
 
@@ -22,14 +25,14 @@ const Configuration = ({handleSaveConfig}) => {
           <label className="w-3/4">
             Minutos de Descanso
           </label>
-            <Input type="number" placeholder="5" id="break_time"/>
+            <Input type="number" placeholder={breakTime} id="break_time"/>
         </div>
 
         <div className="flex flex-col gap-1 text-left">
           <label className="w-3/4">
             Ciclos
           </label>
-            <Input type="number" placeholder="1" id="cycles"/>
+            <Input type="number" placeholder={cicles} id="cycles"/>
         </div>
       </div>
 
@@ -43,5 +46,8 @@ const Configuration = ({handleSaveConfig}) => {
 export default Configuration;
 
 Configuration.propTypes = {
-  handleSaveConfig: PropTypes.func.isRequired
+  handleSaveConfig: PropTypes.func.isRequired,
+  timeDivision: PropTypes.array.isRequired,
+  cicles: PropTypes.number.isRequired
+  
 }

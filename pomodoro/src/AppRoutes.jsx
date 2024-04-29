@@ -40,8 +40,8 @@ const AppRoutes = () => {
     <PhoneLayout>
       <Routes onChange={resetTimer}>
         <Route path="/" element={<Home time={time} activity={activity} percentage={percentage} toogleTime={toogleTime} isTimerRunning={isTimerRunning} resetTimer={resetTimer} activityHasAName={activityHasAName} activityName={activityName} submitActivity={submitActivity} errors={errors} currentCicle={currentCicle} cicles={cicles} timeDivision={timeDivision} />} />
-        <Route path="/historial" element={<h1>Historial</h1>} />
-        <Route path="/configuracion" element={<Configuration handleSaveConfig={handleSaveConfig} />} />
+        <Route path="/historial" element={<h1>Working on it...</h1>} />
+        <Route path="/configuracion" element={<Configuration handleSaveConfig={handleSaveConfig} timeDivision={timeDivision} cicles={cicles} />} />
         <Route path="*" element={<Error />} />
       </Routes>
     </PhoneLayout>
